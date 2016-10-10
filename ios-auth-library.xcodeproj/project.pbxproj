@@ -10,6 +10,9 @@
 		4683BDE81DABECB300E0CE39 /* ios-auth-library.h in Headers */ = {isa = PBXBuildFile; fileRef = 4683BDE71DABECB300E0CE39 /* ios-auth-library.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4683BDEF1DABECB300E0CE39 /* ios-auth-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4683BDE41DABECB300E0CE39 /* ios-auth-library.framework */; };
 		4683BDF41DABECB300E0CE39 /* ios_auth_libraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683BDF31DABECB300E0CE39 /* ios_auth_libraryTests.swift */; };
+		4683BDFF1DAC06A700E0CE39 /* controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683BDFE1DAC06A700E0CE39 /* controller.swift */; };
+		4683BE091DAC16D900E0CE39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4683BE081DAC16D900E0CE39 /* Main.storyboard */; };
+		4683BE0B1DAC16E700E0CE39 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4683BE0A1DAC16E700E0CE39 /* LoginView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 		4683BDEE1DABECB300E0CE39 /* ios-auth-libraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-auth-libraryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4683BDF31DABECB300E0CE39 /* ios_auth_libraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_auth_libraryTests.swift; sourceTree = "<group>"; };
 		4683BDF51DABECB300E0CE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4683BDFE1DAC06A700E0CE39 /* controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = controller.swift; sourceTree = "<group>"; };
+		4683BE081DAC16D900E0CE39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4683BE0A1DAC16E700E0CE39 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,9 @@
 			children = (
 				4683BDE71DABECB300E0CE39 /* ios-auth-library.h */,
 				4683BDE91DABECB300E0CE39 /* Info.plist */,
+				4683BDFE1DAC06A700E0CE39 /* controller.swift */,
+				4683BE081DAC16D900E0CE39 /* Main.storyboard */,
+				4683BE0A1DAC16E700E0CE39 /* LoginView.xib */,
 			);
 			path = "ios-auth-library";
 			sourceTree = "<group>";
@@ -177,6 +186,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4683BE0B1DAC16E700E0CE39 /* LoginView.xib in Resources */,
+				4683BE091DAC16D900E0CE39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4683BDFF1DAC06A700E0CE39 /* controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +320,7 @@
 		4683BDF91DABECB300E0CE39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +331,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.parivedasolutions.ios-auth-library";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4683BDFA1DABECB300E0CE39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
