@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4683BDE31DABECB300E0CE39"
-               BuildableName = "ios-auth-library.framework"
-               BlueprintName = "ios-auth-library"
-               ReferencedContainer = "container:ios-auth-library.xcodeproj">
+               BuildableName = "iosAuthLibrary.framework"
+               BlueprintName = "iosAuthLibrary"
+               ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4683BDED1DABECB300E0CE39"
-               BuildableName = "ios-auth-libraryTests.xctest"
-               BlueprintName = "ios-auth-libraryTests"
-               ReferencedContainer = "container:ios-auth-library.xcodeproj">
+               BuildableName = "iosAuthLibrary.xctest"
+               BlueprintName = "iosAuthLibraryTests"
+               ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4683BDE31DABECB300E0CE39"
-            BuildableName = "ios-auth-library.framework"
-            BlueprintName = "ios-auth-library"
-            ReferencedContainer = "container:ios-auth-library.xcodeproj">
+            BuildableName = "iosAuthLibrary.framework"
+            BlueprintName = "iosAuthLibrary"
+            ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4683BDE31DABECB300E0CE39"
-            BuildableName = "ios-auth-library.framework"
-            BlueprintName = "ios-auth-library"
-            ReferencedContainer = "container:ios-auth-library.xcodeproj">
+            BuildableName = "iosAuthLibrary.framework"
+            BlueprintName = "iosAuthLibrary"
+            ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4683BDE31DABECB300E0CE39"
-            BuildableName = "ios-auth-library.framework"
-            BlueprintName = "ios-auth-library"
-            ReferencedContainer = "container:ios-auth-library.xcodeproj">
+            BuildableName = "iosAuthLibrary.framework"
+            BlueprintName = "iosAuthLibrary"
+            ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
