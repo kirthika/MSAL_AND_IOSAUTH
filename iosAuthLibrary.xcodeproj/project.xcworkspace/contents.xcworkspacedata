@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/davidcollom/Projects/ios-auth-library/iosAuthLibrary.xcodeproj">
+      location = "self:iOSAuthLibrary.xcodeproj">
    </FileRef>
 </Workspace>

@@ -9,5 +9,6 @@ s.author       = "Pariveda Solutions"
 s.platform     = :ios, "9.0"
 s.source       = { :git => "https://bitbucket.org/parivedasolutions/ios-auth-library.git" }
 s.source_files  = "iOSAuthLibrary", "iOSAuthLibrary/**/*.{h,m,swift}"
+s.dependency "JWT"
 s.pod_target_xcconfig = { "SWIFT_VERSION" => '3' }
 end

@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4683BDE81DABECB300E0CE39 /* ios-auth-library.h in Headers */ = {isa = PBXBuildFile; fileRef = 4683BDE71DABECB300E0CE39 /* ios-auth-library.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4683BDE81DABECB300E0CE39 /* iOSAuthLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 4683BDE71DABECB300E0CE39 /* iOSAuthLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4683BDEF1DABECB300E0CE39 /* iosAuthLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4683BDE41DABECB300E0CE39 /* iosAuthLibrary.framework */; };
-		4683BDF41DABECB300E0CE39 /* ios_auth_libraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683BDF31DABECB300E0CE39 /* ios_auth_libraryTests.swift */; };
-		4683BE091DAC16D900E0CE39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4683BE081DAC16D900E0CE39 /* Main.storyboard */; };
-		4683BE0D1DAD25F000E0CE39 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683BE0C1DAD25F000E0CE39 /* LoginViewController.swift */; };
+		4683BDF41DABECB300E0CE39 /* iOSAuthLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683BDF31DABECB300E0CE39 /* iOSAuthLibraryTests.swift */; };
+		4683BE091DAC16D900E0CE39 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4683BE081DAC16D900E0CE39 /* Login.storyboard */; };
+		4683BE0D1DAD25F000E0CE39 /* iOSAuthLibrary in Sources */ = {isa = PBXBuildFile; fileRef = 4683BE0C1DAD25F000E0CE39 /* iOSAuthLibrary */; };
+		EB6104631DAFFA5600EFDDDE /* isJWTValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6104621DAFFA5600EFDDDE /* isJWTValid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,13 +27,14 @@
 
 /* Begin PBXFileReference section */
 		4683BDE41DABECB300E0CE39 /* iosAuthLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iosAuthLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4683BDE71DABECB300E0CE39 /* ios-auth-library.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-auth-library.h"; sourceTree = "<group>"; };
-		4683BDE91DABECB300E0CE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4683BDE71DABECB300E0CE39 /* iOSAuthLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iOSAuthLibrary.h; path = iOSAuthLibrary/iOSAuthLibrary.h; sourceTree = "<group>"; };
+		4683BDE91DABECB300E0CE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = iOSAuthLibrary/Info.plist; sourceTree = "<group>"; };
 		4683BDEE1DABECB300E0CE39 /* iosAuthLibrary.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAuthLibrary.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4683BDF31DABECB300E0CE39 /* ios_auth_libraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_auth_libraryTests.swift; sourceTree = "<group>"; };
-		4683BDF51DABECB300E0CE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4683BE081DAC16D900E0CE39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4683BE0C1DAD25F000E0CE39 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4683BDF31DABECB300E0CE39 /* iOSAuthLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = iOSAuthLibraryTests.swift; path = iOSAuthLibraryTests/iOSAuthLibraryTests.swift; sourceTree = "<group>"; };
+		4683BDF51DABECB300E0CE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = iOSAuthLibraryTests/Info.plist; sourceTree = "<group>"; };
+		4683BE081DAC16D900E0CE39 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = iOSAuthLibrary/Login.storyboard; sourceTree = "<group>"; };
+		4683BE0C1DAD25F000E0CE39 /* iOSAuthLibrary */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOSAuthLibrary; sourceTree = "<group>"; };
+		EB6104621DAFFA5600EFDDDE /* isJWTValid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = isJWTValid.swift; path = iOSAuthLibrary/isJWTValid.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +59,8 @@
 		4683BDDA1DABECB300E0CE39 = {
 			isa = PBXGroup;
 			children = (
-				4683BDE61DABECB300E0CE39 /* ios-auth-library */,
-				4683BDF21DABECB300E0CE39 /* ios-auth-libraryTests */,
+				4683BDE61DABECB300E0CE39 /* iOSAuthLibrary */,
+				4683BDF21DABECB300E0CE39 /* iOSAuthLibraryTests */,
 				4683BDE51DABECB300E0CE39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,23 +74,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4683BDE61DABECB300E0CE39 /* ios-auth-library */ = {
+		4683BDE61DABECB300E0CE39 /* iOSAuthLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				4683BDE71DABECB300E0CE39 /* ios-auth-library.h */,
+				EB6104621DAFFA5600EFDDDE /* isJWTValid.swift */,
+				4683BDE71DABECB300E0CE39 /* iOSAuthLibrary.h */,
 				4683BDE91DABECB300E0CE39 /* Info.plist */,
-				4683BE081DAC16D900E0CE39 /* Main.storyboard */,
-				4683BE0C1DAD25F000E0CE39 /* LoginViewController.swift */,
+				4683BE081DAC16D900E0CE39 /* Login.storyboard */,
+				4683BE0C1DAD25F000E0CE39 /* iOSAuthLibrary */,
 			);
+			name = iOSAuthLibrary;
 			path = "ios-auth-library";
 			sourceTree = "<group>";
 		};
-		4683BDF21DABECB300E0CE39 /* ios-auth-libraryTests */ = {
+		4683BDF21DABECB300E0CE39 /* iOSAuthLibraryTests */ = {
 			isa = PBXGroup;
 			children = (
-				4683BDF31DABECB300E0CE39 /* ios_auth_libraryTests.swift */,
+				4683BDF31DABECB300E0CE39 /* iOSAuthLibraryTests.swift */,
 				4683BDF51DABECB300E0CE39 /* Info.plist */,
 			);
+			name = iOSAuthLibraryTests;
 			path = "ios-auth-libraryTests";
 			sourceTree = "<group>";
 		};
@@ -99,7 +104,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4683BDE81DABECB300E0CE39 /* ios-auth-library.h in Headers */,
+				4683BDE81DABECB300E0CE39 /* iOSAuthLibrary.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4683BE091DAC16D900E0CE39 /* Main.storyboard in Resources */,
+				4683BE091DAC16D900E0CE39 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +206,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4683BE0D1DAD25F000E0CE39 /* LoginViewController.swift in Sources */,
+				EB6104631DAFFA5600EFDDDE /* isJWTValid.swift in Sources */,
+				4683BE0D1DAD25F000E0CE39 /* iOSAuthLibrary in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4683BDF41DABECB300E0CE39 /* ios_auth_libraryTests.swift in Sources */,
+				4683BDF41DABECB300E0CE39 /* iOSAuthLibraryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +393,7 @@
 				4683BDFA1DABECB300E0CE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4683BDFB1DABECB300E0CE39 /* Build configuration list for PBXNativeTarget "iosAuthLibraryTests" */ = {
 			isa = XCConfigurationList;
@@ -395,6 +402,7 @@
 				4683BDFD1DABECB300E0CE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
