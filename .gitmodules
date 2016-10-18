@@ -1,6 +1,0 @@
-[submodule "Carthage/Checkouts/JWT"]
-	path = Carthage/Checkouts/JWT
-	url = https://github.com/yourkarma/JWT.git
-[submodule "Carthage/Checkouts/Base64"]
-	path = Carthage/Checkouts/Base64
-	url = https://github.com/soheilbm/Base64.git
