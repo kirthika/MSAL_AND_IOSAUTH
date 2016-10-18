@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C849C2E556C78FE70577123ADF3D0F7CF47122FB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "43DEEE1E1F66961495077944D6DDB8A602A88F04" : 0,
+    "C849C2E556C78FE70577123ADF3D0F7CF47122FB" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B6D23E2E-F9A4-4DD7-889F-495F7369D556",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "43DEEE1E1F66961495077944D6DDB8A602A88F04" : "ios-auth-library\/Carthage\/Checkouts\/JWT\/",
+    "C849C2E556C78FE70577123ADF3D0F7CF47122FB" : "ios-auth-library\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iosAuthLibrary",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iosAuthLibrary.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yourkarma\/JWT.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43DEEE1E1F66961495077944D6DDB8A602A88F04"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/parivedasolutions\/ios-auth-library.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C849C2E556C78FE70577123ADF3D0F7CF47122FB"
+    }
+  ]
+}
