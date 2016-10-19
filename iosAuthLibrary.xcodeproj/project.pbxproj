@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462E44131DB8148600154B06 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 462E44121DB8148600154B06 /* LoginView.xib */; };
 		4683BDE81DABECB300E0CE39 /* iOSAuthLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 4683BDE71DABECB300E0CE39 /* iOSAuthLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4683BDEF1DABECB300E0CE39 /* iosAuthLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4683BDE41DABECB300E0CE39 /* iosAuthLibrary.framework */; };
 		4683BDF41DABECB300E0CE39 /* iOSAuthLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683BDF31DABECB300E0CE39 /* iOSAuthLibraryTests.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		462E44121DB8148600154B06 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		4683BDE41DABECB300E0CE39 /* iosAuthLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iosAuthLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4683BDE71DABECB300E0CE39 /* iOSAuthLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iOSAuthLibrary.h; path = iOSAuthLibrary/iOSAuthLibrary.h; sourceTree = "<group>"; };
 		4683BDE91DABECB300E0CE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = iOSAuthLibrary/Info.plist; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		4683BDDA1DABECB300E0CE39 = {
 			isa = PBXGroup;
 			children = (
+				462E44121DB8148600154B06 /* LoginView.xib */,
 				4683BDE61DABECB300E0CE39 /* iOSAuthLibrary */,
 				4683BDF21DABECB300E0CE39 /* iOSAuthLibraryTests */,
 				4683BDE51DABECB300E0CE39 /* Products */,
@@ -165,7 +168,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4683BDDE1DABECB300E0CE39 /* Build configuration list for PBXProject "iosAuthLibrary" */;
+			buildConfigurationList = 4683BDDE1DABECB300E0CE39 /* Build configuration list for PBXProject "iOSAuthLibrary" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -188,6 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				462E44131DB8148600154B06 /* LoginView.xib in Resources */,
 				4683BE091DAC16D900E0CE39 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,7 +381,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4683BDDE1DABECB300E0CE39 /* Build configuration list for PBXProject "iosAuthLibrary" */ = {
+		4683BDDE1DABECB300E0CE39 /* Build configuration list for PBXProject "iOSAuthLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4683BDF61DABECB300E0CE39 /* Debug */,
