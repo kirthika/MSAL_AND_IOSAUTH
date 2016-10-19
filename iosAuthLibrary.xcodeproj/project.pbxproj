@@ -17,14 +17,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4683BDF01DABECB300E0CE39 /* PBXContainerItemProxy */ = {
+		466910251DAEBAFD00E0DB35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4683BDDB1DABECB300E0CE39 /* Project object */;
+			containerPortal = 466910101DAEBAFD00E0DB35 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4683BDE31DABECB300E0CE39;
-			remoteInfo = "ios-auth-library";
+			remoteGlobalIDString = 466910181DAEBAFD00E0DB35;
+			remoteInfo = iOSAuthLibrary;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB49B5491DB5D310000A8D0E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		462E44121DB8148600154B06 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
@@ -40,130 +52,131 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4683BDE01DABECB300E0CE39 /* Frameworks */ = {
+		466910151DAEBAFD00E0DB35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4683BDEB1DABECB300E0CE39 /* Frameworks */ = {
+		466910201DAEBAFD00E0DB35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4683BDEF1DABECB300E0CE39 /* iosAuthLibrary.framework in Frameworks */,
+				466910241DAEBAFD00E0DB35 /* iOSAuthLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4683BDDA1DABECB300E0CE39 = {
+		4669100F1DAEBAFD00E0DB35 = {
 			isa = PBXGroup;
 			children = (
 				462E44121DB8148600154B06 /* LoginView.xib */,
 				4683BDE61DABECB300E0CE39 /* iOSAuthLibrary */,
 				4683BDF21DABECB300E0CE39 /* iOSAuthLibraryTests */,
 				4683BDE51DABECB300E0CE39 /* Products */,
+				4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */,
 			);
 			sourceTree = "<group>";
 		};
-		4683BDE51DABECB300E0CE39 /* Products */ = {
+		4669101A1DAEBAFD00E0DB35 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4683BDE41DABECB300E0CE39 /* iosAuthLibrary.framework */,
-				4683BDEE1DABECB300E0CE39 /* iosAuthLibrary.xctest */,
+				466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */,
+				466910231DAEBAFD00E0DB35 /* iOSAuthLibraryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4683BDE61DABECB300E0CE39 /* iOSAuthLibrary */ = {
+		4669101B1DAEBAFD00E0DB35 /* iOSAuthLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				EB6104621DAFFA5600EFDDDE /* isJWTValid.swift */,
-				4683BDE71DABECB300E0CE39 /* iOSAuthLibrary.h */,
-				4683BDE91DABECB300E0CE39 /* Info.plist */,
-				4683BE081DAC16D900E0CE39 /* Login.storyboard */,
-				4683BE0C1DAD25F000E0CE39 /* iOSAuthLibrary */,
+				EB49B53D1DB57B64000A8D0E /* AuthLibrary.swift */,
+				4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */,
+				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
+				466910371DAEBB4900E0DB35 /* Main.storyboard */,
+				466910391DAEBB5B00E0DB35 /* LoginViewController.swift */,
 			);
-			name = iOSAuthLibrary;
-			path = "ios-auth-library";
+			path = iOSAuthLibrary;
 			sourceTree = "<group>";
 		};
-		4683BDF21DABECB300E0CE39 /* iOSAuthLibraryTests */ = {
+		466910271DAEBAFD00E0DB35 /* iOSAuthLibraryTests */ = {
 			isa = PBXGroup;
 			children = (
-				4683BDF31DABECB300E0CE39 /* iOSAuthLibraryTests.swift */,
-				4683BDF51DABECB300E0CE39 /* Info.plist */,
+				466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */,
+				4669102A1DAEBAFD00E0DB35 /* Info.plist */,
 			);
-			name = iOSAuthLibraryTests;
-			path = "ios-auth-libraryTests";
+			path = iOSAuthLibraryTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4683BDE11DABECB300E0CE39 /* Headers */ = {
+		466910161DAEBAFD00E0DB35 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4683BDE81DABECB300E0CE39 /* iOSAuthLibrary.h in Headers */,
+				4669101D1DAEBAFD00E0DB35 /* iOSAuthLibrary.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4683BDE31DABECB300E0CE39 /* iosAuthLibrary */ = {
+		466910181DAEBAFD00E0DB35 /* iOSAuthLibrary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4683BDF81DABECB300E0CE39 /* Build configuration list for PBXNativeTarget "iosAuthLibrary" */;
+			buildConfigurationList = 4669102D1DAEBAFD00E0DB35 /* Build configuration list for PBXNativeTarget "iOSAuthLibrary" */;
 			buildPhases = (
-				4683BDDF1DABECB300E0CE39 /* Sources */,
-				4683BDE01DABECB300E0CE39 /* Frameworks */,
-				4683BDE11DABECB300E0CE39 /* Headers */,
-				4683BDE21DABECB300E0CE39 /* Resources */,
+				466910141DAEBAFD00E0DB35 /* Sources */,
+				466910151DAEBAFD00E0DB35 /* Frameworks */,
+				466910161DAEBAFD00E0DB35 /* Headers */,
+				466910171DAEBAFD00E0DB35 /* Resources */,
+				EB49B5461DB59B2C000A8D0E /* ShellScript */,
+				EB49B5491DB5D310000A8D0E /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = iosAuthLibrary;
-			productName = "ios-auth-library";
-			productReference = 4683BDE41DABECB300E0CE39 /* iosAuthLibrary.framework */;
+			name = iOSAuthLibrary;
+			productName = iOSAuthLibrary;
+			productReference = 466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4683BDED1DABECB300E0CE39 /* iosAuthLibraryTests */ = {
+		466910221DAEBAFD00E0DB35 /* iOSAuthLibraryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4683BDFB1DABECB300E0CE39 /* Build configuration list for PBXNativeTarget "iosAuthLibraryTests" */;
+			buildConfigurationList = 466910301DAEBAFD00E0DB35 /* Build configuration list for PBXNativeTarget "iOSAuthLibraryTests" */;
 			buildPhases = (
-				4683BDEA1DABECB300E0CE39 /* Sources */,
-				4683BDEB1DABECB300E0CE39 /* Frameworks */,
-				4683BDEC1DABECB300E0CE39 /* Resources */,
+				4669101F1DAEBAFD00E0DB35 /* Sources */,
+				466910201DAEBAFD00E0DB35 /* Frameworks */,
+				466910211DAEBAFD00E0DB35 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4683BDF11DABECB300E0CE39 /* PBXTargetDependency */,
+				466910261DAEBAFD00E0DB35 /* PBXTargetDependency */,
 			);
-			name = iosAuthLibraryTests;
-			productName = "ios-auth-libraryTests";
-			productReference = 4683BDEE1DABECB300E0CE39 /* iosAuthLibrary.xctest */;
+			name = iOSAuthLibraryTests;
+			productName = iOSAuthLibraryTests;
+			productReference = 466910231DAEBAFD00E0DB35 /* iOSAuthLibraryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4683BDDB1DABECB300E0CE39 /* Project object */ = {
+		466910101DAEBAFD00E0DB35 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Pariveda Solutions";
 				TargetAttributes = {
-					4683BDE31DABECB300E0CE39 = {
+					466910181DAEBAFD00E0DB35 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
-					4683BDED1DABECB300E0CE39 = {
+					466910221DAEBAFD00E0DB35 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
@@ -175,28 +188,30 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = 4683BDDA1DABECB300E0CE39;
-			productRefGroup = 4683BDE51DABECB300E0CE39 /* Products */;
+			mainGroup = 4669100F1DAEBAFD00E0DB35;
+			productRefGroup = 4669101A1DAEBAFD00E0DB35 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4683BDE31DABECB300E0CE39 /* iosAuthLibrary */,
-				4683BDED1DABECB300E0CE39 /* iosAuthLibraryTests */,
+				466910181DAEBAFD00E0DB35 /* iOSAuthLibrary */,
+				466910221DAEBAFD00E0DB35 /* iOSAuthLibraryTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4683BDE21DABECB300E0CE39 /* Resources */ = {
+		466910171DAEBAFD00E0DB35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				462E44131DB8148600154B06 /* LoginView.xib in Resources */,
 				4683BE091DAC16D900E0CE39 /* Login.storyboard in Resources */,
+				4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */,
+				466910381DAEBB4900E0DB35 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4683BDEC1DABECB300E0CE39 /* Resources */ = {
+		466910211DAEBAFD00E0DB35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -205,36 +220,52 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		EB49B5461DB59B2C000A8D0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		4683BDDF1DABECB300E0CE39 /* Sources */ = {
+		466910141DAEBAFD00E0DB35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB6104631DAFFA5600EFDDDE /* isJWTValid.swift in Sources */,
-				4683BE0D1DAD25F000E0CE39 /* iOSAuthLibrary in Sources */,
+				4669103A1DAEBB5B00E0DB35 /* LoginViewController.swift in Sources */,
+				EB49B53E1DB57B64000A8D0E /* AuthLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4683BDEA1DABECB300E0CE39 /* Sources */ = {
+		4669101F1DAEBAFD00E0DB35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4683BDF41DABECB300E0CE39 /* iOSAuthLibraryTests.swift in Sources */,
+				466910291DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4683BDF11DABECB300E0CE39 /* PBXTargetDependency */ = {
+		466910261DAEBAFD00E0DB35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4683BDE31DABECB300E0CE39 /* iosAuthLibrary */;
-			targetProxy = 4683BDF01DABECB300E0CE39 /* PBXContainerItemProxy */;
+			target = 466910181DAEBAFD00E0DB35 /* iOSAuthLibrary */;
+			targetProxy = 466910251DAEBAFD00E0DB35 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4683BDF61DABECB300E0CE39 /* Debug */ = {
+		4669102B1DAEBAFD00E0DB35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -251,6 +282,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -282,7 +314,7 @@
 			};
 			name = Debug;
 		};
-		4683BDF71DABECB300E0CE39 /* Release */ = {
+		4669102C1DAEBAFD00E0DB35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -299,6 +331,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -323,58 +356,68 @@
 			};
 			name = Release;
 		};
-		4683BDF91DABECB300E0CE39 /* Debug */ = {
+		4669102E1DAEBAFD00E0DB35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "ios-auth-library/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = iOSAuthLibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.parivedasolutions.iosAuthLibrary;
-				PRODUCT_NAME = iosAuthLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parivedasolutions.iOSAuthLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		4683BDFA1DABECB300E0CE39 /* Release */ = {
+		4669102F1DAEBAFD00E0DB35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "ios-auth-library/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = iOSAuthLibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.parivedasolutions.iosAuthLibrary;
-				PRODUCT_NAME = iosAuthLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parivedasolutions.iOSAuthLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		4683BDFC1DABECB300E0CE39 /* Debug */ = {
+		466910311DAEBAFD00E0DB35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "ios-auth-libraryTests/Info.plist";
+				INFOPLIST_FILE = iOSAuthLibraryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.parivedasolutions.ios-auth-libraryTests";
-				PRODUCT_NAME = iosAuthLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parivedasolutions.iOSAuthLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		4683BDFD1DABECB300E0CE39 /* Release */ = {
+		466910321DAEBAFD00E0DB35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "ios-auth-libraryTests/Info.plist";
+				INFOPLIST_FILE = iOSAuthLibraryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.parivedasolutions.ios-auth-libraryTests";
-				PRODUCT_NAME = iosAuthLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parivedasolutions.iOSAuthLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -384,31 +427,31 @@
 		4683BDDE1DABECB300E0CE39 /* Build configuration list for PBXProject "iOSAuthLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4683BDF61DABECB300E0CE39 /* Debug */,
-				4683BDF71DABECB300E0CE39 /* Release */,
+				4669102B1DAEBAFD00E0DB35 /* Debug */,
+				4669102C1DAEBAFD00E0DB35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4683BDF81DABECB300E0CE39 /* Build configuration list for PBXNativeTarget "iosAuthLibrary" */ = {
+		4669102D1DAEBAFD00E0DB35 /* Build configuration list for PBXNativeTarget "iOSAuthLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4683BDF91DABECB300E0CE39 /* Debug */,
-				4683BDFA1DABECB300E0CE39 /* Release */,
+				4669102E1DAEBAFD00E0DB35 /* Debug */,
+				4669102F1DAEBAFD00E0DB35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4683BDFB1DABECB300E0CE39 /* Build configuration list for PBXNativeTarget "iosAuthLibraryTests" */ = {
+		466910301DAEBAFD00E0DB35 /* Build configuration list for PBXNativeTarget "iOSAuthLibraryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4683BDFC1DABECB300E0CE39 /* Debug */,
-				4683BDFD1DABECB300E0CE39 /* Release */,
+				466910311DAEBAFD00E0DB35 /* Debug */,
+				466910321DAEBAFD00E0DB35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4683BDDB1DABECB300E0CE39 /* Project object */;
+	rootObject = 466910101DAEBAFD00E0DB35 /* Project object */;
 }
