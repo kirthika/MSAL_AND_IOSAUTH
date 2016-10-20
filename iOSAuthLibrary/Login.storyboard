@@ -8,7 +8,7 @@
         <!--Login View Controller-->
         <scene sceneID="2Bh-QC-7Xc">
             <objects>
-                <viewController id="FZ6-vC-wGv" customClass="LoginViewController" customModule="Base64" sceneMemberID="viewController">
+                <viewController id="FZ6-vC-wGv" customClass="LoginViewController" customModule="iOSAuthLibrary" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yNS-pN-O9w"/>
                         <viewControllerLayoutGuide type="bottom" id="0lk-PL-TOo"/>
@@ -31,7 +31,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="loginView" destination="bBA-2c-dbF" id="8oI-gW-Z6m"/>
+                        <outlet property="loginView" destination="bBA-2c-dbF" id="xrz-gt-18w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDt-0G-0gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
