@@ -13,7 +13,6 @@
 		466910291DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */; };
 		466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466910371DAEBB4900E0DB35 /* Login.storyboard */; };
 		4669103A1DAEBB5B00E0DB35 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466910391DAEBB5B00E0DB35 /* LoginViewController.swift */; };
-		EB7D87AE1DB9230B00B768F9 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB7D87AD1DB9230B00B768F9 /* LoginView.xib */; };
 		EB7D87B01DB9231700B768F9 /* AuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7D87AF1DB9231700B768F9 /* AuthLibrary.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 		4669102A1DAEBAFD00E0DB35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		466910371DAEBB4900E0DB35 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		466910391DAEBB5B00E0DB35 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		EB7D87AD1DB9230B00B768F9 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		EB7D87AF1DB9231700B768F9 /* AuthLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +84,6 @@
 				4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */,
 				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
 				466910371DAEBB4900E0DB35 /* Login.storyboard */,
-				EB7D87AD1DB9230B00B768F9 /* LoginView.xib */,
 				466910391DAEBB5B00E0DB35 /* LoginViewController.swift */,
 			);
 			path = iOSAuthLibrary;
@@ -194,7 +191,6 @@
 			files = (
 				4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */,
 				466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */,
-				EB7D87AE1DB9230B00B768F9 /* LoginView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
