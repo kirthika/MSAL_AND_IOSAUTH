@@ -10,7 +10,7 @@ import UIKit
 
 public class LoginViewController: UIViewController {
     @IBOutlet var loginView: UIWebView!
-
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
