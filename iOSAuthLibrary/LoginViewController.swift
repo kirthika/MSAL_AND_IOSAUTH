@@ -27,7 +27,7 @@ public class LoginViewController: UIViewController {
         let prompt = "login"
         let state = "currenttempstate"
         
-        let url = NSURL (string: domain +
+        let url = domain +
             tenant +
             oauth +
             authorize +
@@ -38,10 +38,11 @@ public class LoginViewController: UIViewController {
             "&state=" + state +
             "&response_type=" + responsetype +
             "&response_mode=" + responsemode +
-            "&prompt=" + prompt)
+            "&prompt=" + prompt
+        let nsURL = NSURL(string: url)
         
         /*let url = NSURL (string: "https://login.microsoftonline.com/tyrtsi.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SignupAndSignin&client_Id=ce25c98b-f01d-46ad-936a-62ac28c939e5&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid&response_type=id_token&response_mode=query");*/
-        let requestObj = NSURLRequest(URL: url!);
+        let requestObj = NSURLRequest(URL: nsURL!);
         loginView.loadRequest(requestObj);
         // Do any additional setup after loading the view.
     }
