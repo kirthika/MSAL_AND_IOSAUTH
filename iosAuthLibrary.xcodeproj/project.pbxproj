@@ -13,6 +13,9 @@
 		466910291DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */; };
 		466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466910371DAEBB4900E0DB35 /* Login.storyboard */; };
 		4669103A1DAEBB5B00E0DB35 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466910391DAEBB5B00E0DB35 /* LoginViewController.swift */; };
+		EB47F9DA1DBE5A0300A2ED70 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = EB47F9D81DBE5A0300A2ED70 /* Cartfile */; };
+		EB47F9DB1DBE5A0300A2ED70 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = EB47F9D91DBE5A0300A2ED70 /* Cartfile.resolved */; };
+		EB47F9DD1DBE5CEC00A2ED70 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB47F9DC1DBE5CEC00A2ED70 /* JWT.framework */; };
 		EB7D87B01DB9231700B768F9 /* AuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7D87AF1DB9231700B768F9 /* AuthLibrary.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +39,9 @@
 		4669102A1DAEBAFD00E0DB35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		466910371DAEBB4900E0DB35 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		466910391DAEBB5B00E0DB35 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EB47F9D81DBE5A0300A2ED70 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		EB47F9D91DBE5A0300A2ED70 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
+		EB47F9DC1DBE5CEC00A2ED70 /* JWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWT.framework; path = Carthage/Build/iOS/JWT.framework; sourceTree = "<group>"; };
 		EB7D87AF1DB9231700B768F9 /* AuthLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB47F9DD1DBE5CEC00A2ED70 /* JWT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +68,9 @@
 		4669100F1DAEBAFD00E0DB35 = {
 			isa = PBXGroup;
 			children = (
+				EB47F9DC1DBE5CEC00A2ED70 /* JWT.framework */,
+				EB47F9D81DBE5A0300A2ED70 /* Cartfile */,
+				EB47F9D91DBE5A0300A2ED70 /* Cartfile.resolved */,
 				4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */,
 				4669101B1DAEBAFD00E0DB35 /* iOSAuthLibrary */,
 				466910271DAEBAFD00E0DB35 /* iOSAuthLibraryTests */,
@@ -189,6 +199,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB47F9DA1DBE5A0300A2ED70 /* Cartfile in Resources */,
+				EB47F9DB1DBE5A0300A2ED70 /* Cartfile.resolved in Resources */,
 				4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */,
 				466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */,
 			);
@@ -329,6 +341,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = iOSAuthLibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -347,6 +363,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = iOSAuthLibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
