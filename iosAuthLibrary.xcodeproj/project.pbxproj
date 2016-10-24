@@ -130,6 +130,7 @@
 				466910151DAEBAFD00E0DB35 /* Frameworks */,
 				466910161DAEBAFD00E0DB35 /* Headers */,
 				466910171DAEBAFD00E0DB35 /* Resources */,
+				EB47F9E01DBE5E8F00A2ED70 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -214,6 +215,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EB47F9E01DBE5E8F00A2ED70 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/JWT.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		466910141DAEBAFD00E0DB35 /* Sources */ = {
