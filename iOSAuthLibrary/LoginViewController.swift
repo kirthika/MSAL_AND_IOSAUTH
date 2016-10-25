@@ -54,6 +54,14 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    open func webViewDidStartLoad(_ webView: UIWebView) {
+        print("started")
+    }
+    
+    open func webViewDidFinishLoad(_ webView: UIWebView) {
+        print("finished")
+    }
+    
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.url)
         if (navigationType == UIWebViewNavigationType.linkClicked) {
@@ -70,15 +78,4 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         return true;
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
