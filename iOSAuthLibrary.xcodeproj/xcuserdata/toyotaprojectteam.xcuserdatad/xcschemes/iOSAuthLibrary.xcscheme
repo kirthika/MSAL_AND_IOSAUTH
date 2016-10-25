@@ -17,7 +17,7 @@
                BlueprintIdentifier = "466910181DAEBAFD00E0DB35"
                BuildableName = "iOSAuthLibrary.framework"
                BlueprintName = "iOSAuthLibrary"
-               ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
+               ReferencedContainer = "container:iOSAuthLibrary.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "466910221DAEBAFD00E0DB35"
                BuildableName = "iOSAuthLibraryTests.xctest"
                BlueprintName = "iOSAuthLibraryTests"
-               ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
+               ReferencedContainer = "container:iOSAuthLibrary.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "466910181DAEBAFD00E0DB35"
             BuildableName = "iOSAuthLibrary.framework"
             BlueprintName = "iOSAuthLibrary"
-            ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
+            ReferencedContainer = "container:iOSAuthLibrary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,7 +67,7 @@
             BlueprintIdentifier = "466910181DAEBAFD00E0DB35"
             BuildableName = "iOSAuthLibrary.framework"
             BlueprintName = "iOSAuthLibrary"
-            ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
+            ReferencedContainer = "container:iOSAuthLibrary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,7 +85,7 @@
             BlueprintIdentifier = "466910181DAEBAFD00E0DB35"
             BuildableName = "iOSAuthLibrary.framework"
             BlueprintName = "iOSAuthLibrary"
-            ReferencedContainer = "container:iosAuthLibrary.xcodeproj">
+            ReferencedContainer = "container:iOSAuthLibrary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
