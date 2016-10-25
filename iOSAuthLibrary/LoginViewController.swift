@@ -43,15 +43,31 @@ open class LoginViewController: UIViewController {
         
         print(url)
         
-        /*let url = NSURL (string: "https://login.microsoftonline.com/tyrtsi.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SignupAndSignin&client_Id=ce25c98b-f01d-46ad-936a-62ac28c939e5&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid&response_type=id_token&response_mode=query");*/
-        let requestObj = URLRequest(url: nsURL!);
-        loginView.loadRequest(requestObj);
+        /*let nsURL = NSURL (string: "https://login.microsoftonline.com/tyrtsi.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SignupAndSignin&client_Id=ce25c98b-f01d-46ad-936a-62ac28c939e5&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid&response_type=id_token&response_mode=query");*/
+        let request = URLRequest(url: nsURL!);
+        loginView.loadRequest(request);
         // Do any additional setup after loading the view.
     }
 
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func webView(loginView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+        print(request.url)
+        if (navigationType == UIWebViewNavigationType.linkClicked) {
+            let url = request.url
+            let scheme = url?.scheme
+            if (scheme == "urn:ietf:wg:oauth:2.0:oob") {
+                // Update the url as needed
+                
+                // Now handled the url by asking the app to open it
+                return false; // don't let the webview process it.
+            }
+        }
+        
+        return true;
     }
     
 
