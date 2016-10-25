@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class LoginViewController: UIViewController {
+open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var loginView: UIWebView!
     
     override open func viewDidLoad() {
@@ -54,7 +54,7 @@ open class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    open func webView(loginView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.url)
         if (navigationType == UIWebViewNavigationType.linkClicked) {
             let url = request.url
