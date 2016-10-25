@@ -45,7 +45,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         
         /*let nsURL = NSURL (string: "https://login.microsoftonline.com/tyrtsi.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SignupAndSignin&client_Id=ce25c98b-f01d-46ad-936a-62ac28c939e5&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid&response_type=id_token&response_mode=query");*/
         let request = URLRequest(url: nsURL!);
-        loginView.loadRequest(request);
+        loginView.delegate = self
+        loginView.loadRequest(request)
         // Do any additional setup after loading the view.
     }
 
@@ -54,15 +55,15 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    open func webViewDidStartLoad(_ webView: UIWebView) {
+    open func webViewDidStartLoad(_ loginView: UIWebView) {
         print("started")
     }
     
-    open func webViewDidFinishLoad(_ webView: UIWebView) {
+    open func webViewDidFinishLoad(_ loginView: UIWebView) {
         print("finished")
     }
     
-    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(_ loginView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.url)
         if (navigationType == UIWebViewNavigationType.linkClicked) {
             let url = request.url
