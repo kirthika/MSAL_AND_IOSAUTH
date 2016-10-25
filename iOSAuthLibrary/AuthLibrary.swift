@@ -7,11 +7,11 @@
 
 import JWT
 
-public class AuthLibrary {
+open class AuthLibrary {
     
     public init() { }
     
-    public func isJwtValid(token: String) -> Bool {
+    open func isJwtValid(_ token: String) -> Bool {
         let algorithmName = "RS256"
         let claims = JWT.decodeMessage(token).options(true)
         if ((claims.decode) != nil) {

@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class LoginViewController: UIViewController {
-    @IBOutlet public var loginView: UIWebView!
+open class LoginViewController: UIViewController {
+    @IBOutlet open var loginView: UIWebView!
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         let domain = "https://login.microsoftonline.com"
@@ -39,17 +39,17 @@ public class LoginViewController: UIViewController {
             "&response_type=" + responsetype +
             "&response_mode=" + responsemode +
             "&prompt=" + prompt
-        let nsURL = NSURL(string: url)
+        let nsURL = URL(string: url)
         
         print(url)
         
         /*let url = NSURL (string: "https://login.microsoftonline.com/tyrtsi.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SignupAndSignin&client_Id=ce25c98b-f01d-46ad-936a-62ac28c939e5&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid&response_type=id_token&response_mode=query");*/
-        let requestObj = NSURLRequest(URL: nsURL!);
+        let requestObj = URLRequest(url: nsURL!);
         loginView.loadRequest(requestObj);
         // Do any additional setup after loading the view.
     }
 
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
