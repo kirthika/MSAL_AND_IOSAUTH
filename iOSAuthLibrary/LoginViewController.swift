@@ -54,7 +54,7 @@ open class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func webView(loginView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(loginView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.url)
         if (navigationType == UIWebViewNavigationType.linkClicked) {
             let url = request.url
