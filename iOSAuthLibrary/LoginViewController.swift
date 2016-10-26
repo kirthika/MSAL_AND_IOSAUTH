@@ -19,22 +19,22 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let oauth = "/oauth2/v2.0"
         let authorize = "/authorize"
         let policy = "B2C_1_SignupAndSignin"
-        let clientid = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
-        let redirecturiencoded = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
-        let scope = "openid"
-        let responsetype = "id_token"
-        let responsemode = "query"
+        let clientId = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
+        let redirectURI = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
+        let scope = "offline_access%20openid"
+        let responseType = "code%20id_token"
+        let responseMode = "query"
         
         let url = domain +
             tenant +
             oauth +
             authorize +
             "?p=" + policy +
-            "&client_id=" + clientid +
-            "&redirect_uri=" + redirecturiencoded +
+            "&client_id=" + clientId +
+            "&redirect_uri=" + redirectURI +
             "&scope=" + scope +
-            "&response_type=" + responsetype +
-            "&response_mode=" + responsemode
+            "&response_type=" + responseType +
+            "&response_mode=" + responseMode
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }
@@ -46,8 +46,10 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.url)
         if (navigationType == UIWebViewNavigationType.linkClicked) {
+            print("clickedLink")
             let url = request.url
             let scheme = url?.scheme
+            print(scheme)
             if (scheme == "urn:ietf:wg:oauth:2.0:oob") {
                 print("redirect")
                 // Now handled the url by asking the app to open it
