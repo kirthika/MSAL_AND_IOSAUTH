@@ -66,6 +66,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             print("state: " + state!)
             print("code: " + auth_code!)
             print("token: " + id_token!)
+            
+            dismiss(animated: true, completion: nil)
         }
         return true;
     }
