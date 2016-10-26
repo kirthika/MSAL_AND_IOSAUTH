@@ -24,8 +24,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let scope = "openid"
         let responsetype = "id_token"
         let responsemode = "query"
-        let prompt = "login"
-        let state = "test"
         
         let url = domain +
             tenant +
@@ -35,35 +33,22 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&client_id=" + clientid +
             "&redirect_uri=" + redirecturiencoded +
             "&scope=" + scope +
-            "&state=" + state +
             "&response_type=" + responsetype +
-            "&response_mode=" + responsemode +
-            "&prompt=" + prompt
+            "&response_mode=" + responsemode
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
-        loginView.delegate = self
-        self.view.addSubview(loginView)
     }
 
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    open func webViewDidStartLoad(_ loginView: UIWebView) {
-        print("started")
-    }
-    
-    open func webViewDidFinishLoad(_ loginView: UIWebView) {
-        print("finished")
-    }
-    
-    open func webView(_ loginView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.url)
         if (navigationType == UIWebViewNavigationType.linkClicked) {
             let url = request.url
             let scheme = url?.scheme
             if (scheme == "urn:ietf:wg:oauth:2.0:oob") {
-                // Update the url as needed
-                
+                print("redirect")
                 // Now handled the url by asking the app to open it
                 return false; // don't let the webview process it.
             }
