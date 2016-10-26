@@ -24,6 +24,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let scope = "offline_access%20openid"
         let responseType = "code%20id_token"
         let responseMode = "query"
+        let prompt = "login"
         
         let url = domain +
             tenant +
@@ -34,7 +35,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&redirect_uri=" + redirectURI +
             "&scope=" + scope +
             "&response_type=" + responseType +
-            "&response_mode=" + responseMode
+            "&response_mode=" + responseMode +
+            "&prompt=" + prompt
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }
