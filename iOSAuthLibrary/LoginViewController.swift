@@ -15,17 +15,17 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
         
         let domain = "https://login.microsoftonline.com"
-        let tenant = "/fe14a1c0-578a-42fe-bb99-2bcc77bcc761"
+        let tenant = "/tyrtsi.onmicrosoft.com"
         let oauth = "/oauth2/v2.0"
         let authorize = "/authorize"
-        let policy = "B2C_1_toss"
-        let clientid = "93406a76-dc2a-4fa9-a900-25f8151762c8"
+        let policy = "B2C_1_SignupAndSignin"
+        let clientid = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
         let redirecturiencoded = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
         let scope = "openid"
         let responsetype = "id_token"
         let responsemode = "query"
         let prompt = "login"
-        let state = "currenttempstate"
+        let state = "test"
         
         let url = domain +
             tenant +
@@ -39,20 +39,13 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&response_type=" + responsetype +
             "&response_mode=" + responsemode +
             "&prompt=" + prompt
-        let nsURL = URL(string: url)
-        
-        print(url)
-        
-        /*let nsURL = NSURL (string: "https://login.microsoftonline.com/tyrtsi.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SignupAndSignin&client_Id=ce25c98b-f01d-46ad-936a-62ac28c939e5&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid&response_type=id_token&response_mode=query");*/
-        let request = URLRequest(url: nsURL!);
+        loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
-        loginView.loadRequest(request)
-        // Do any additional setup after loading the view.
+        self.view.addSubview(loginView)
     }
 
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     open func webViewDidStartLoad(_ loginView: UIWebView) {
