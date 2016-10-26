@@ -48,7 +48,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         // Retrieve code and id token if they exist
         let url = request.url?.absoluteString
-        print(url)
         let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
@@ -64,9 +63,9 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
             let id_token = url?.substring(from: tokenUpperIndex!)
             
-            print(state!)
-            print(auth_code!)
-            print(id_token!)
+            print("state: " + state!)
+            print("code: " + auth_code!)
+            print("token: " + id_token!)
         }
         return true;
     }
