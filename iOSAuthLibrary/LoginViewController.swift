@@ -36,6 +36,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&response_type=" + responsetype +
             "&response_mode=" + responsemode
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
+        loginView.delegate = self
     }
 
     override open func didReceiveMemoryWarning() {
