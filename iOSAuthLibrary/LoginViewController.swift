@@ -45,6 +45,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.url)
+        print(navigationType)
         if (navigationType == UIWebViewNavigationType.linkClicked) {
             print("clickedLink")
             let url = request.url
@@ -56,8 +57,23 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 return false; // don't let the webview process it.
             }
         }
+        let url = request.url?.absoluteString
+        print(url)
         
-        return true;
+        // Retrieve code and id token if they exist
+        if (url?.range(of: "urn:ietf:wg:oauth:2.0:oob") != nil && url?.range(of: "code=") != nil && url?.range(of: "&id_token=") != nil) {
+            let codeIndex = url?.range(of: "code=")?.lowerBound
+            let tokenIndex = url?.range(of: "&id_token=")?.lowerBound
+            let auth_code = url?.substring(with: codeIndex!..<tokenIndex!)
+            let id_token = url?.substring(from: tokenIndex!)
+            
+            print(codeIndex)
+            print(tokenIndex)
+            print(auth_code)
+            print(id_token)
+            return true;
+        }
+        return false;
     }
     
 }
