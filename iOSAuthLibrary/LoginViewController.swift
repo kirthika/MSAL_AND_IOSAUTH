@@ -73,9 +73,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             print(tokenIndex)
             print(auth_code)
             print(id_token)
-            return true;
         }
-        return false;
+        return true;
     }
     
 }
