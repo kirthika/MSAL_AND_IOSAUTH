@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		460099A91DC245AA0015BA8E /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460099A81DC245AA0015BA8E /* KeychainAccess.framework */; };
+		460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AB1DC29B9D0015BA8E /* KeychainService.swift */; };
 		4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */; };
 		4669101D1DAEBAFD00E0DB35 /* iOSAuthLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		466910241DAEBAFD00E0DB35 /* iOSAuthLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		460099A81DC245AA0015BA8E /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
+		460099AB1DC29B9D0015BA8E /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOSAuthLibrary.podspec; sourceTree = "<group>"; };
 		466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSAuthLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSAuthLibrary.h; sourceTree = "<group>"; };
@@ -46,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460099A91DC245AA0015BA8E /* KeychainAccess.framework in Frameworks */,
 				EB47F9EF1DBEE96A00A2ED70 /* JWT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,14 +66,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		460099A71DC245AA0015BA8E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4669100F1DAEBAFD00E0DB35 = {
 			isa = PBXGroup;
 			children = (
 				EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */,
+				460099A81DC245AA0015BA8E /* KeychainAccess.framework */,
 				4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */,
 				4669101B1DAEBAFD00E0DB35 /* iOSAuthLibrary */,
 				466910271DAEBAFD00E0DB35 /* iOSAuthLibraryTests */,
 				4669101A1DAEBAFD00E0DB35 /* Products */,
+				460099A71DC245AA0015BA8E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +103,7 @@
 				4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */,
 				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
 				466910371DAEBB4900E0DB35 /* Login.storyboard */,
+				460099AB1DC29B9D0015BA8E /* KeychainService.swift */,
 			);
 			path = iOSAuthLibrary;
 			sourceTree = "<group>";
@@ -124,6 +139,7 @@
 				466910151DAEBAFD00E0DB35 /* Frameworks */,
 				466910161DAEBAFD00E0DB35 /* Headers */,
 				466910171DAEBAFD00E0DB35 /* Resources */,
+				460099AA1DC247520015BA8E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -209,6 +225,25 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		460099AA1DC247520015BA8E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/iOSAuthLibrary.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/JWT.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		466910141DAEBAFD00E0DB35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -216,6 +251,7 @@
 			files = (
 				EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */,
 				EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */,
+				460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
