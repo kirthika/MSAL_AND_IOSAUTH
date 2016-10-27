@@ -25,7 +25,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        print(state)
         let domain = "https://login.microsoftonline.com"
         let tenant = "/tyrtsi.onmicrosoft.com"
         let oauth = "/oauth2/v2.0"

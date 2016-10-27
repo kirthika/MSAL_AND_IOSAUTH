@@ -22,7 +22,9 @@
                                 <frame key="frameInset" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Title" id="tDG-tX-OLN"/>
+                                    <navigationItem title="Login" id="tDG-tX-OLN">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="3E4-e6-oWl"/>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBA-2c-dbF" userLabel="LoginWebView">
