@@ -8,11 +8,17 @@
 import JWT
 
 open class AuthLibrary {
-    
+        
     public init() { }
     
     open func isAuthenticated() -> Bool {
         return false;
+    }
+    
+    open func login(state: String) -> LoginViewController {
+        let viewController = LoginViewController()
+        viewController.state = state
+        return viewController
     }
     
     open func isJwtValid(_ token: String) -> Bool {
