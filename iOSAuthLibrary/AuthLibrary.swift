@@ -15,10 +15,12 @@ open class AuthLibrary {
         return false;
     }
     
-    open func login(state: String) -> LoginViewController {
-        let viewController = LoginViewController()
+    open func login(state: String) {
+        let storyboard = UIStoryboard (
+            name: "Login", bundle: Bundle(for: LoginViewController.self)
+        )
+        let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         viewController.state = state
-        return viewController
     }
     
     open func isJwtValid(_ token: String) -> Bool {

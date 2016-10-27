@@ -45,7 +45,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&client_id=" + clientId +
             "&redirect_uri=" + redirectURI +
             "&scope=" + scope +
-            "&state=" + "test" +
+            "&state=" + state +
             "&response_type=" + responseType +
             "&response_mode=" + responseMode
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
