@@ -10,7 +10,17 @@ import UIKit
 
 open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var loginView: UIWebView!
-    var state: String = ""
+    open var state: String
+    
+    required public init?(coder aDecoder: NSCoder) {
+        state = ""
+        super.init(coder: aDecoder)
+    }
+    
+    init() {
+        state = ""
+        super.init(nibName: nil, bundle: nil)
+    }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +44,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&client_id=" + clientId +
             "&redirect_uri=" + redirectURI +
             "&scope=" + scope +
-            "&state=" + self.state +
+            "&state=" + state +
             "&response_type=" + responseType +
             "&response_mode=" + responseMode
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
