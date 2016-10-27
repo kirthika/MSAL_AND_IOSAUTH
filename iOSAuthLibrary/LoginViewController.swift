@@ -15,66 +15,60 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
         
         let domain = "https://login.microsoftonline.com"
-        let tenant = "/fe14a1c0-578a-42fe-bb99-2bcc77bcc761"
+        let tenant = "/tyrtsi.onmicrosoft.com"
         let oauth = "/oauth2/v2.0"
         let authorize = "/authorize"
-        let policy = "B2C_1_toss"
-        let clientid = "93406a76-dc2a-4fa9-a900-25f8151762c8"
-        let redirecturiencoded = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
-        let scope = "openid"
-        let responsetype = "id_token"
-        let responsemode = "query"
-        let prompt = "login"
-        let state = "currenttempstate"
+        let policy = "B2C_1_SignupAndSignin"
+        let clientId = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
+        let redirectURI = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
+        let scope = "offline_access%20openid"
+        let state = "protected"
+        let responseType = "code%20id_token"
+        let responseMode = "query"
         
         let url = domain +
             tenant +
             oauth +
             authorize +
             "?p=" + policy +
-            "&client_id=" + clientid +
-            "&redirect_uri=" + redirecturiencoded +
+            "&client_id=" + clientId +
+            "&redirect_uri=" + redirectURI +
             "&scope=" + scope +
             "&state=" + state +
-            "&response_type=" + responsetype +
-            "&response_mode=" + responsemode +
-            "&prompt=" + prompt
-        let nsURL = URL(string: url)
-        
-        print(url)
-        
-        /*let nsURL = NSURL (string: "https://login.microsoftonline.com/tyrtsi.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SignupAndSignin&client_Id=ce25c98b-f01d-46ad-936a-62ac28c939e5&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid&response_type=id_token&response_mode=query");*/
-        let request = URLRequest(url: nsURL!);
-        loginView.loadRequest(request);
-        // Do any additional setup after loading the view.
+            "&response_type=" + responseType +
+            "&response_mode=" + responseMode
+        loginView.loadRequest(URLRequest(url: URL(string: url)!))
+        loginView.delegate = self
     }
 
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    open func webViewDidStartLoad(_ webView: UIWebView) {
-        print("started")
-    }
-    
-    open func webViewDidFinishLoad(_ webView: UIWebView) {
-        print("finished")
     }
     
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print(request.url)
-        if (navigationType == UIWebViewNavigationType.linkClicked) {
-            let url = request.url
-            let scheme = url?.scheme
-            if (scheme == "urn:ietf:wg:oauth:2.0:oob") {
-                // Update the url as needed
-                
-                // Now handled the url by asking the app to open it
-                return false; // don't let the webview process it.
-            }
-        }
+        // Retrieve code and id token if they exist
+        let url = request.url?.absoluteString
+        let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
+        let stateRange = url?.range(of: "state=")
+        let codeRange = url?.range(of: "&code=")
+        let tokenRange = url?.range(of: "&id_token=")
         
+        if (redirectRange != nil && stateRange != nil && codeRange != nil && tokenRange != nil) {
+            let stateUpperIndex = stateRange?.upperBound
+            let codeLowerIndex = codeRange?.lowerBound
+            let codeUpperIndex = codeRange?.upperBound
+            let tokenLowerIndex = tokenRange?.lowerBound
+            let tokenUpperIndex = tokenRange?.upperBound
+            let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
+            let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
+            let id_token = url?.substring(from: tokenUpperIndex!)
+            
+            print("state: " + state!)
+            print("code: " + auth_code!)
+            print("token: " + id_token!)
+            
+            dismiss(animated: true, completion: nil)
+        }
         return true;
     }
     
