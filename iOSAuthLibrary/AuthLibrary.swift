@@ -11,6 +11,10 @@ open class AuthLibrary {
     
     public init() { }
     
+    open func isAuthenticated() -> Bool {
+        return false;
+    }
+    
     open func isJwtValid(_ token: String) -> Bool {
         //let algorithmName = "RS256"
         let claims = JWT.decodeMessage(token).options(true)
