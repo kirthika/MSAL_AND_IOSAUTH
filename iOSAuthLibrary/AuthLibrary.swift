@@ -12,7 +12,7 @@ open class AuthLibrary {
     required public init() {
     }
 
-    open func isAuthenticated() -> Bool {
+    open func isAuthenticated(_ token: String) -> Bool {
         return false;
     }
     
