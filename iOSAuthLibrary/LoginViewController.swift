@@ -80,16 +80,12 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             //let keychainService = KeychainService()
             //keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
             
-            print(parent)
-            
-            if (parent != nil) {
-                print(parent)
-                print(parent?.storyboard)
-                print(parent?.view.restorationIdentifier)
-                print(parent?.childViewControllers)
-                let viewController = parent!.storyboard!.instantiateViewController(withIdentifier: state! + "ViewController")
-                parent!.addChildViewController(viewController)
-                parent!.view!.addSubview(viewController.view)
+            print(presentingViewController)
+
+            if (presentingViewController != nil) {
+                let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state! + "ViewController")
+                presentingViewController!.addChildViewController(viewController)
+                presentingViewController!.view!.addSubview(viewController.view)
             }
             
             dismiss(animated: true, completion: nil)
