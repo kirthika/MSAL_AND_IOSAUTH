@@ -80,6 +80,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             //let keychainService = KeychainService()
             //keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
             
+            print(parent)
+            
             if (parent != nil) {
                 print(parent)
                 print(parent?.storyboard)
