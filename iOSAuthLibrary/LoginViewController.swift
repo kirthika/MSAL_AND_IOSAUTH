@@ -82,9 +82,11 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             
             dismiss(animated: true, completion: nil)
             
-            let viewController = storyboard!.instantiateViewController(withIdentifier: state! + "ViewController")
-            self.addChildViewController(viewController)
-            self.view!.addSubview(viewController.view)
+            if (parent != nil) {
+                let viewController = parent!.storyboard!.instantiateViewController(withIdentifier: state! + "ViewController")
+                parent!.addChildViewController(viewController)
+                parent!.view!.addSubview(viewController.view)
+            }
         }
         return true;
     }
