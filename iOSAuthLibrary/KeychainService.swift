@@ -27,8 +27,12 @@ open class KeychainService {
     }
     
     public func getToken(_ tokenType: String) -> String {
+        print(tokenType)
         var id_token: String
         do {
+            print(keychain)
+            print(keychain.allKeys())
+            print(keychain.get("id_token"))
             try id_token = keychain.get(tokenType)!
         } catch let error {
             print(error)
