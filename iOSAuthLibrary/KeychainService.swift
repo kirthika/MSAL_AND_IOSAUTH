@@ -26,8 +26,8 @@ open class KeychainService {
         }
     }
     
-    public func getToken(_ tokenType: String) -> String {
-        var id_token: String?
+    public func getToken() -> String {
+        var id_token: String
         do {
             try id_token = keychain.get("id_token")!
         } catch let error {
