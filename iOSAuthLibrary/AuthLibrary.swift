@@ -12,8 +12,14 @@ open class AuthLibrary {
     required public init() {
     }
 
-    open func isAuthenticated(_ token: String) -> Bool {
-        return false;
+    open func isAuthenticated() -> Bool {
+        let keychainService = KeychainService()
+        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
+        if (!id_token.isEmpty) {
+            return isJwtValid(id_token)
+        } else {
+            return false
+        }
     }
     
     open func login(state: String) -> LoginViewController {

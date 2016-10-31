@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		460099A91DC245AA0015BA8E /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460099A81DC245AA0015BA8E /* KeychainAccess.framework */; };
 		460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AB1DC29B9D0015BA8E /* KeychainService.swift */; };
+		460099AE1DC3E33A0015BA8E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AD1DC3E33A0015BA8E /* Token.swift */; };
 		4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */; };
 		4669101D1DAEBAFD00E0DB35 /* iOSAuthLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		466910241DAEBAFD00E0DB35 /* iOSAuthLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		460099A81DC245AA0015BA8E /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		460099AB1DC29B9D0015BA8E /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		460099AD1DC3E33A0015BA8E /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOSAuthLibrary.podspec; sourceTree = "<group>"; };
 		466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSAuthLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSAuthLibrary.h; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
 				466910371DAEBB4900E0DB35 /* Login.storyboard */,
 				460099AB1DC29B9D0015BA8E /* KeychainService.swift */,
+				460099AD1DC3E33A0015BA8E /* Token.swift */,
 			);
 			path = iOSAuthLibrary;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */,
 				EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */,
 				460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */,
+				460099AE1DC3E33A0015BA8E /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
