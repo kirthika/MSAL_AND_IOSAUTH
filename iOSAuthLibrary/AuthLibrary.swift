@@ -13,14 +13,13 @@ open class AuthLibrary {
     }
 
     open func isAuthenticated() -> Bool {
-        /*let keychainService = KeychainService()
-        let id_token = keychainService.getToken("id_token")
+        let keychainService = KeychainService()
+        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
             return isJwtValid(id_token)
         } else {
             return false
-        }*/
-        return false
+        }
     }
     
     open func login(state: String) -> LoginViewController {

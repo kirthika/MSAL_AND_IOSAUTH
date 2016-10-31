@@ -73,20 +73,19 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
             let id_token = url?.substring(from: tokenUpperIndex!)
             
-            print("state: " + state!)
             print("code: " + auth_code!)
             print("token: " + id_token!)
             
             let keychainService = KeychainService()
             keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
             
-            dismiss(animated: true, completion: nil)
-            
             if (presentingViewController != nil) {
-                let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state! + "ViewController")
+                let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
                 presentingViewController!.addChildViewController(viewController)
                 presentingViewController!.view!.addSubview(viewController.view)
             }
+            
+            dismiss(animated: true, completion: nil)
         }
         return true;
     }
