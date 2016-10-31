@@ -27,22 +27,11 @@ open class KeychainService {
     }
     
     public func getToken(_ tokenType: String) -> String {
-        print(tokenType)
-        do {
-            try Keychain(service: "com.parivedasolutions.iOSAuthLibrary").set("test", key: "id_token")
-        }
-        catch let error {
-            print(error)
-            print("broken set")
-        }
         var id_token: String
         do {
-            print(Keychain(service: "com.parivedasolutions.iOSAuthLibrary"))
-            print(keychain.allKeys())
-            try id_token = Keychain(service: "com.parivedasolutions.iOSAuthLibrary").get(tokenType)!
+            try id_token = keychain.get(tokenType)!
         } catch let error {
             print(error)
-            print("broken get")
             return ""
         }
         return id_token
