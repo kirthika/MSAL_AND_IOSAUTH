@@ -18,12 +18,11 @@ open class KeychainService {
             .accessibility(.whenUnlocked)
     }
     
-    public func storeToken(_ token: String) -> Bool {
+    public func storeToken(_ token: String) {
         do {
             try keychain.set(token, key: "id_token")
-            return true
         } catch let error {
-            return false
+            print(error)
         }
     }
 }

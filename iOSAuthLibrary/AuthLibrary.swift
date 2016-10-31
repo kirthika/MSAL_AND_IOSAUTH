@@ -12,8 +12,13 @@ open class AuthLibrary {
     required public init() {
     }
 
-    open func isAuthenticated(_ token: String) -> Bool {
-        return false;
+    open func isAuthenticated(_ token: String?) -> Bool {
+        if (token != nil) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
     open func login(state: String) -> LoginViewController {
