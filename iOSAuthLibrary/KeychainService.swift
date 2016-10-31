@@ -30,9 +30,9 @@ open class KeychainService {
         print(tokenType)
         var id_token: String
         do {
-            print(keychain)
+            print(Keychain(service: "com.parivedasolutions.iOSAuthLibrary"))
             print(keychain.allKeys())
-            try id_token = keychain.get(tokenType)!
+            try id_token = Keychain(service: "com.parivedasolutions.iOSAuthLibrary").get(tokenType)!
         } catch let error {
             print(error)
             return ""
