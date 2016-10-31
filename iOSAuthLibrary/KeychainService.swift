@@ -36,12 +36,9 @@ open class KeychainService {
             print("broken set")
         }
         var id_token: String
-        var token: String
         do {
-            print(Keychain())
             print(Keychain(service: "com.parivedasolutions.iOSAuthLibrary"))
             print(keychain.allKeys())
-            try token = Keychain().get("id_token")!
             try id_token = Keychain(service: "com.parivedasolutions.iOSAuthLibrary").get(tokenType)!
         } catch let error {
             print(error)
