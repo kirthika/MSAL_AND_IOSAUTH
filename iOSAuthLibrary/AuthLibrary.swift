@@ -14,7 +14,7 @@ open class AuthLibrary {
 
     open func isAuthenticated() -> Bool {
         let keychainService = KeychainService()
-        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
+        let id_token = keychainService.getToken("id_token")
         if (!id_token.isEmpty) {
             return isJwtValid(id_token)
         } else {
@@ -31,7 +31,7 @@ open class AuthLibrary {
         return viewController
     }
     
-    func isJwtValid(_ token: String) -> Bool {
+    open func isJwtValid(_ token: String) -> Bool {
         //let algorithmName = "RS256"
         let claims = JWT.decodeMessage(token).options(true)
         if ((claims?.decode) != nil) {
