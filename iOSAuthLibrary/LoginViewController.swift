@@ -77,8 +77,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             print("code: " + auth_code!)
             print("token: " + id_token!)
             
-            let keychainService = KeychainService()
-            keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
+            //let keychainService = KeychainService()
+            //keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
             
             if (parent != nil) {
                 print(parent)
