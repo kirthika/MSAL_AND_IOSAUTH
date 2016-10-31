@@ -27,8 +27,10 @@ open class KeychainService {
     }
     
     public func getToken() -> String {
+        print("in getToken func")
         var id_token: String
         do {
+            print("before try")
             try id_token = keychain.get("id_token")!
         } catch let error {
             print(error)

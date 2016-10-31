@@ -12,7 +12,9 @@ open class AuthLibrary {
     required public init() { }
 
     open func isAuthenticated() -> Bool {
+        print("isAuthenticated func")
         let keychainService = KeychainService()
+        print("before get token")
         let id_token = keychainService.getToken()
         if (!id_token.isEmpty) {
             return isJwtValid(id_token)
