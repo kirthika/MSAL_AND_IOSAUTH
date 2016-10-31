@@ -31,7 +31,7 @@ open class KeychainService {
         var id_token: String
         do {
             print("before try")
-            try id_token = keychain.get("id_token")!
+            id_token = try? keychain.getString("kishikawakatsumi")
         } catch let error {
             print(error)
             id_token = ""
