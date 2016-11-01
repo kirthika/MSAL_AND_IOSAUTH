@@ -11,13 +11,9 @@ import KeychainAccess
 
 open class KeychainService {
     
-    public var keychain: Keychain
     let authService = "com.parivedasolutions.iOSAuthLibrary"
     
-    required public init() {
-        self.keychain = Keychain(service: authService)
-            .accessibility(.whenUnlocked)
-    }
+    required public init() {}
     
     public func KeychainConstructor() -> Keychain {
         return Keychain(service: authService)
