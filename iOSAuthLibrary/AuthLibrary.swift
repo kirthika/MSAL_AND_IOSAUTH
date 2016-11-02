@@ -9,10 +9,13 @@ import JWT
 
 open class AuthLibrary {
     
-    required public init() { }
+    var keychainService: KeychainService
+    
+    required public init() {
+        keychainService = KeychainService()
+    }
 
     open func isAuthenticated() -> Bool {
-        let keychainService = KeychainService()
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
             return isJwtValid(id_token)
@@ -22,9 +25,7 @@ open class AuthLibrary {
     }
     
     open func login(state: String) -> LoginViewController {
-        let storyboard = UIStoryboard (
-            name: "Login", bundle: Bundle(for: LoginViewController.self)
-        )
+        let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         viewController.state = state
         return viewController
@@ -35,7 +36,6 @@ open class AuthLibrary {
     }
     
     open func clearTokens() {
-        let keychainService = KeychainService()
         keychainService.removeTokens()
     }
 }

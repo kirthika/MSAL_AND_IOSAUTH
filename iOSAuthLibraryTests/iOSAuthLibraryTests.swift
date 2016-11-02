@@ -18,7 +18,7 @@ class iOSAuthLibraryTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         loginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         
         authLibrary = AuthLibrary()
@@ -26,7 +26,6 @@ class iOSAuthLibraryTests: XCTestCase {
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
