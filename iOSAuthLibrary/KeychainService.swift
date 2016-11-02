@@ -13,8 +13,6 @@ open class KeychainService {
     
     let authService = "com.parivedasolutions.iOSAuthLibrary"
     
-    required public init() {}
-    
     public func KeychainConstructor() -> Keychain {
         return Keychain(service: "com.parivedasolutions.iOSAuthLibrary")
     }
@@ -28,15 +26,21 @@ open class KeychainService {
     }
     
     public func getToken(_ tokenType: String) -> String {
-        print(tokenType)
         var id_token: String
         do {
             try id_token = KeychainConstructor().get(tokenType)!
         } catch let error {
             print(error)
-            print("broken get")
             id_token = ""
         }
         return id_token
+    }
+    
+    public func removeTokens() {
+        do {
+            try KeychainConstructor().removeAll()
+        } catch let error {
+            print(error)
+        }
     }
 }
