@@ -16,7 +16,7 @@ open class KeychainService {
     required public init() {}
     
     public func KeychainConstructor() -> Keychain {
-        return Keychain(service: authService)
+        return Keychain(service: "com.parivedasolutions.iOSAuthLibrary")
     }
     
     public func storeToken(_ token: String, _ tokenType: String) {
@@ -35,7 +35,7 @@ open class KeychainService {
         } catch let error {
             print(error)
             print("broken get")
-            return ""
+            id_token = ""
         }
         return id_token
     }
