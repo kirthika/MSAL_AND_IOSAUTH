@@ -166,6 +166,7 @@
 				4669101F1DAEBAFD00E0DB35 /* Sources */,
 				466910201DAEBAFD00E0DB35 /* Frameworks */,
 				466910211DAEBAFD00E0DB35 /* Resources */,
+				EBC513041DCA601F009ECD21 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -250,6 +251,21 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		EBC513041DCA601F009ECD21 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/JWT.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
