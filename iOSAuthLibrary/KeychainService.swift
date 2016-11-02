@@ -33,6 +33,7 @@ open class KeychainService {
             print(error)
             id_token = ""
         }
+        print(id_token)
         return id_token!
     }
     
