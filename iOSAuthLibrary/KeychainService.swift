@@ -11,15 +11,16 @@ import KeychainAccess
 
 open class KeychainService {
     
-    let authService = "com.parivedasolutions.iOSAuthLibrary"
+    public var keychain: Keychain
     
-    public func KeychainConstructor() -> Keychain {
-        return Keychain(service: "com.parivedasolutions.iOSAuthLibrary")
+    required public init() {
+        self.keychain = Keychain(service: "com.parivedasolutions.iOSAuthLibrary")
+            .accessibility(.whenUnlocked)
     }
     
     public func storeToken(_ token: String, _ tokenType: String) {
         do {
-            try KeychainConstructor().set(token, key: tokenType)
+            try keychain.set(token, key: tokenType)
         } catch let error {
             print(error)
         }
@@ -28,18 +29,20 @@ open class KeychainService {
     public func getToken(_ tokenType: String) -> String {
         var id_token: String?
         do {
-            try id_token = KeychainConstructor().get(tokenType)
+            try id_token = keychain.get(tokenType)
         } catch let error {
             print(error)
             id_token = ""
         }
-        print(id_token)
+        if (id_token == nil) {
+            id_token = ""
+        }
         return id_token!
     }
     
     public func removeTokens() {
         do {
-            try KeychainConstructor().removeAll()
+            try keychain.removeAll()
         } catch let error {
             print(error)
         }
