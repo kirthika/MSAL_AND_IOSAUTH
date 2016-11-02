@@ -26,14 +26,14 @@ open class KeychainService {
     }
     
     public func getToken(_ tokenType: String) -> String {
-        var id_token: String
+        var id_token: String?
         do {
-            try id_token = KeychainConstructor().get(tokenType)!
+            try id_token = KeychainConstructor().get(tokenType)
         } catch let error {
             print(error)
             id_token = ""
         }
-        return id_token
+        return id_token!
     }
     
     public func removeTokens() {
