@@ -22,6 +22,8 @@
 		EB47F9EF1DBEE96A00A2ED70 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */; };
 		EB6404761DC7F58F008AFAC9 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = EB6404741DC7F58F008AFAC9 /* Cartfile */; };
 		EB6404771DC7F58F008AFAC9 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */; };
+		EBFF96521DCA90F0004F7EE9 /* MockKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */; };
+		EBFF96551DCA9A38004F7EE9 /* MockToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFF96541DCA9A38004F7EE9 /* MockToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWT.framework; path = Carthage/Build/iOS/JWT.framework; sourceTree = "<group>"; };
 		EB6404741DC7F58F008AFAC9 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
+		EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockKeychainService.swift; sourceTree = "<group>"; };
+		EBFF96541DCA9A38004F7EE9 /* MockToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 		4669101B1DAEBAFD00E0DB35 /* iOSAuthLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				EBFF96531DCA90FE004F7EE9 /* Mocks */,
 				EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */,
 				EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */,
 				4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */,
@@ -130,6 +135,15 @@
 				4669102A1DAEBAFD00E0DB35 /* Info.plist */,
 			);
 			path = iOSAuthLibraryTests;
+			sourceTree = "<group>";
+		};
+		EBFF96531DCA90FE004F7EE9 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */,
+				EBFF96541DCA9A38004F7EE9 /* MockToken.swift */,
+			);
+			name = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +301,8 @@
 				EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */,
 				460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */,
 				46408CDE1DCA7B21000715CD /* PListService.swift in Sources */,
+				EBFF96551DCA9A38004F7EE9 /* MockToken.swift in Sources */,
+				EBFF96521DCA90F0004F7EE9 /* MockKeychainService.swift in Sources */,
 				460099AE1DC3E33A0015BA8E /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

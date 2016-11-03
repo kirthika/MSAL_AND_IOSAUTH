@@ -13,31 +13,39 @@ class iOSAuthLibraryTests: XCTestCase {
     
     var loginViewController: LoginViewController!
     var authLibrary: AuthLibrary!
-    var keychainService: KeychainService!
+    var keychainService: MockKeychainService!
     
     override func setUp() {
         super.setUp()
 
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         loginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         
         authLibrary = AuthLibrary()
-        keychainService = KeychainService()
+        keychainService = MockKeychainService()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        XCTAssert(true)
+    func testCorrectMockStoreAndGetToken() {
+        let mockToken = "test"
+        keychainService.storeToken(mockToken, TokenType.id_token.rawValue)
+        let token = keychainService.getToken(TokenType.id_token.rawValue)
+        XCTAssert(token == mockToken)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    func testIncorrectMockStoreAndGetToken() {
+        let mockToken = "test"
+        keychainService.storeToken(mockToken, TokenType.id_token.rawValue)
+        let token = keychainService.getToken(TokenType.auth_token.rawValue)
+        XCTAssert(token != mockToken)
+    }
+    
+    func testPerformanceIsAuthenticated() {
         self.measure {
-            // Put the code you want to measure the time of here.
+            self.authLibrary.isAuthenticated()
         }
     }
     
