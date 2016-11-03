@@ -14,6 +14,10 @@ open class PListService
     
     init(_ file: String) {
         print(file)
+        let testPath = Bundle.main.resourcePath!
+        print(testPath)
+        let testDocs = NSDictionary(contentsOfFile: testPath) as! Dictionary<String, String>
+        print(testDocs)
         let plistPath = Bundle.main.path(forResource: file, ofType: "plist")!
         print(plistPath)
         
