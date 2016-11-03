@@ -18,6 +18,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     init() {
+        state = ""
         super.init(nibName: nil, bundle: nil)
     }
     
