@@ -39,7 +39,7 @@ open class KeychainService {
         if (id_token == nil) {
             id_token = ""
         }
-        return id_token!
+        return id_token
     }
     
     public func removeTokens() {

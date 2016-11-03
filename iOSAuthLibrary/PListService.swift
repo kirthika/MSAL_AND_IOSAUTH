@@ -11,14 +11,18 @@ import Foundation
 open class PListService
 {
     var plistPath : String
-    var properties : NSDictionary
+    var properties : Dictionary<String, String>
     
     init(_ file: String) {
         plistPath = Bundle.main.path(forResource: file, ofType: "plist")!
-        properties = NSDictionary(contentsOfFile: plistPath)!
+        properties = NSDictionary(contentsOfFile: plistPath) as! Dictionary
+    }
+    
+    open func getAllProperties() -> Dictionary<String, String> {
+        return self.properties
     }
     
     open func getProperty(_ key: String) -> String {
-        return properties.object(forKey: key) as! String
+        return properties[key] as String!
     }
 }

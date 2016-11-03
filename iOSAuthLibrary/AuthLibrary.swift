@@ -10,7 +10,11 @@ import Alamofire
 
 open class AuthLibrary {
     
-    required public init() { }
+    var authProps: PListService
+    
+    required public init() {
+        authProps = PListService("auth")
+    }
 
     open func isAuthenticated() -> Bool {
         print("isAuthenticated func")
@@ -41,8 +45,23 @@ open class AuthLibrary {
         let keychainService = KeychainService()
         keychainService.removeTokens()
     }
-    
-    open func getAuthAndIdTokens() -> [String] {
-        
+
+    open func getAuthCode() -> String {
+        var auth_code = ""
+        let authCodeProps = PListService("authCodeRequest")
+        let request = authProps.getProperty("domain") + "3ca60f43-0cb5-4822-9ca0-1553fc5382c9/" + authProps.getProperty("oauth") + authProps.getProperty("authorize")
+        print(request)
+        Alamofire.request(authProps.getProperty("domain") + "3ca60f43-0cb5-4822-9ca0-1553fc5382c9/" + authProps.getProperty("oauth") + authProps.getProperty("authorize"),
+                          method: .get,
+                          parameters: authCodeProps.getAllProperties())
+            .responseString { auth_code in print("Response String: \(auth_code.result.value)") }
+        print(auth_code)
+        return ""
     }
+    
+//    open func getAuthAndIdTokens() -> [String] {
+//        Alamofire.request(.GET, ")
+//        
+//        return []
+//    }
 }
