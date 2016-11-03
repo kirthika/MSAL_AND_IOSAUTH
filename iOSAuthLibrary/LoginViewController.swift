@@ -32,7 +32,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let clientId = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
         let redirectURI = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
         let scope = "openid%20offline_access"
-        let state = "currenttempstate"
+        self.state = "currenttempstate"
         let responseType = "code"
         let responseMode = "query"
         let prompt = "login"
