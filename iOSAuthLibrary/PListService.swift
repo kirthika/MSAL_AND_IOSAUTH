@@ -13,13 +13,11 @@ open class PListService
     var properties : Dictionary<String, String>
     
     init(_ file: String) {
-        print(file)
-        let testPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
-        print(testPaths[0])
-        
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        print(paths)
-        let path = paths.appending("authCodeRequest.plist")
+        let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let path = dir.appending(file + ".plist")
+        print(path)
+        let test = dir + file + ".plist"
+        print(test)
         properties = NSDictionary(contentsOfFile: path) as! Dictionary
     }
     
