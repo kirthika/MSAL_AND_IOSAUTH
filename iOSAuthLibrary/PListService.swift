@@ -15,7 +15,7 @@ open class PListService
     
     init(_ file: String) {
         print(file)
-        plistPath = Bundle.main.path(forResource: file, ofType: "plist")
+        plistPath = Bundle.main.path(forResource: file, ofType: "plist")!
         properties = NSDictionary(contentsOfFile: plistPath) as! Dictionary
     }
     
