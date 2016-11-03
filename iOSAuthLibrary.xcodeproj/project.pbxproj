@@ -18,6 +18,7 @@
 		466910291DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */; };
 		466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466910371DAEBB4900E0DB35 /* Login.storyboard */; };
 		46FE9E441DCB8D72006EEC75 /* authCodeRequest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46FE9E431DCB8D72006EEC75 /* authCodeRequest.plist */; };
+		46FE9E461DCB9FBD006EEC75 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */; };
 		EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */; };
 		EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */; };
 		EB47F9EF1DBEE96A00A2ED70 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */; };
@@ -50,6 +51,7 @@
 		4669102A1DAEBAFD00E0DB35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		466910371DAEBB4900E0DB35 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		46FE9E431DCB8D72006EEC75 /* authCodeRequest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = authCodeRequest.plist; sourceTree = "<group>"; };
+		46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthLibrary.swift; sourceTree = "<group>"; };
 		EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWT.framework; path = Carthage/Build/iOS/JWT.framework; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46FE9E461DCB9FBD006EEC75 /* Alamofire.framework in Frameworks */,
 				460099A91DC245AA0015BA8E /* KeychainAccess.framework in Frameworks */,
 				EB47F9EF1DBEE96A00A2ED70 /* JWT.framework in Frameworks */,
 			);
@@ -90,6 +93,7 @@
 			children = (
 				EB6404741DC7F58F008AFAC9 /* Cartfile */,
 				EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */,
+				46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */,
 				EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */,
 				460099A81DC245AA0015BA8E /* KeychainAccess.framework */,
 				4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */,

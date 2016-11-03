@@ -56,7 +56,7 @@ open class AuthLibrary {
                           parameters: authCodeProps.getAllProperties())
             .responseString { auth_code in print("Response String: \(auth_code.result.value)") }
         print(auth_code)
-        return ""
+        return auth_code
     }
     
 //    open func getAuthAndIdTokens() -> [String] {
