@@ -18,7 +18,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     init() {
-        state = ""
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,15 +25,17 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
         
         let domain = "https://login.microsoftonline.com"
-        let tenant = "/tyrtsi.onmicrosoft.com"
+        let tenant = "/3ca60f43-0cb5-4822-9ca0-1553fc5382c9"
         let oauth = "/oauth2/v2.0"
         let authorize = "/authorize"
         let policy = "B2C_1_SignupAndSignin"
         let clientId = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
         let redirectURI = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
-        let scope = "offline_access%20openid"
-        let responseType = "code%20id_token"
+        let scope = "openid%20offline_access"
+        let state = "currenttempstate"
+        let responseType = "code"
         let responseMode = "query"
+        let prompt = "login"
         
         let url = domain +
             tenant +
@@ -46,7 +47,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&scope=" + scope +
             "&state=" + state +
             "&response_type=" + responseType +
-            "&response_mode=" + responseMode
+            "&response_mode=" + responseMode +
+            "&prompt=" + prompt
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }
