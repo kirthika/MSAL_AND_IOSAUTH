@@ -43,10 +43,9 @@ class iOSAuthLibraryTests: XCTestCase {
         XCTAssert(token != mockToken)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    func testPerformanceIsAuthenticated() {
         self.measure {
-            // Put the code you want to measure the time of here.
+            self.authLibrary.isAuthenticated()
         }
     }
     
