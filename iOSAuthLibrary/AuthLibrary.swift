@@ -13,7 +13,7 @@ open class AuthLibrary {
     var authProps: PListService
     
     required public init() {
-        authProps = PListService("auth")
+        authProps = PListService()
     }
 
     open func isAuthenticated() -> Bool {
