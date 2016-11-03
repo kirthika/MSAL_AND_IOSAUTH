@@ -54,7 +54,7 @@ open class AuthLibrary {
         print(request)
         Alamofire.request(request,/*authProps.getProperty("domain") + "3ca60f43-0cb5-4822-9ca0-1553fc5382c9/" + authProps.getProperty("oauth") + authProps.getProperty("authorize"),*/
                           method: .get,
-                          parameters: ["p": "B2C_1_SignupAndSignin", "client_id": "461d17fe-5432-48f0-aa60-6a71813cc065", "redirect_uri":"urn%3Aietf%3Awg%3A2.0%3Aoob", "scope":"openid%20offline_access", "state":"currenttempstate", "response_type":"code", "response_mode":"query","prompt":"login"])
+                          parameters: ["p": "B2C_1_SignupAndSignin", "client_id": "93406a76-dc2a-4fa9-a900-25f8151762c8", "redirect_uri":"urn%3Aietf%3Awg%3A2.0%3Aoob", "scope":"openid%20offline_access", "state":"currenttempstate", "response_type":"code", "response_mode":"query","prompt":"login"])
             .responseString { auth_code in print("Response String: \(auth_code.result.value)") }
         print(auth_code)
         return auth_code
