@@ -10,17 +10,14 @@ import Alamofire
 
 open class AuthLibrary {
     
-    var authProps: PListService
+    var keychainService: KeychainService
     
     required public init() {
-        authProps = PListService()
+        keychainService = KeychainService()
     }
 
     open func isAuthenticated() -> Bool {
-        print("isAuthenticated func")
-        let keychainService = KeychainService()
-        print("before get token")
-        let id_token = keychainService.getToken()
+        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
             return isJwtValid(id_token)
         } else {
@@ -29,9 +26,7 @@ open class AuthLibrary {
     }
     
     open func login(state: String) -> LoginViewController {
-        let storyboard = UIStoryboard (
-            name: "Login", bundle: Bundle(for: LoginViewController.self)
-        )
+        let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         viewController.state = state
         return viewController
@@ -42,7 +37,6 @@ open class AuthLibrary {
     }
     
     open func clearTokens() {
-        let keychainService = KeychainService()
         keychainService.removeTokens()
     }
 
