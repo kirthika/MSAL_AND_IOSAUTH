@@ -50,6 +50,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&response_type=" + responseType +
             "&response_mode=" + responseMode +
             "&prompt=" + prompt
+        print(url)
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }
