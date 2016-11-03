@@ -6,6 +6,7 @@
 //
 
 import JWT
+import Alamofire
 
 open class AuthLibrary {
     
@@ -39,5 +40,9 @@ open class AuthLibrary {
     open func clearTokens() {
         let keychainService = KeychainService()
         keychainService.removeTokens()
+    }
+    
+    open func getAuthAndIdTokens() -> [String] {
+        
     }
 }
