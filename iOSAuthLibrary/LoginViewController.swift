@@ -65,23 +65,19 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
-        let tokenRange = url?.range(of: "&id_token=")
+        //let tokenRange = url?.range(of: "&id_token=")
         
-        if (redirectRange != nil && stateRange != nil && codeRange != nil && tokenRange != nil) {
+        if (redirectRange != nil && stateRange != nil && codeRange != nil) {
             let stateUpperIndex = stateRange?.upperBound
             let codeLowerIndex = codeRange?.lowerBound
             let codeUpperIndex = codeRange?.upperBound
-            let tokenLowerIndex = tokenRange?.lowerBound
-            let tokenUpperIndex = tokenRange?.upperBound
             let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
-            let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
-            let id_token = url?.substring(from: tokenUpperIndex!)
+            let auth_code = url?.substring(from: codeUpperIndex!)
             
             print("code: " + auth_code!)
-            print("token: " + id_token!)
             
             let keychainService = KeychainService()
-            keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
+            //keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
             
             if (presentingViewController != nil) {
                 let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
