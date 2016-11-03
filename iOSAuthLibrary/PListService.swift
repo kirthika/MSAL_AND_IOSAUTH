@@ -14,8 +14,11 @@ open class PListService
     
     init(_ file: String) {
         print(file)
+        let testPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
+        print(testPaths[0])
         
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        print(paths)
         let path = paths.appending("authCodeRequest.plist")
         properties = NSDictionary(contentsOfFile: path) as! Dictionary
     }
