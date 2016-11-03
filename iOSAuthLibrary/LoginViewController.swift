@@ -33,7 +33,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let clientId = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
         let redirectURI = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
         let scope = "openid%20offline_access"
-        let new_state = "currenttempstate"
+        let new_state = "ProtectedViewController"
         let responseType = "code"
         let responseMode = "query"
         let prompt = "login"
@@ -65,23 +65,19 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
-        let tokenRange = url?.range(of: "&id_token=")
+        //let tokenRange = url?.range(of: "&id_token=")
         
-        if (redirectRange != nil && stateRange != nil && codeRange != nil && tokenRange != nil) {
+        if (redirectRange != nil && stateRange != nil && codeRange != nil) {
             let stateUpperIndex = stateRange?.upperBound
             let codeLowerIndex = codeRange?.lowerBound
             let codeUpperIndex = codeRange?.upperBound
-            let tokenLowerIndex = tokenRange?.lowerBound
-            let tokenUpperIndex = tokenRange?.upperBound
             let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
-            let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
-            let id_token = url?.substring(from: tokenUpperIndex!)
+            let auth_code = url?.substring(from: codeUpperIndex!)
             
             print("code: " + auth_code!)
-            print("token: " + id_token!)
             
             let keychainService = KeychainService()
-            keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
+            //keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
             
             if (presentingViewController != nil) {
                 let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
