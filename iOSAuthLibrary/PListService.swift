@@ -13,16 +13,24 @@ open class PListService
     var properties : Dictionary<String, String>
     
     init(_ file: String) {
+        print(file)
+        let plistPath = Bundle.main.path(forResource: file, ofType: "plist")!
+        print(plistPath)
+        
         let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let path = dir + "/" + file + ".plist"
         print(path)
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
             properties = NSDictionary(contentsOfFile: path) as! Dictionary
-        } else {
+        } else if fileManager.fileExists(atPath: plistPath){
+            properties = NSDictionary(contentsOfFile: plistPath) as! Dictionary
+        }
+        else {
             properties = NSDictionary() as! Dictionary
         }
-        properties = NSDictionary(contentsOfFile: path) as! Dictionary
+        
+        
     }
     
     open func getAllProperties() -> Dictionary<String, String> {
