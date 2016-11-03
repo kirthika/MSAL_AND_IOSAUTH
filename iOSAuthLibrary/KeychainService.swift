@@ -26,12 +26,10 @@ open class KeychainService {
         }
     }
     
-    public func getToken() -> String {
-        print("in getToken func")
-        var id_token: String
-        print("before try")
+    public func getToken(_ tokenType: String) -> String {
+        var id_token: String?
         do {
-            id_token = try keychain.getString("id_token")!
+            id_token = try keychain.get(tokenType)
         } catch let error {
             print(error)
             id_token = ""
@@ -39,7 +37,7 @@ open class KeychainService {
         if (id_token == nil) {
             id_token = ""
         }
-        return id_token
+        return id_token!
     }
     
     public func removeTokens() {
