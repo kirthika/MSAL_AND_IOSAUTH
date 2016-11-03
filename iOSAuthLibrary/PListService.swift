@@ -15,6 +15,13 @@ open class PListService
     init(_ file: String) {
         let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let path = dir + "/" + file + ".plist"
+        print(path)
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: path) {
+            properties = NSDictionary(contentsOfFile: path) as! Dictionary
+        } else {
+            properties = NSDictionary() as! Dictionary
+        }
         properties = NSDictionary(contentsOfFile: path) as! Dictionary
     }
     
