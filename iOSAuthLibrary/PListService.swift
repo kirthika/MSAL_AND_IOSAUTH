@@ -14,21 +14,11 @@ open class PListService
     
     init(_ file: String) {
         print(file)
-        let testPath = Bundle.main.resourcePath!
-        print(testPath)
-        let testDocs = NSDictionary(contentsOfFile: testPath) as! Dictionary<String, String>
-        print(testDocs)
-        let plistPath = Bundle.main.path(forResource: file, ofType: "plist")!
-        print(plistPath)
-        
-        let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path = dir + "/" + file + ".plist"
+        let path = Bundle(for: AuthLibrary.self).path(forResource: file, ofType: "plist")!
         print(path)
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
             properties = NSDictionary(contentsOfFile: path) as! Dictionary
-        } else if fileManager.fileExists(atPath: plistPath){
-            properties = NSDictionary(contentsOfFile: plistPath) as! Dictionary
         }
         else {
             properties = NSDictionary() as! Dictionary
