@@ -41,8 +41,9 @@ open class AuthLibrary {
     }
 
     open func getAuthCode() -> String {
-        var auth_code = ""
-        //let authCodeProps = PListService("authCodeRequest")
+        let auth_code = ""
+        let authCodeProps = PListService("authCodeRequest")
+        print(authCodeProps.getProperty("p"))
         //let request = authProps.getProperty("domain") + "3ca60f43-0cb5-4822-9ca0-1553fc5382c9/" + authProps.getProperty("oauth") + authProps.getProperty("authorize")
         let request = "https://login.microsoftonline.com/3ca60f43-0cb5-4822-9ca0-1553fc5382c9/oauth2/v2.0/authorize"
         print(request)
