@@ -13,18 +13,8 @@ open class PListService
     var properties : Dictionary<String, String>
     
     init(_ file: String) {
-        print(file)
-        let path = Bundle(for: AuthLibrary.self).path(forResource: file, ofType: "plist")!
-        print(path)
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: path) {
-            properties = NSDictionary(contentsOfFile: path) as! Dictionary
-        }
-        else {
-            properties = NSDictionary() as! Dictionary
-        }
-        
-        
+        let path = Bundle(for: PListService.self).path(forResource: file, ofType: "plist")!
+        properties = NSDictionary(contentsOfFile: path) as! Dictionary
     }
     
     open func getAllProperties() -> Dictionary<String, String> {
