@@ -20,7 +20,10 @@ open class KeychainService {
     
     public func storeToken(_ token: String, _ tokenType: String) {
         do {
+            print("storing token")
+            print(token)
             try keychain.set(token, key: tokenType)
+            print("successful")
         } catch let error {
             print(error)
         }
@@ -28,15 +31,21 @@ open class KeychainService {
     
     public func getToken(_ tokenType: String) -> String {
         var id_token: String?
+        print("getToken")
         do {
+            print("try get token")
             id_token = try keychain.get(tokenType)
+            print("successfully got token")
         } catch let error {
             print(error)
             id_token = ""
         }
         if (id_token == nil) {
+            print("token is null")
             id_token = ""
         }
+        print("id token: ")
+        print(id_token!)
         return id_token!
     }
     
