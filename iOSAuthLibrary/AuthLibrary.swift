@@ -5,9 +5,6 @@
 //
 //
 
-import JWT
-import Alamofire
-
 open class AuthLibrary {
     
     var keychainService: KeychainService
@@ -40,15 +37,14 @@ open class AuthLibrary {
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         var returnValue = Claims()
         if (!id_token.isEmpty) {
-            let claims = JWT.decodeMessage(id_token).options(true)
-            if ((claims?.decode) != nil) {
-                print(claims?.decode)
-                returnValue.firstName = claims?.decode["given_name"] as! String
-                return returnValue
+            let jwt = id_token.components(separatedBy: ".")
+            guard let data = Data(base64Encoded: jwt[1]) else {
+                return nil
             }
-            else {
-                return returnValue
-            }
+            
+            let claims = String(data: data, encoding: .utf8)
+            print(claims)
+            return returnValue
         } else {
             return returnValue
         }
