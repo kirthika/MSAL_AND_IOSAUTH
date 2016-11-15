@@ -9,7 +9,7 @@
 import Foundation
 
 open class Claims {
-    var firstName = ""
-    var lastName = ""
-    var email = ""
+    open var firstName = ""
+    open var lastName = ""
+    open var email = ""
 }
