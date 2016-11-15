@@ -35,11 +35,13 @@ open class AuthLibrary {
     
     open func getClaims() -> Claims {
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
-        var returnValue = Claims()
+        let returnValue = Claims()
         if (!id_token.isEmpty) {
             let jwt = id_token.components(separatedBy: ".")
             let claims = convertToString(claimsString: jwt[1])
-            print(claims)
+            returnValue.firstName = claims!["given_name"] as! String
+            returnValue.lastName = claims!["family_name"] as! String
+            returnValue.email = claims!["emails"]?[0] as! String
             return returnValue
         } else {
             return returnValue
@@ -50,7 +52,7 @@ open class AuthLibrary {
         keychainService.removeTokens()
     }
     
-    func convertToString(claimsString: String) -> String {
+    func convertToString(claimsString: String) -> [String:AnyObject]? {
         var claims = claimsString
         switch (claims.characters.count % 4) // Pad with trailing '='s
         {
@@ -60,10 +62,11 @@ open class AuthLibrary {
             case 3: claims += "="; break; // One pad char
             default: print("Illegal base64 string!")
         }
-        guard let result = Data(base64Encoded: claims) else {
-            return ""
+        do {
+            return try JSONSerialization.jsonObject(with: Data(base64Encoded: claims)!, options: []) as? [String:AnyObject]
+        } catch let error {
+            print(error)
+            return nil
         }
-            
-        return String(data: result, encoding: .utf8)!
     }
 }
