@@ -65,10 +65,15 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
             let id_token = url?.substring(from: tokenUpperIndex!)
             
-            print("code: " + auth_code!)
+            let service = TokenService()
+            service.getTokens(auth_code!) {
+                (token: Token) in
+                print(token.auth_token)
+                print(token)
+            }
             
-            let keychainService = KeychainService()
-            keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
+            //let keychainService = KeychainService()
+            //keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
             
             if (presentingViewController != nil) {
                 let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)

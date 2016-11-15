@@ -13,3 +13,9 @@ public enum TokenType: String {
     case auth_token
     case refresh_token
 }
+
+class Token {
+    var id_token = ""
+    var auth_token = ""
+    var refresh_token = ""
+}
