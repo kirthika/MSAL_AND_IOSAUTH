@@ -16,5 +16,15 @@
 	<string>ce25c98b-f01d-46ad-936a-62ac28c939e5</string>
 	<key>redirectURI</key>
 	<string>urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob</string>
+	<key>scope</key>
+	<string>openid%20offline_access</string>
+	<key>state</key>
+	<string>ProtectedViewController</string>
+	<key>responseType</key>
+	<string>code%20id_token</string>
+	<key>responseMode</key>
+	<string>query</string>
+	<key>prompt</key>
+	<string>login</string>
 </dict>
 </plist>
