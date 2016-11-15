@@ -68,8 +68,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             let service = TokenService()
             service.getTokens(auth_code!) {
                 (token: Token) in
-                print(token.auth_token)
-                print(token)
+                print(token.id_token)
             }
             
             //let keychainService = KeychainService()

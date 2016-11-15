@@ -20,15 +20,13 @@ open class TokenService {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
-                print("it worked")
-                print(JSON)
-                print(JSON["token_type"]!)
+                token.id_token = JSON[TokenType.id_token.rawValue] as! String
+                token.auth_token = JSON[TokenType.auth_token.rawValue] as! String
+                token.refresh_token = JSON[TokenType.refresh_token.rawValue] as! String
                 completion(token)
-            case .failure(let data):
-                print("it failed")
-                print(data)
-            default:
-                print("default")
+            case .failure:
+                print(response.result.error!)
+            default: break
             }
         }
     }
