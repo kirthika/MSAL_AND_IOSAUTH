@@ -10,6 +10,8 @@
 	<string>/oauth2/v2.0</string>
 	<key>authorize</key>
 	<string>/authorize</string>
+	<key>token</key>
+	<string>/token</string>
 	<key>policy</key>
 	<string>B2C_1_SignupAndSignin</string>
 	<key>clientId</key>
@@ -19,10 +21,12 @@
 	<key>scope</key>
 	<string>openid%20offline_access</string>
 	<key>responseType</key>
-	<string>code%20id_token</string>
+	<string>code</string>
 	<key>responseMode</key>
 	<string>query</string>
 	<key>prompt</key>
 	<string>login</string>
+	<key>grantType</key>
+	<string>authorization_code</string>
 </dict>
 </plist>

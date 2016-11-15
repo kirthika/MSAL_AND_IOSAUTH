@@ -13,13 +13,12 @@
 		460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AB1DC29B9D0015BA8E /* KeychainService.swift */; };
 		460099AE1DC3E33A0015BA8E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AD1DC3E33A0015BA8E /* Token.swift */; };
 		4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */; };
-		46408CDC1DCA6FAF000715CD /* auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46408CDB1DCA6FAF000715CD /* auth.plist */; };
+		46408CDC1DCA6FAF000715CD /* azure.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46408CDB1DCA6FAF000715CD /* azure.plist */; };
 		46408CDE1DCA7B21000715CD /* PListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46408CDD1DCA7B21000715CD /* PListService.swift */; };
 		4669101D1DAEBAFD00E0DB35 /* iOSAuthLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		466910241DAEBAFD00E0DB35 /* iOSAuthLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */; };
 		466910291DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */; };
 		466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466910371DAEBB4900E0DB35 /* Login.storyboard */; };
-		46FE9E441DCB8D72006EEC75 /* authCodeRequest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46FE9E431DCB8D72006EEC75 /* authCodeRequest.plist */; };
 		46FE9E461DCB9FBD006EEC75 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */; };
 		EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */; };
 		EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */; };
@@ -47,7 +46,7 @@
 		460099AB1DC29B9D0015BA8E /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		460099AD1DC3E33A0015BA8E /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOSAuthLibrary.podspec; sourceTree = "<group>"; };
-		46408CDB1DCA6FAF000715CD /* auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = auth.plist; sourceTree = "<group>"; };
+		46408CDB1DCA6FAF000715CD /* azure.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = azure.plist; sourceTree = "<group>"; };
 		46408CDD1DCA7B21000715CD /* PListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PListService.swift; sourceTree = "<group>"; };
 		466910191DAEBAFD00E0DB35 /* iOSAuthLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSAuthLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSAuthLibrary.h; sourceTree = "<group>"; };
@@ -56,7 +55,6 @@
 		466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSAuthLibraryTests.swift; sourceTree = "<group>"; };
 		4669102A1DAEBAFD00E0DB35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		466910371DAEBB4900E0DB35 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		46FE9E431DCB8D72006EEC75 /* authCodeRequest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = authCodeRequest.plist; sourceTree = "<group>"; };
 		46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthLibrary.swift; sourceTree = "<group>"; };
 		EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -125,8 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				EBFF96531DCA90FE004F7EE9 /* Mocks */,
-				46408CDB1DCA6FAF000715CD /* auth.plist */,
-				46FE9E431DCB8D72006EEC75 /* authCodeRequest.plist */,
+				46408CDB1DCA6FAF000715CD /* azure.plist */,
 				EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */,
 				2ACFAFED1DDADEE9002EC763 /* Claims.swift */,
 				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
@@ -255,9 +252,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB6404761DC7F58F008AFAC9 /* Cartfile in Resources */,
-				46FE9E441DCB8D72006EEC75 /* authCodeRequest.plist in Resources */,
 				EB6404771DC7F58F008AFAC9 /* Cartfile.resolved in Resources */,
-				46408CDC1DCA6FAF000715CD /* auth.plist in Resources */,
+				46408CDC1DCA6FAF000715CD /* azure.plist in Resources */,
 				4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */,
 				466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */,
 			);

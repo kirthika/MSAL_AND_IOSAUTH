@@ -25,20 +25,19 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        let authProps = PListService("auth")
-        let url = authProps.getProperty("domain") +
-            authProps.getProperty("tenant") +
-            authProps.getProperty("oauth") +
-            authProps.getProperty("authorize") +
-            "?p=" + authProps.getProperty("policy") +
-            "&client_id=" + authProps.getProperty("clientId") +
-            "&redirect_uri=" + authProps.getProperty("redirectURI") +
-            "&scope=" + authProps.getProperty("scope") +
+        let azureProps = PListService("azure")
+        let url = azureProps.getProperty("domain") +
+            azureProps.getProperty("tenant") +
+            azureProps.getProperty("oauth") +
+            azureProps.getProperty("authorize") +
+            "?p=" + azureProps.getProperty("policy") +
+            "&client_id=" + azureProps.getProperty("clientId") +
+            "&redirect_uri=" + azureProps.getProperty("redirectURI") +
+            "&scope=" + azureProps.getProperty("scope") +
             "&state=" + state +
-            "&response_type=" + authProps.getProperty("responseType") +
-            "&response_mode=" + authProps.getProperty("responseMode") +
-            "&prompt=" + authProps.getProperty("prompt")
-        print(url)
+            "&response_type=" + azureProps.getProperty("responseType") +
+            "&response_mode=" + azureProps.getProperty("responseMode") +
+            "&prompt=" + azureProps.getProperty("prompt")
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }
@@ -48,36 +47,35 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        // Retrieve code and id token if they exist
+        // Dismiss webview after loaded
+        self.dismiss(animated: true, completion: nil)
+        
+        // Retrieve code
         let url = request.url?.absoluteString
         let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
-        let tokenRange = url?.range(of: "&id_token=")
         
-        if (redirectRange != nil && stateRange != nil && codeRange != nil && tokenRange != nil) {
+        if (redirectRange != nil && stateRange != nil && codeRange != nil) {
             let stateUpperIndex = stateRange?.upperBound
             let codeLowerIndex = codeRange?.lowerBound
             let codeUpperIndex = codeRange?.upperBound
-            let tokenLowerIndex = tokenRange?.lowerBound
-            //let tokenUpperIndex = tokenRange?.upperBound
             let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
-            let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
-            //let id_token = url?.substring(from: tokenUpperIndex!)
+            let auth_code = url?.substring(from: codeUpperIndex!)
             
+            // Retrieve tokens using code
             let service = TokenService()
             service.getTokens(auth_code!) {
                 (token: Token) in
                 let keychainService = KeychainService()
                 keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
                 
+                // Redirect back to called controller
                 if (self.presentingViewController != nil) {
                     let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
                     self.presentingViewController!.addChildViewController(viewController)
                     self.presentingViewController!.view!.addSubview(viewController.view)
                 }
-                
-                self.dismiss(animated: true, completion: nil)
             }
         }
         return true;
