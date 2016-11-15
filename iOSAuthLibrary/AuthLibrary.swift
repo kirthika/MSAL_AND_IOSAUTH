@@ -61,9 +61,6 @@ open class AuthLibrary {
         
         do {
             let parsedData = try JSONSerialization.jsonObject(with: Data(base64Encoded: claims)!, options: .allowFragments) as! [String:Any]
-            print(parsedData)
-            print(parsedData["given_name"])
-            print(parsedData["emails"])
             returnValue.firstName = parsedData["given_name"] as! String
             returnValue.lastName = parsedData["family_name"] as! String
             let emails = parsedData["emails"] as! [String]
