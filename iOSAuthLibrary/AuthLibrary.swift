@@ -13,12 +13,22 @@ open class AuthLibrary {
         keychainService = KeychainService()
     }
 
-    open func isAuthenticated() -> Bool {
+    open func isAuthenticated(completion: @escaping (Bool) -> Void) {
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
-            return isJwtValid(id_token)
+            completion(isJwtValid(id_token))
         } else {
-            return false
+            let refresh_token = keychainService.getToken(TokenType.refresh_token.rawValue)
+            if (!refresh_token.isEmpty) {
+                let tokenService = TokenService()
+                tokenService.getTokens(refresh_token) {
+                    (token: Token) in
+                    completion(self.isJwtValid(token.id_token))
+                }
+            }
+            else {
+                completion(false)
+            }
         }
     }
     
