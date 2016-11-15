@@ -62,11 +62,13 @@ open class AuthLibrary {
             case 3: claims += "="; break; // One pad char
             default: print("Illegal base64 string!")
         }
+        
+        var returnValue = [String:AnyObject]()
         do {
-            return try JSONSerialization.jsonObject(with: Data(base64Encoded: claims)!, options: []) as? [String:AnyObject]
+            try returnValue = (JSONSerialization.jsonObject(with: Data(base64Encoded: claims)!, options: []) as? [String:AnyObject])!
         } catch let error {
             print(error)
-            return nil
         }
+        return returnValue
     }
 }
