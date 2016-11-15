@@ -36,6 +36,24 @@ open class AuthLibrary {
         return true
     }
     
+    open func getClaims() -> Claims {
+        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
+        var returnValue = Claims()
+        if (!id_token.isEmpty) {
+            let claims = JWT.decodeMessage(id_token).options(true)
+            if ((claims?.decode) != nil) {
+                print(claims?.decode)
+                returnValue.firstName = claims?.decode["given_name"] as! String
+                return returnValue
+            }
+            else {
+                return returnValue
+            }
+        } else {
+            return returnValue
+        }
+    }
+    
     open func clearTokens() {
         keychainService.removeTokens()
     }

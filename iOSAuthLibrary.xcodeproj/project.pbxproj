@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2ACFAFE61DDAB530002EC763 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACFAFE51DDAB530002EC763 /* TokenService.swift */; };
+		2ACFAFEE1DDADEE9002EC763 /* Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACFAFED1DDADEE9002EC763 /* Claims.swift */; };
 		460099A91DC245AA0015BA8E /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460099A81DC245AA0015BA8E /* KeychainAccess.framework */; };
 		460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AB1DC29B9D0015BA8E /* KeychainService.swift */; };
 		460099AE1DC3E33A0015BA8E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AD1DC3E33A0015BA8E /* Token.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		2ACFAFE51DDAB530002EC763 /* TokenService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
+		2ACFAFED1DDADEE9002EC763 /* Claims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Claims.swift; sourceTree = "<group>"; };
 		460099A81DC245AA0015BA8E /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		460099AB1DC29B9D0015BA8E /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		460099AD1DC3E33A0015BA8E /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				46408CDB1DCA6FAF000715CD /* auth.plist */,
 				46FE9E431DCB8D72006EEC75 /* authCodeRequest.plist */,
 				EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */,
+				2ACFAFED1DDADEE9002EC763 /* Claims.swift */,
 				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
 				4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */,
 				460099AB1DC29B9D0015BA8E /* KeychainService.swift */,
@@ -311,6 +314,7 @@
 				EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */,
 				EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */,
 				460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */,
+				2ACFAFEE1DDADEE9002EC763 /* Claims.swift in Sources */,
 				2ACFAFE61DDAB530002EC763 /* TokenService.swift in Sources */,
 				46408CDE1DCA7B21000715CD /* PListService.swift in Sources */,
 				EBFF96551DCA9A38004F7EE9 /* MockToken.swift in Sources */,
