@@ -38,11 +38,7 @@ open class AuthLibrary {
         var returnValue = Claims()
         if (!id_token.isEmpty) {
             let jwt = id_token.components(separatedBy: ".")
-            guard let data = Data(base64Encoded: jwt[1]) else {
-                return nil
-            }
-            
-            let claims = String(data: data, encoding: .utf8)
+            let claims = String(data: Data(base64Encoded: jwt[1])!, encoding: .utf8)
             print(claims)
             return returnValue
         } else {
