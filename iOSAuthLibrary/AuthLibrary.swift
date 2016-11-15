@@ -38,9 +38,7 @@ open class AuthLibrary {
         var returnValue = Claims()
         if (!id_token.isEmpty) {
             let jwt = id_token.components(separatedBy: ".")
-            let claimsData = Data(base64Encoded: jwt[1])
-            let claims = String(data: claimsData!, encoding: .utf8)
-            print(claims)
+            convertToString(claimsString: jwt[1])
             return returnValue
         } else {
             return returnValue
@@ -49,5 +47,22 @@ open class AuthLibrary {
     
     open func clearTokens() {
         keychainService.removeTokens()
+    }
+    
+    func convertToString(claimsString: String) -> String {
+        var claims = claimsString
+        switch (claims.characters.count % 4) // Pad with trailing '='s
+        {
+            case 0: break; // No pad chars in this case
+            case 1: claims += "==="; break; // Three pad chars
+            case 2: claims += "=="; break; // Two pad chars
+            case 3: claims += "="; break; // One pad char
+            default: print("Illegal base64 string!")
+        }
+        guard let result = Data(base64Encoded: claims) else {
+            return ""
+        }
+            
+        return String(data: result, encoding: .utf8)!
     }
 }
