@@ -47,9 +47,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        // Dismiss webview after loaded
-        self.dismiss(animated: true, completion: nil)
-        
         // Retrieve code
         let url = request.url?.absoluteString
         let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
@@ -62,6 +59,9 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             let codeUpperIndex = codeRange?.upperBound
             let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
             let auth_code = url?.substring(from: codeUpperIndex!)
+            
+            // Dismiss webview after code is retrieved
+            self.dismiss(animated: true, completion: nil)
             
             // Retrieve tokens using code
             let service = TokenService()
