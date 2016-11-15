@@ -39,18 +39,4 @@ open class AuthLibrary {
     open func clearTokens() {
         keychainService.removeTokens()
     }
-
-    open func getAuthCode() -> String {
-        let auth_code = ""
-        let authCodeProps = PListService("authCodeRequest")
-        print(authCodeProps.getProperty("p"))
-        //let request = authProps.getProperty("domain") + "3ca60f43-0cb5-4822-9ca0-1553fc5382c9/" + authProps.getProperty("oauth") + authProps.getProperty("authorize")
-        let request = "https://login.microsoftonline.com/3ca60f43-0cb5-4822-9ca0-1553fc5382c9/oauth2/v2.0/authorize"
-        print(request)
-        Alamofire.request(request,/*authProps.getProperty("domain") + "3ca60f43-0cb5-4822-9ca0-1553fc5382c9/" + authProps.getProperty("oauth") + authProps.getProperty("authorize"),*/
-                          method: .get,
-                          parameters: ["p": "B2C_1_SignupAndSignin", "client_id": "ce25c98b-f01d-46ad-936a-62ac28c939e5", "redirect_uri":"urn%3Aietf%3Awg%3A2.0%3Aoob", "scope":"openid%20offline_access", "state":"currenttempstate", "response_type":"code", "response_mode":"query","prompt":"login"])
-            .responseString { auth_code in print("Response String: \(auth_code.result.value)") }
-        return auth_code
-    }
 }

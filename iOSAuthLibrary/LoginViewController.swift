@@ -34,7 +34,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&client_id=" + authProps.getProperty("clientId") +
             "&redirect_uri=" + authProps.getProperty("redirectURI") +
             "&scope=" + authProps.getProperty("scope") +
-            "&state=" + authProps.getProperty("state") +
+            "&state=" + state +
             "&response_type=" + authProps.getProperty("responseType") +
             "&response_mode=" + authProps.getProperty("responseMode") +
             "&prompt=" + authProps.getProperty("prompt")
