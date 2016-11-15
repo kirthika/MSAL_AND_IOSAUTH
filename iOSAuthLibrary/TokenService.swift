@@ -21,7 +21,7 @@ open class TokenService {
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
                 token.id_token = JSON[TokenType.id_token.rawValue] as! String
-                token.auth_token = JSON[TokenType.auth_token.rawValue] as! String
+                //token.auth_token = JSON[TokenType.auth_token.rawValue] as! String
                 token.refresh_token = JSON[TokenType.refresh_token.rawValue] as! String
                 completion(token)
             case .failure:

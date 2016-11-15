@@ -60,27 +60,25 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             let codeLowerIndex = codeRange?.lowerBound
             let codeUpperIndex = codeRange?.upperBound
             let tokenLowerIndex = tokenRange?.lowerBound
-            let tokenUpperIndex = tokenRange?.upperBound
+            //let tokenUpperIndex = tokenRange?.upperBound
             let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
             let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
-            let id_token = url?.substring(from: tokenUpperIndex!)
+            //let id_token = url?.substring(from: tokenUpperIndex!)
             
             let service = TokenService()
             service.getTokens(auth_code!) {
                 (token: Token) in
-                print(token.id_token)
+                let keychainService = KeychainService()
+                keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
+                
+                if (self.presentingViewController != nil) {
+                    let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
+                    self.presentingViewController!.addChildViewController(viewController)
+                    self.presentingViewController!.view!.addSubview(viewController.view)
+                }
+                
+                self.dismiss(animated: true, completion: nil)
             }
-            
-            //let keychainService = KeychainService()
-            //keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
-            
-            if (presentingViewController != nil) {
-                let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
-                presentingViewController!.addChildViewController(viewController)
-                presentingViewController!.view!.addSubview(viewController.view)
-            }
-            
-            dismiss(animated: true, completion: nil)
         }
         return true;
     }
