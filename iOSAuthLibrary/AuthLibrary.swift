@@ -23,6 +23,9 @@ open class AuthLibrary {
                 let tokenService = TokenService()
                 tokenService.getTokens(refresh_token) {
                     (token: Token) in
+                    print(refresh_token)
+                    print(token.refresh_token)
+                    self.keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
                     completion(self.isJwtValid(token.id_token))
                 }
             }
