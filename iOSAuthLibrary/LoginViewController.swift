@@ -10,6 +10,7 @@ import UIKit
 
 open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var loginView: UIWebView!
+    @IBOutlet open var activityView: UIActivityIndicatorView!
     open var state: String
     open var brand: String
     
@@ -62,6 +63,9 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let errorRange = url?.range(of: "?error=")
         
         if (redirectRange != nil) {
+            // Start spinner
+            activityView.startAnimating()
+            
             if (stateRange != nil && codeRange != nil) {
                 let stateUpperIndex = stateRange?.upperBound
                 let codeLowerIndex = codeRange?.lowerBound
@@ -83,6 +87,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         self.presentingViewController!.addChildViewController(viewController)
                         self.presentingViewController!.view!.addSubview(viewController.view)
                     }
+                    
+                    self.activityView.stopAnimating()
                     
                     // Dismiss webview after new view is established
                     self.dismiss(animated: true, completion: nil)
@@ -111,15 +117,18 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         "&prompt=" + azureProps.getProperty("prompt")
                     loginView.loadRequest(URLRequest(url: URL(string: url)!))
                     loginView.delegate = self
+                    self.activityView.stopAnimating()
                 }
-                    
+                
                 // Cancel
                 let cancel = url?.range(of: "AADB2C90091")
                 if (cancel != nil) {
+                    self.activityView.stopAnimating()
                     dismiss(animated: true, completion: nil)
                 }
             }
             else {
+                self.activityView.stopAnimating()
                 dismiss(animated: true, completion: nil)
             }
         }
