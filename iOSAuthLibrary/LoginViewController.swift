@@ -70,7 +70,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 let auth_code = url?.substring(from: codeUpperIndex!)
                 
                 // Retrieve tokens using code
-                let service = TokenService()
+                let service = TokenService(brand)
                 service.getTokens(auth_code!) {
                     (token: Token) in
                     let keychainService = KeychainService()

@@ -8,9 +8,11 @@
 open class AuthLibrary {
     
     var keychainService: KeychainService
+    let brand: String
     
-    required public init() {
+    required public init(_ branding: String) {
         keychainService = KeychainService()
+        brand = branding
     }
 
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
@@ -20,7 +22,7 @@ open class AuthLibrary {
         } else {
             let refresh_token = keychainService.getToken(TokenType.refresh_token.rawValue)
             if (!refresh_token.isEmpty) {
-                let tokenService = TokenService()
+                let tokenService = TokenService(brand)
                 tokenService.getTokens(refresh_token) {
                     (token: Token) in
                     self.keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
@@ -34,7 +36,7 @@ open class AuthLibrary {
         }
     }
     
-    open func login(state: String, brand: String) -> LoginViewController {
+    open func login(state: String) -> LoginViewController {
         let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         viewController.state = state
