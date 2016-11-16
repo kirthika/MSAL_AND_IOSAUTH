@@ -11,14 +11,17 @@ import UIKit
 open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var loginView: UIWebView!
     open var state: String
+    open var brand: String
     
     required public init?(coder aDecoder: NSCoder) {
         state = ""
+        brand = ""
         super.init(coder: aDecoder)
     }
     
     init() {
         state = ""
+        brand = ""
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,11 +29,15 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
 
         let azureProps = PListService("azure")
+        var brandTag = ""
+        if (brand == "Lexus") {
+            brandTag = "_lexus"
+        }
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("authorize") +
-            "?p=" + azureProps.getProperty("policyLogin") +
+            "?p=" + azureProps.getProperty("policyLogin") + brandTag +
             "&client_id=" + azureProps.getProperty("clientId") +
             "&redirect_uri=" + azureProps.getProperty("redirectURI") +
             "&scope=" + azureProps.getProperty("scope") +
@@ -86,11 +93,15 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 let forgotPassword = url?.range(of: "AADB2C90118")
                 if (forgotPassword != nil) {
                     let azureProps = PListService("azure")
+                    var brandTag = ""
+                    if (brand == "Lexus") {
+                        brandTag = "_lexus"
+                    }
                     let url = azureProps.getProperty("domain") +
                         azureProps.getProperty("tenant") +
                         azureProps.getProperty("oauth") +
                         azureProps.getProperty("authorize") +
-                        "?p=" + azureProps.getProperty("policyReset") +
+                        "?p=" + azureProps.getProperty("policyReset") + brandTag +
                         "&client_id=" + azureProps.getProperty("clientId") +
                         "&redirect_uri=" + azureProps.getProperty("redirectURI") +
                         "&scope=" + azureProps.getProperty("scope") +
@@ -105,7 +116,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 // Cancel
                 let cancel = url?.range(of: "AADB2C90091")
                 if (cancel != nil) {
-                    print("cancelled")
+                    dismiss(animated: true, completion: nil)
                 }
             }
         }

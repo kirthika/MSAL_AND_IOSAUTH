@@ -34,10 +34,11 @@ open class AuthLibrary {
         }
     }
     
-    open func login(state: String) -> LoginViewController {
+    open func login(state: String, brand: String) -> LoginViewController {
         let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         viewController.state = state
+        viewController.brand = brand
         return viewController
     }
     
