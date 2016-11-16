@@ -119,6 +119,9 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                     dismiss(animated: true, completion: nil)
                 }
             }
+            else {
+                dismiss(animated: true, completion: nil)
+            }
         }
         return true;
     }
