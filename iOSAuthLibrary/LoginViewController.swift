@@ -52,31 +52,79 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
+        let errorRange = url?.range(of: "?error=")
+        print(url)
         
-        if (redirectRange != nil && stateRange != nil && codeRange != nil) {
+        if (redirectRange != nil && stateRange != nil) {
             let stateUpperIndex = stateRange?.upperBound
-            let codeLowerIndex = codeRange?.lowerBound
-            let codeUpperIndex = codeRange?.upperBound
-            let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
-            let auth_code = url?.substring(from: codeUpperIndex!)
-            
-            // Retrieve tokens using code
-            let service = TokenService()
-            service.getTokens(auth_code!) {
-                (token: Token) in
-                let keychainService = KeychainService()
-                keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
-                keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
+            if (codeRange != nil) {
+                let codeLowerIndex = codeRange?.lowerBound
+                let codeUpperIndex = codeRange?.upperBound
+                let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
+                let auth_code = url?.substring(from: codeUpperIndex!)
                 
-                // Redirect back to called controller
-                if (self.presentingViewController != nil) {
-                    let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
-                    self.presentingViewController!.addChildViewController(viewController)
-                    self.presentingViewController!.view!.addSubview(viewController.view)
+                // Retrieve tokens using code
+                let service = TokenService()
+                service.getTokens(auth_code!) {
+                    (token: Token) in
+                    let keychainService = KeychainService()
+                    keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
+                    keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
+                    
+                    // Redirect back to called controller
+                    if (self.presentingViewController != nil) {
+                        let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
+                        self.presentingViewController!.addChildViewController(viewController)
+                        self.presentingViewController!.view!.addSubview(viewController.view)
+                    }
+                    
+                    // Dismiss webview after new view is established
+                    self.dismiss(animated: true, completion: nil)
                 }
+            }
+            else if (errorRange != nil) {
+                let errorLowerIndex = errorRange?.lowerBound
+                let errorUpperIndex = errorRange?.upperBound
                 
-                // Dismiss webview after new view is established
-                self.dismiss(animated: true, completion: nil)
+                // Password Reset
+                let forgotPassword = url?.range(of: "AADB2C90118")
+                if (forgotPassword != nil) {
+                    let azureProps = PListService("azure")
+                    let url = azureProps.getProperty("domain") +
+                        azureProps.getProperty("tenant") +
+                        azureProps.getProperty("oauth") +
+                        azureProps.getProperty("authorize") +
+                        "?p=" + azureProps.getProperty("policy") +
+                        "&client_id=" + azureProps.getProperty("clientId") +
+                        "&redirect_uri=" + azureProps.getProperty("redirectURI") +
+                        "&scope=" + azureProps.getProperty("scope") +
+                        "&state=" + state +
+                        "&response_type=" + azureProps.getProperty("responseType") +
+                        "&response_mode=" + azureProps.getProperty("responseMode") +
+                        "&prompt=" + azureProps.getProperty("prompt")
+                    loginView.loadRequest(URLRequest(url: URL(string: url)!))
+                    loginView.delegate = self
+                }
+                    
+                // Cancel
+                let cancel = url?.range(of: "AADB2C90091")
+                if (cancel != nil) {
+                    let azureProps = PListService("azure")
+                    let url = azureProps.getProperty("domain") +
+                        azureProps.getProperty("tenant") +
+                        azureProps.getProperty("oauth") +
+                        azureProps.getProperty("authorize") +
+                        "?p=" + azureProps.getProperty("policy") +
+                        "&client_id=" + azureProps.getProperty("clientId") +
+                        "&redirect_uri=" + azureProps.getProperty("redirectURI") +
+                        "&scope=" + azureProps.getProperty("scope") +
+                        "&state=" + state +
+                        "&response_type=" + azureProps.getProperty("responseType") +
+                        "&response_mode=" + azureProps.getProperty("responseMode") +
+                        "&prompt=" + azureProps.getProperty("prompt")
+                    loginView.loadRequest(URLRequest(url: URL(string: url)!))
+                    loginView.delegate = self
+                }
             }
         }
         return true;
