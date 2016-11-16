@@ -17,14 +17,12 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     required public init?(coder aDecoder: NSCoder) {
         state = ""
         brand = ""
-        activityView.hidesWhenStopped = true
         super.init(coder: aDecoder)
     }
     
     init() {
         state = ""
         brand = ""
-        activityView.hidesWhenStopped = true
         super.init(nibName: nil, bundle: nil)
     }
     
