@@ -66,6 +66,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 (token: Token) in
                 let keychainService = KeychainService()
                 keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
+                keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
                 
                 // Redirect back to called controller
                 if (self.presentingViewController != nil) {
