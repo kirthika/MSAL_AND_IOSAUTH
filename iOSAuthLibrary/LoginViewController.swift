@@ -30,7 +30,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("authorize") +
-            "?p=" + azureProps.getProperty("policy") +
+            "?p=" + azureProps.getProperty("policyLogin") +
             "&client_id=" + azureProps.getProperty("clientId") +
             "&redirect_uri=" + azureProps.getProperty("redirectURI") +
             "&scope=" + azureProps.getProperty("scope") +
@@ -53,11 +53,10 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
         let errorRange = url?.range(of: "?error=")
-        print(url)
         
-        if (redirectRange != nil && stateRange != nil) {
-            let stateUpperIndex = stateRange?.upperBound
-            if (codeRange != nil) {
+        if (redirectRange != nil) {
+            if (stateRange != nil && codeRange != nil) {
+                let stateUpperIndex = stateRange?.upperBound
                 let codeLowerIndex = codeRange?.lowerBound
                 let codeUpperIndex = codeRange?.upperBound
                 let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
@@ -83,9 +82,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 }
             }
             else if (errorRange != nil) {
-                let errorLowerIndex = errorRange?.lowerBound
-                let errorUpperIndex = errorRange?.upperBound
-                
                 // Password Reset
                 let forgotPassword = url?.range(of: "AADB2C90118")
                 if (forgotPassword != nil) {
@@ -94,7 +90,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         azureProps.getProperty("tenant") +
                         azureProps.getProperty("oauth") +
                         azureProps.getProperty("authorize") +
-                        "?p=" + azureProps.getProperty("policy") +
+                        "?p=" + azureProps.getProperty("policyReset") +
                         "&client_id=" + azureProps.getProperty("clientId") +
                         "&redirect_uri=" + azureProps.getProperty("redirectURI") +
                         "&scope=" + azureProps.getProperty("scope") +
@@ -109,21 +105,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 // Cancel
                 let cancel = url?.range(of: "AADB2C90091")
                 if (cancel != nil) {
-                    let azureProps = PListService("azure")
-                    let url = azureProps.getProperty("domain") +
-                        azureProps.getProperty("tenant") +
-                        azureProps.getProperty("oauth") +
-                        azureProps.getProperty("authorize") +
-                        "?p=" + azureProps.getProperty("policy") +
-                        "&client_id=" + azureProps.getProperty("clientId") +
-                        "&redirect_uri=" + azureProps.getProperty("redirectURI") +
-                        "&scope=" + azureProps.getProperty("scope") +
-                        "&state=" + state +
-                        "&response_type=" + azureProps.getProperty("responseType") +
-                        "&response_mode=" + azureProps.getProperty("responseMode") +
-                        "&prompt=" + azureProps.getProperty("prompt")
-                    loginView.loadRequest(URLRequest(url: URL(string: url)!))
-                    loginView.delegate = self
+                    print("cancelled")
                 }
             }
         }

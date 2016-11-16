@@ -35,7 +35,6 @@ open class KeychainService {
             id_token = ""
         }
         if (id_token == nil) {
-            print("token is null")
             id_token = ""
         }
         return id_token!

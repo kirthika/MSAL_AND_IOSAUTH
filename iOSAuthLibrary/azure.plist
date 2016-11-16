@@ -12,8 +12,10 @@
 	<string>/authorize</string>
 	<key>token</key>
 	<string>/token</string>
-	<key>policy</key>
+	<key>policyLogin</key>
 	<string>B2C_1_SignupAndSignin</string>
+	<key>policyReset</key>
+	<string>B2C_1_PasswordReset</string>
 	<key>clientId</key>
 	<string>ce25c98b-f01d-46ad-936a-62ac28c939e5</string>
 	<key>redirectURI</key>
