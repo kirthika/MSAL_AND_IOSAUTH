@@ -60,9 +60,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
             let auth_code = url?.substring(from: codeUpperIndex!)
             
-            // Dismiss webview after code is retrieved
-            self.dismiss(animated: true, completion: nil)
-            
             // Retrieve tokens using code
             let service = TokenService()
             service.getTokens(auth_code!) {
@@ -76,6 +73,9 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                     self.presentingViewController!.addChildViewController(viewController)
                     self.presentingViewController!.view!.addSubview(viewController.view)
                 }
+                
+                // Dismiss webview after new view is established
+                self.dismiss(animated: true, completion: nil)
             }
         }
         return true;
