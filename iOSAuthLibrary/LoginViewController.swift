@@ -60,7 +60,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
         let errorRange = url?.range(of: "?error=")
-        print(url)
         
         if (redirectRange != nil) {
             if (stateRange != nil && codeRange != nil) {
@@ -105,9 +104,9 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         "?p=" + azureProps.getProperty("policyReset") + brandTag +
                         "&client_id=" + azureProps.getProperty("clientId") +
                         "&redirect_uri=" + azureProps.getProperty("redirectURI") +
-                        "&scope=" + azureProps.getProperty("scope") +
+                        "&scope=openid" +
                         "&state=" + state +
-                        "&response_type=" + azureProps.getProperty("responseType") +
+                        "&response_type=id_token" +
                         "&response_mode=" + azureProps.getProperty("responseMode") +
                         "&prompt=" + azureProps.getProperty("prompt")
                     loginView.loadRequest(URLRequest(url: URL(string: url)!))
