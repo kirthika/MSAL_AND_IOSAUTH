@@ -27,7 +27,7 @@ open class TokenService {
         print(azureProps.getProperty("scope"))
         print(auth_code)
         Alamofire.request(url, method: .post, parameters:
-            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectURI"), "code": auth_code, "grant_type": azureProps.getProperty("grantType"), "scope": azureProps.getProperty("scope")]).responseJSON {
+            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectURINonEncoded"), "code": auth_code, "grant_type": azureProps.getProperty("grantType"), "scope": azureProps.getProperty("scopeNonEncoded")]).responseJSON {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
