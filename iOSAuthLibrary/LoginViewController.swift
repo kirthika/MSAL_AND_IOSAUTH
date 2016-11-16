@@ -60,6 +60,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
         let errorRange = url?.range(of: "?error=")
+        print(url)
         
         if (redirectRange != nil) {
             if (stateRange != nil && codeRange != nil) {
