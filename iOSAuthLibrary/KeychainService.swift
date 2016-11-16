@@ -49,6 +49,14 @@ open class KeychainService {
         return id_token!
     }
     
+    public func removeToken(_ tokenType: String) {
+        do {
+            try keychain.remove(tokenType)
+        } catch let error {
+            print(error)
+        }
+    }
+    
     public func removeTokens() {
         do {
             try keychain.removeAll()

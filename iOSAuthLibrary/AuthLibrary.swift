@@ -53,6 +53,10 @@ open class AuthLibrary {
         }
     }
     
+    open func clearIdToken() {
+        keychainService.removeToken(TokenType.id_token.rawValue)
+    }
+    
     open func clearTokens() {
         keychainService.removeTokens()
     }
