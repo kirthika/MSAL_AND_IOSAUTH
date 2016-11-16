@@ -17,12 +17,14 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     required public init?(coder aDecoder: NSCoder) {
         state = ""
         brand = ""
+        activityView.isHidden = true
         super.init(coder: aDecoder)
     }
     
     init() {
         state = ""
         brand = ""
+        activityView.isHidden = true
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -64,6 +66,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         
         if (redirectRange != nil) {
             // Start spinner
+            activityView.isHidden = false
             activityView.startAnimating()
             
             if (stateRange != nil && codeRange != nil) {
@@ -89,6 +92,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                     }
                     
                     self.activityView.stopAnimating()
+                    self.activityView.isHidden = true
                     
                     // Dismiss webview after new view is established
                     self.dismiss(animated: true, completion: nil)
@@ -117,18 +121,21 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         "&prompt=" + azureProps.getProperty("prompt")
                     loginView.loadRequest(URLRequest(url: URL(string: url)!))
                     loginView.delegate = self
-                    self.activityView.stopAnimating()
+                    activityView.stopAnimating()
+                    activityView.isHidden = true
                 }
                 
                 // Cancel
                 let cancel = url?.range(of: "AADB2C90091")
                 if (cancel != nil) {
-                    self.activityView.stopAnimating()
+                    activityView.stopAnimating()
+                    activityView.isHidden = true
                     dismiss(animated: true, completion: nil)
                 }
             }
             else {
-                self.activityView.stopAnimating()
+                activityView.stopAnimating()
+                activityView.isHidden = true
                 dismiss(animated: true, completion: nil)
             }
         }
