@@ -32,7 +32,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         
         // Get policy based on brand
         var policy = ""
-        if (brand == "Lexus") {
+        if (brand == "lexus") {
             policy = azureProps.getProperty("policyLexus")
         }
         else {
@@ -104,15 +104,18 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 let forgotPassword = url?.range(of: "AADB2C90118")
                 if (forgotPassword != nil) {
                     let azureProps = PListService("azure")
-                    var brandTag = ""
-                    if (brand == "Lexus") {
-                        brandTag = "_lexus"
+                    var policy = ""
+                    if (brand == "lexus") {
+                        policy = azureProps.getProperty("policyResetLexus")
+                    }
+                    else {
+                        policy = azureProps.getProperty("policyReset")
                     }
                     let url = azureProps.getProperty("domain") +
                         azureProps.getProperty("tenant") +
                         azureProps.getProperty("oauth") +
                         azureProps.getProperty("authorize") +
-                        "?p=" + azureProps.getProperty("policyReset") + brandTag +
+                        "?p=" + policy +
                         "&client_id=" + azureProps.getProperty("clientId") +
                         "&redirect_uri=" + azureProps.getProperty("redirectUriEncoded") +
                         "&scope=openid" +
