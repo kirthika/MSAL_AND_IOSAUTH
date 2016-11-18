@@ -29,26 +29,24 @@ open class TokenService {
             policy = azureProps.getProperty("policy")
         }
         
-        // Get correct grant type based on if refresh or not
-        var grant = azureProps.getProperty("grantType")
-        /*if (refresh) {
+        // Get correct grant type and code var based on if refresh or not
+        var grant = ""
+        var codeVar = ""
+        if (refresh) {
             grant = azureProps.getProperty("grantTypeRefresh")
+            codeVar = "refresh_token"
         }
         else {
             grant = azureProps.getProperty("grantType")
-        }*/
+            codeVar = "code"
+        }
         
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("token") + "?p=" + policy
-        print(url)
-        print(grant)
-        print(auth_code)
-        print(azureProps.getProperty("redirectUri"))
-        print(azureProps.getProperty("scope"))
         Alamofire.request(url, method: .post, parameters:
-            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), "code": auth_code, "grant_type": grant, "scope": azureProps.getProperty("scope")]).responseJSON {
+            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant, "scope": azureProps.getProperty("scope")]).responseJSON {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
