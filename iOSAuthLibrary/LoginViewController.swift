@@ -45,8 +45,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             azureProps.getProperty("authorize") +
             "?p=" + policy +
             "&client_id=" + azureProps.getProperty("clientId") +
-            "&redirect_uri=" + azureProps.getProperty("redirectURI") +
-            "&scope=" + azureProps.getProperty("scope") +
+            "&redirect_uri=" + azureProps.getProperty("redirectUriEncoded") +
+            "&scope=" + azureProps.getProperty("scopeEncoded") +
             "&state=" + state +
             "&response_type=" + azureProps.getProperty("responseType") +
             "&response_mode=" + azureProps.getProperty("responseMode") +
@@ -114,7 +114,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         azureProps.getProperty("authorize") +
                         "?p=" + azureProps.getProperty("policyReset") + brandTag +
                         "&client_id=" + azureProps.getProperty("clientId") +
-                        "&redirect_uri=" + azureProps.getProperty("redirectURI") +
+                        "&redirect_uri=" + azureProps.getProperty("redirectUriEncoded") +
                         "&scope=openid" +
                         "&state=" + state +
                         "&response_type=id_token" +
