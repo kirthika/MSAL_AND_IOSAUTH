@@ -1,8 +1,7 @@
 //
 //  isJWTValid.swift
 //
-//  Created by Toyota Project Team on 10/13/16.
-//
+//  Created by Pariveda Solutions.
 //
 
 open class AuthLibrary {
@@ -12,7 +11,7 @@ open class AuthLibrary {
     
     required public init(_ branding: String) {
         keychainService = KeychainService()
-        brand = branding
+        brand = branding.lowercased()
     }
 
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
@@ -22,7 +21,7 @@ open class AuthLibrary {
         } else {
             let refresh_token = keychainService.getToken(TokenType.refresh_token.rawValue)
             if (!refresh_token.isEmpty) {
-                let tokenService = TokenService(brand)
+                let tokenService = TokenService(brand, true)
                 tokenService.getTokens(refresh_token) {
                     (token: Token) in
                     self.keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
@@ -48,13 +47,13 @@ open class AuthLibrary {
         return true
     }
     
-    open func getClaims() -> Claims {
+    open func getClaims() -> [String: Any] {
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
             let jwt = id_token.components(separatedBy: ".")
             return convertJwtToClaims(claimsString: jwt[1])
         } else {
-            return Claims()
+            return [String: Any]()
         }
     }
     
@@ -66,8 +65,7 @@ open class AuthLibrary {
         keychainService.removeTokens()
     }
     
-    func convertJwtToClaims(claimsString: String) -> Claims {
-        let returnValue = Claims()
+    func convertJwtToClaims(claimsString: String) -> [String: Any] {
         var claims = claimsString
         switch (claims.characters.count % 4) // Pad with trailing '='s
         {
@@ -80,14 +78,11 @@ open class AuthLibrary {
         
         do {
             let parsedData = try JSONSerialization.jsonObject(with: Data(base64Encoded: claims)!, options: .allowFragments) as! [String:Any]
-            returnValue.firstName = parsedData["given_name"] as! String
-            returnValue.lastName = parsedData["family_name"] as! String
-            let emails = parsedData["emails"] as! [String]
-            returnValue.email = emails[0]
+            return parsedData
         } catch let error as NSError {
             print(error)
         }
         
-        return returnValue
+        return [String: Any]()
     }
 }

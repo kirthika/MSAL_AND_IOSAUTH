@@ -2,8 +2,7 @@
 //  LoginViewController.swift
 //  ios-auth-library
 //
-//  Created by David Collom on 10/11/16.
-//  Copyright Â© 2016 Pariveda Solutions. All rights reserved.
+//  Created by Pariveda Solutions.
 //
 
 import UIKit
@@ -30,15 +29,21 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
 
         let azureProps = PListService("azure")
-        var brandTag = ""
+        
+        // Get policy based on brand
+        var policy = ""
         if (brand == "Lexus") {
-            brandTag = "_lexus"
+            policy = azureProps.getProperty("policyLexus")
         }
+        else {
+            policy = azureProps.getProperty("policy")
+        }
+        
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("authorize") +
-            "?p=" + azureProps.getProperty("policyLogin") + brandTag +
+            "?p=" + policy +
             "&client_id=" + azureProps.getProperty("clientId") +
             "&redirect_uri=" + azureProps.getProperty("redirectURI") +
             "&scope=" + azureProps.getProperty("scope") +
@@ -74,7 +79,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 let auth_code = url?.substring(from: codeUpperIndex!)
                 
                 // Retrieve tokens using code
-                let service = TokenService(brand)
+                let service = TokenService(brand, false)
                 service.getTokens(auth_code!) {
                     (token: Token) in
                     let keychainService = KeychainService()

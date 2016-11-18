@@ -2,8 +2,7 @@
 //  Keychain.swift
 //  iOSAuthLibrary
 //
-//  Created by David Collom on 10/27/16.
-//  Copyright © 2016 Pariveda Solutions. All rights reserved.
+//  Created by Pariveda Solutions.
 //
 
 import Foundation
