@@ -2,8 +2,7 @@
 //  Keychain.swift
 //  iOSAuthLibrary
 //
-//  Created by David Collom on 10/27/16.
-//  Copyright © 2016 Pariveda Solutions. All rights reserved.
+//  Created by Pariveda Solutions.
 //
 
 import Foundation
@@ -29,7 +28,7 @@ open class KeychainService {
     public func getToken(_ tokenType: String) -> String {
         var id_token: String?
         do {
-            try id_token = keychain.get(tokenType)
+            id_token = try keychain.get(tokenType)
         } catch let error {
             print(error)
             id_token = ""
@@ -38,6 +37,14 @@ open class KeychainService {
             id_token = ""
         }
         return id_token!
+    }
+    
+    public func removeToken(_ tokenType: String) {
+        do {
+            try keychain.remove(tokenType)
+        } catch let error {
+            print(error)
+        }
     }
     
     public func removeTokens() {

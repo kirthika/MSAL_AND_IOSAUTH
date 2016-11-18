@@ -2,51 +2,55 @@
 //  LoginViewController.swift
 //  ios-auth-library
 //
-//  Created by David Collom on 10/11/16.
-//  Copyright Â© 2016 Pariveda Solutions. All rights reserved.
+//  Created by Pariveda Solutions.
 //
 
 import UIKit
 
 open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var loginView: UIWebView!
+    @IBOutlet open var activityView: UIActivityIndicatorView!
     open var state: String
+    open var brand: String
     
     required public init?(coder aDecoder: NSCoder) {
         state = ""
+        brand = ""
         super.init(coder: aDecoder)
     }
     
     init() {
         state = ""
+        brand = ""
         super.init(nibName: nil, bundle: nil)
     }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+
+        let azureProps = PListService("azure")
         
-        let domain = "https://login.microsoftonline.com"
-        let tenant = "/tyrtsi.onmicrosoft.com"
-        let oauth = "/oauth2/v2.0"
-        let authorize = "/authorize"
-        let policy = "B2C_1_SignupAndSignin"
-        let clientId = "ce25c98b-f01d-46ad-936a-62ac28c939e5"
-        let redirectURI = "urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob"
-        let scope = "offline_access%20openid"
-        let responseType = "code%20id_token"
-        let responseMode = "query"
+        // Get policy based on brand
+        var policy = ""
+        if (brand == "lexus") {
+            policy = azureProps.getProperty("policyLexus")
+        }
+        else {
+            policy = azureProps.getProperty("policy")
+        }
         
-        let url = domain +
-            tenant +
-            oauth +
-            authorize +
+        let url = azureProps.getProperty("domain") +
+            azureProps.getProperty("tenant") +
+            azureProps.getProperty("oauth") +
+            azureProps.getProperty("authorize") +
             "?p=" + policy +
-            "&client_id=" + clientId +
-            "&redirect_uri=" + redirectURI +
-            "&scope=" + scope +
+            "&client_id=" + azureProps.getProperty("clientId") +
+            "&redirect_uri=" + azureProps.getProperty("redirectUriEncoded") +
+            "&scope=" + azureProps.getProperty("scopeEncoded") +
             "&state=" + state +
-            "&response_type=" + responseType +
-            "&response_mode=" + responseMode
+            "&response_type=" + azureProps.getProperty("responseType") +
+            "&response_mode=" + azureProps.getProperty("responseMode") +
+            "&prompt=" + azureProps.getProperty("prompt")
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }
@@ -56,36 +60,85 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        // Retrieve code and id token if they exist
+        // Retrieve code
         let url = request.url?.absoluteString
         let redirectRange = url?.range(of: "urn:ietf:wg:oauth:2.0:oob")
         let stateRange = url?.range(of: "state=")
         let codeRange = url?.range(of: "&code=")
-        let tokenRange = url?.range(of: "&id_token=")
+        let errorRange = url?.range(of: "?error=")
         
-        if (redirectRange != nil && stateRange != nil && codeRange != nil && tokenRange != nil) {
-            let stateUpperIndex = stateRange?.upperBound
-            let codeLowerIndex = codeRange?.lowerBound
-            let codeUpperIndex = codeRange?.upperBound
-            let tokenLowerIndex = tokenRange?.lowerBound
-            let tokenUpperIndex = tokenRange?.upperBound
-            let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
-            let auth_code = url?.substring(with: codeUpperIndex!..<tokenLowerIndex!)
-            let id_token = url?.substring(from: tokenUpperIndex!)
+        if (redirectRange != nil) {
+            // Start spinner
+            activityView.startAnimating()
             
-            print("code: " + auth_code!)
-            print("token: " + id_token!)
-            
-            let keychainService = KeychainService()
-            keychainService.storeToken(id_token!, TokenType.id_token.rawValue)
-            
-            if (presentingViewController != nil) {
-                let viewController = presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
-                presentingViewController!.addChildViewController(viewController)
-                presentingViewController!.view!.addSubview(viewController.view)
+            if (stateRange != nil && codeRange != nil) {
+                let stateUpperIndex = stateRange?.upperBound
+                let codeLowerIndex = codeRange?.lowerBound
+                let codeUpperIndex = codeRange?.upperBound
+                let state = url?.substring(with: stateUpperIndex!..<codeLowerIndex!)
+                let auth_code = url?.substring(from: codeUpperIndex!)
+                
+                // Retrieve tokens using code
+                let service = TokenService(brand, false)
+                service.getTokens(auth_code!) {
+                    (token: Token) in
+                    let keychainService = KeychainService()
+                    keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
+                    keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
+                    
+                    // Redirect back to called controller
+                    if (self.presentingViewController != nil) {
+                        let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
+                        self.presentingViewController!.addChildViewController(viewController)
+                        self.presentingViewController!.view!.addSubview(viewController.view)
+                    }
+                    
+                    self.activityView.stopAnimating()
+                    
+                    // Dismiss webview after new view is established
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
-            
-            dismiss(animated: true, completion: nil)
+            else if (errorRange != nil) {
+                // Password Reset
+                let forgotPassword = url?.range(of: "AADB2C90118")
+                if (forgotPassword != nil) {
+                    let azureProps = PListService("azure")
+                    var policy = ""
+                    if (brand == "lexus") {
+                        policy = azureProps.getProperty("policyResetLexus")
+                    }
+                    else {
+                        policy = azureProps.getProperty("policyReset")
+                    }
+                    let url = azureProps.getProperty("domain") +
+                        azureProps.getProperty("tenant") +
+                        azureProps.getProperty("oauth") +
+                        azureProps.getProperty("authorize") +
+                        "?p=" + policy +
+                        "&client_id=" + azureProps.getProperty("clientId") +
+                        "&redirect_uri=" + azureProps.getProperty("redirectUriEncoded") +
+                        "&scope=openid" +
+                        "&state=" + state +
+                        "&response_type=id_token" +
+                        "&response_mode=" + azureProps.getProperty("responseMode") +
+                        "&prompt=" + azureProps.getProperty("prompt")
+                    loginView.loadRequest(URLRequest(url: URL(string: url)!))
+                    loginView.delegate = self
+                    activityView.stopAnimating()
+                }
+                
+                // Cancel
+                let cancel = url?.range(of: "AADB2C90091")
+                if (cancel != nil) {
+                    activityView.stopAnimating()
+                    dismiss(animated: true, completion: nil)
+                }
+            }
+            else {
+                activityView.stopAnimating()
+                dismiss(animated: true, completion: nil)
+            }
         }
         return true;
     }

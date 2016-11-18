@@ -2,8 +2,7 @@
 //  iOSAuthLibraryTests.swift
 //  iOSAuthLibraryTests
 //
-//  Created by David Collom on 10/12/16.
-//  Copyright © 2016 Pariveda Solutions. All rights reserved.
+//  Created by Pariveda Solutions.
 //
 
 import XCTest
