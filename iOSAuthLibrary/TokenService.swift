@@ -30,13 +30,13 @@ open class TokenService {
         }
         
         // Get correct grant type based on if refresh or not
-        var grant = ""
-        if (refresh) {
+        var grant = azureProps.getProperty("grantType")
+        /*if (refresh) {
             grant = azureProps.getProperty("grantTypeRefresh")
         }
         else {
             grant = azureProps.getProperty("grantType")
-        }
+        }*/
         
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
