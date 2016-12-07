@@ -5,7 +5,7 @@
 	<key>domain</key>
 	<string>https://login.microsoftonline.com</string>
 	<key>tenant</key>
-	<string>/tyrtsi.onmicrosoft.com</string>
+	<string>/cd786c48-dafb-41d1-acbf-d4ee777adf02</string>
 	<key>oauth</key>
 	<string>/oauth2/v2.0</string>
 	<key>authorize</key>
@@ -13,15 +13,15 @@
 	<key>token</key>
 	<string>/token</string>
 	<key>policy</key>
-	<string>B2C_1_SignupAndSignin</string>
+	<string>B2C_1_SignupOrSigninToyota</string>
 	<key>policyLexus</key>
-	<string>B2C_1_SignupAndSignin_lexus</string>
+	<string>B2C_1_SignupOrSigninLexus</string>
 	<key>policyReset</key>
-	<string>B2C_1_PasswordReset</string>
+	<string>B2C_1_PasswordResetToyota</string>
 	<key>policyResetLexus</key>
-	<string>B2C_1_PasswordReset_lexus</string>
+	<string>B2C_1_PasswordResetLexus</string>
 	<key>clientId</key>
-	<string>ce25c98b-f01d-46ad-936a-62ac28c939e5</string>
+	<string>df15ce4f-f1f1-4c90-956c-299e5fd9feae</string>
 	<key>redirectUri</key>
 	<string>urn:ietf:wg:oauth:2.0:oob</string>
 	<key>redirectUriEncoded</key>
