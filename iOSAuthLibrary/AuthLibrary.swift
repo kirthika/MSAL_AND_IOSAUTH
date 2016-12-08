@@ -48,14 +48,12 @@ open class AuthLibrary {
     open func isJwtValid(_ token: String?) -> Bool {
         var claims = convertTokenToClaims(token!)
         let issuer = claims["iss"] as! String
-        print(issuer)
-        print(azureProps.getProperty("tenant"))
-        if ("/" + issuer == azureProps.getProperty("tenant")) {
-            print(true)
+        let audience = claims["aud"] as! String
+        if (("/" + issuer == azureProps.getProperty("domain") + azureProps.getProperty("tenant") + "/v2.0/")
+            && (audience == azureProps.getProperty("clientId"))) {
             return true
         }
         else {
-            print(false)
             return false
         }
     }
