@@ -8,10 +8,12 @@ open class AuthLibrary {
     
     var keychainService: KeychainService
     let brand: String
+    let azureProps: PListService
     
     required public init(_ branding: String) {
         keychainService = KeychainService()
         brand = branding.lowercased()
+        azureProps = PListService("azure")
     }
 
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
@@ -44,14 +46,24 @@ open class AuthLibrary {
     }
     
     open func isJwtValid(_ token: String?) -> Bool {
-        return true
+        var claims = convertTokenToClaims(token!)
+        let issuer = claims["iss"] as! String
+        print(issuer)
+        print(azureProps.getProperty("tenant"))
+        if ("/" + issuer == azureProps.getProperty("tenant")) {
+            print(true)
+            return true
+        }
+        else {
+            print(false)
+            return false
+        }
     }
     
     open func getClaims() -> [String: Any] {
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
-            let jwt = id_token.components(separatedBy: ".")
-            return convertJwtToClaims(claimsString: jwt[1])
+            return convertTokenToClaims(id_token)
         } else {
             return [String: Any]()
         }
@@ -65,8 +77,9 @@ open class AuthLibrary {
         keychainService.removeTokens()
     }
     
-    func convertJwtToClaims(claimsString: String) -> [String: Any] {
-        var claims = claimsString
+    func convertTokenToClaims(_ token: String) -> [String: Any] {
+        let jwt = token.components(separatedBy: ".")
+        var claims = jwt[1]
         switch (claims.characters.count % 4) // Pad with trailing '='s
         {
             case 0: break; // No pad chars in this case
