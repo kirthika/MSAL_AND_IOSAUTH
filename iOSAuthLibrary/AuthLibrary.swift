@@ -49,7 +49,7 @@ open class AuthLibrary {
         var claims = convertTokenToClaims(token!)
         let issuer = claims["iss"] as! String
         let audience = claims["aud"] as! String
-        if (("/" + issuer == azureProps.getProperty("domain") + azureProps.getProperty("tenant") + "/v2.0/")
+        if ((issuer == azureProps.getProperty("domain") + azureProps.getProperty("tenant") + "/v2.0/")
             && (audience == azureProps.getProperty("clientId"))) {
             return true
         }
