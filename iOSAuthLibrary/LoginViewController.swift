@@ -12,16 +12,22 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var activityView: UIActivityIndicatorView!
     open var state: String
     open var brand: String
+    open var resource: String
+    open var scopes: [String]
     
     required public init?(coder aDecoder: NSCoder) {
         state = ""
         brand = ""
+        resource = ""
+        scopes = []
         super.init(coder: aDecoder)
     }
     
     init() {
         state = ""
         brand = ""
+        resource = ""
+        scopes = []
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,18 +45,26 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             policy = azureProps.getProperty("policy")
         }
         
+        var scopeUrl = azureProps.getProperty("scopeIdRefresh")
+        for scope in scopes {
+            scopeUrl += " " + azureProps.getProperty("scopeAccess") + resource + "/" + scope
+        }
+        
+        let encodedScopeUrl = scopeUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("authorize") +
-            "?p=" + policy +
-            "&client_id=" + azureProps.getProperty("clientId") +
-            "&redirect_uri=" + azureProps.getProperty("redirectUriEncoded") +
-            "&scope=" + azureProps.getProperty("scopeEncoded") +
-            "&state=" + state +
-            "&response_type=" + azureProps.getProperty("responseType") +
-            "&response_mode=" + azureProps.getProperty("responseMode") +
-            "&prompt=" + azureProps.getProperty("prompt")
+            "?p=\(policy)" +
+            "&client_id=\(azureProps.getProperty("clientId"))" +
+            "&redirect_uri=\(azureProps.getProperty("redirectUriEncoded"))" +
+            "&scope=\(encodedScopeUrl)" +
+            "&state=\(state)" +
+            "&response_type=\(azureProps.getProperty("responseType"))" +
+            "&response_mode=\(azureProps.getProperty("responseMode"))" +
+            "&prompt=\(azureProps.getProperty("prompt"))"
+        print(url)
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }

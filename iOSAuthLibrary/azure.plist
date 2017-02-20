@@ -28,6 +28,10 @@
 	<string>urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob</string>
 	<key>scope</key>
 	<string>openid offline_access</string>
+	<key>scopeIdRefresh</key>
+	<string>openid offline_access</string>
+	<key>scopeAccess</key>
+	<string>https://rtb2cdev.onmicrosoft.com/</string>
 	<key>scopeEncoded</key>
 	<string>openid%20offline_access</string>
 	<key>responseType</key>
@@ -38,6 +42,8 @@
 	<string>login</string>
 	<key>grantType</key>
 	<string>authorization_code</string>
+	<key>keysExtension</key>
+	<string>/discovery/v2.0/keys?p=</string>
 	<key>grantTypeRefresh</key>
 	<string>refresh_token</string>
 </dict>
