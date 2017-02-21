@@ -59,7 +59,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "?p=\(policy)" +
             "&client_id=\(azureProps.getProperty("clientId"))" +
             "&redirect_uri=\(azureProps.getProperty("redirectUriEncoded"))" +
-            "&scope=\(encodedScopeUrl)" +
+            "&scope=\(encodedScopeUrl!)" +
             "&state=\(state)" +
             "&response_type=\(azureProps.getProperty("responseType"))" +
             "&response_mode=\(azureProps.getProperty("responseMode"))" +
