@@ -16,6 +16,7 @@ open class TokenService {
         refresh = refreshBool
     }
     
+    // 2) Is this where we want to be grabbing access tokens?
     func getTokens(_ auth_code: String, completion: @escaping (_ token: Token) -> Void) {
         let token = Token()
         let azureProps = PListService("azure")
