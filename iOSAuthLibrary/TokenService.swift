@@ -54,6 +54,8 @@ open class TokenService {
                 token.id_token = JSON[TokenType.id_token.rawValue] as! String
                 //token.auth_token = JSON[TokenType.auth_token.rawValue] as! String
                 token.refresh_token = JSON[TokenType.refresh_token.rawValue] as! String
+                token.access_token = JSON[TokenType.access_token.rawValue] as! String
+                print("access token = " + token.access_token)
                 completion(token)
             case .failure:
                 print(response.result.error!)
