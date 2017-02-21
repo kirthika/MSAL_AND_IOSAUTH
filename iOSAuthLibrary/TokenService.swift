@@ -42,12 +42,20 @@ open class TokenService {
             codeVar = "code"
         }
         
+        let resource = "api1"
+        let scopes = ["read", "write"]
+        
+        var scopeUrl = azureProps.getProperty("scopeIdRefresh")
+        for scope in scopes {
+            scopeUrl += " " + azureProps.getProperty("scopeAccess") + resource + "/" + scope
+        }
+                
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("token") + "?p=" + policy
         Alamofire.request(url, method: .post, parameters:
-            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant, "scope": azureProps.getProperty("scope")]).responseJSON {
+            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant, "scope": scopeUrl!]).responseJSON {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
