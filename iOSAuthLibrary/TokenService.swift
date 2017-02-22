@@ -42,20 +42,12 @@ open class TokenService {
             codeVar = "code"
         }
         
-        let resource = "api1"
-        let scopes = ["read", "write"]
-        
-        var scopeUrl = azureProps.getProperty("scopeIdRefresh")
-        for scope in scopes {
-            scopeUrl += " " + azureProps.getProperty("scopeAccess") + resource + "/" + scope
-        }
-                
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("token") + "?p=" + policy
         Alamofire.request(url, method: .post, parameters:
-            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant, "scope": scopeUrl!]).responseJSON {
+            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant, "scope": azureProps.getProperty("scope")]).responseJSON {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
@@ -63,8 +55,8 @@ open class TokenService {
                 token.id_token = JSON[TokenType.id_token.rawValue] as! String
                 //token.auth_token = JSON[TokenType.auth_token.rawValue] as! String
                 token.refresh_token = JSON[TokenType.refresh_token.rawValue] as! String
-                token.access_token = JSON[TokenType.access_token.rawValue] as! String
-                print("access token = " + token.access_token)
+                //token.access_token = JSON[TokenType.access_token.rawValue] as! String
+                //print("access token = " + token.access_token)
                 completion(token)
             case .failure:
                 print(response.result.error!)
