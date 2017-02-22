@@ -60,7 +60,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             azureProps.getProperty("authorize") +
             "?p=\(policy)" +
             "&client_id=\(azureProps.getProperty("clientId"))" +
-            "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed))" +
+            "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!)" +
             "&scope=\(encodedScopeUrl!)" +
             "&state=\(state)" +
             "&response_type=\(azureProps.getProperty("responseType"))" +
@@ -133,7 +133,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         azureProps.getProperty("authorize") +
                         "?p=\(policy)" +
                         "&client_id=\(azureProps.getProperty("clientId"))" +
-                        "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed))" +
+                        "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!)" +
                         "&scope=openid" +
                         "&state=\(state)" +
                         "&response_type=id_token" +

@@ -23,7 +23,7 @@ open class AuthLibrary {
             completion(isJwtValid(id_token))
         } else {
             renewTokens(completion: { (success) in
-                if(success){
+                if (success) {
                     completion(success)
                 } else {
                     completion(false)
