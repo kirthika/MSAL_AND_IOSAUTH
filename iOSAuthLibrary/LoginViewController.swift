@@ -60,13 +60,12 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             azureProps.getProperty("authorize") +
             "?p=\(policy)" +
             "&client_id=\(azureProps.getProperty("clientId"))" +
-            "&redirect_uri=\(azureProps.getProperty("redirectUriEncoded"))" +
+            "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed))" +
             "&scope=\(encodedScopeUrl!)" +
             "&state=\(state)" +
             "&response_type=\(azureProps.getProperty("responseType"))" +
             "&response_mode=\(azureProps.getProperty("responseMode"))" +
             "&prompt=\(azureProps.getProperty("prompt"))"
-        print(url)
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
         loginView.delegate = self
     }
@@ -96,12 +95,12 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 
                 // Retrieve tokens using code
                 let service = TokenService(brand, false)
-                print("auth_code = " + auth_code! + "\n")
                 service.getTokens(auth_code!) {
                     (token: Token) in
                     let keychainService = KeychainService()
                     keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
                     keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
+                    keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
                     
                     // Redirect back to called controller
                     if (self.presentingViewController != nil) {
@@ -132,14 +131,14 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         azureProps.getProperty("tenant") +
                         azureProps.getProperty("oauth") +
                         azureProps.getProperty("authorize") +
-                        "?p=" + policy +
-                        "&client_id=" + azureProps.getProperty("clientId") +
-                        "&redirect_uri=" + azureProps.getProperty("redirectUriEncoded") +
+                        "?p=\(policy)" +
+                        "&client_id=\(azureProps.getProperty("clientId"))" +
+                        "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed))" +
                         "&scope=openid" +
-                        "&state=" + state +
+                        "&state=\(state)" +
                         "&response_type=id_token" +
-                        "&response_mode=" + azureProps.getProperty("responseMode") +
-                        "&prompt=" + azureProps.getProperty("prompt")
+                        "&response_mode=\(azureProps.getProperty("responseMode"))" +
+                        "&prompt=\(azureProps.getProperty("prompt"))"
                     loginView.loadRequest(URLRequest(url: URL(string: url)!))
                     loginView.delegate = self
                     activityView.stopAnimating()
