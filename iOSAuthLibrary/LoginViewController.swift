@@ -50,7 +50,9 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             scopeUrl += " " + azureProps.getProperty("scopeAccess") + resource + "/" + scope
         }
         
-        let encodedScopeUrl = scopeUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let encodedScopeUrl = scopeUrl
+            .replacingOccurrences(of: " ", with: "+")
+            .addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)  // replaces "#%/:<>?@[\]^` with percent encoding
         
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
