@@ -42,6 +42,8 @@ open class TokenService {
             codeVar = "code"
         }
         
+        print("grant = " + grant)
+        
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
