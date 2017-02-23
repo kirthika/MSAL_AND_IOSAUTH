@@ -20,8 +20,18 @@ open class AuthLibrary {
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
-            completion(isJwtValid(id_token))
-        } else {
+            if (!isJwtValid(id_token)) {    // An Id Token exists, but it's not valid
+                renewTokens(completion: { (success) in
+                    if (success) {
+                        completion(success)
+                    } else {
+                        completion(false)
+                    }
+                })
+            } else {
+                completion(true)    // A saved, valid token exists
+            }
+        } else {    // No ID Token exists
             renewTokens(completion: { (success) in
                 if (success) {
                     completion(success)
