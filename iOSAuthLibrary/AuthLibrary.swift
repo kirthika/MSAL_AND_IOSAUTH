@@ -89,7 +89,7 @@ open class AuthLibrary {
         }
     }
     
-    open func getRoles() -> Data {
+    open func getRoles() -> [String:Any] {
         let userInfo = getUserClaims()
         var obj : [String: Any] = [:]
       
@@ -114,14 +114,7 @@ open class AuthLibrary {
             obj["isDriver"] = false
         }
         
-        var jsonObj : Data? = nil
-        do {
-            jsonObj = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
-            return jsonObj!
-        } catch {
-            print(error.localizedDescription)
-            return jsonObj!
-        }
+        return obj
     }
     
     open func getAccessToken() -> String {
