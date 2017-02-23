@@ -41,10 +41,15 @@ open class AuthLibrary {
             let tokenService = TokenService(brand, true)
             tokenService.getTokens(refresh_token) {
                 (token: Token) in
-                self.keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
-                self.keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
-                self.keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
-                completion(self.isJwtValid(token.id_token))
+                if (self.isJwtValid(token.id_token)) {
+                    self.keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
+                    self.keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
+                    self.keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
+                    completion(true)
+                } else {
+                    self.keychainService.removeTokens()
+                    completion(false)
+                }
             }
         }
         else {

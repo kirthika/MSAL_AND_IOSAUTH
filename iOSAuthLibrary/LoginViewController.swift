@@ -97,11 +97,19 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 let service = TokenService(brand, false)
                 service.getTokens(auth_code!) {
                     (token: Token) in
+                    let authLibrary = AuthLibrary(self.brand)
                     let keychainService = KeychainService()
-                    keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
-                    keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
-                    keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
-                    
+                    if (authLibrary.isJwtValid("junk")) {
+                        keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
+                        keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
+                        keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
+                    } else {
+                        print("TOKEN IS INVALID NOT STORING")
+                        keychainService.removeTokens()
+                        self.activityView.stopAnimating()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                        
                     // Redirect back to called controller
                     if (self.presentingViewController != nil) {
                         let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
