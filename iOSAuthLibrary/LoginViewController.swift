@@ -99,7 +99,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                     (token: Token) in
                     let authLibrary = AuthLibrary(self.brand)
                     let keychainService = KeychainService()
-                    if (authLibrary.isJwtValid("junk")) {
+                    if (authLibrary.isJwtValid("junk21341341.juk223423423.junb23423455")) {
                         keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
                         keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
                         keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
