@@ -89,6 +89,41 @@ open class AuthLibrary {
         }
     }
     
+    open func getRoles() -> Data {
+        let userInfo = getUserClaims()
+        var obj : [String: Any] = [:]
+      
+        if (userInfo["extension_IsShopper"] != nil) {
+            obj["isShopper"] = true
+        } else {
+            obj["isShopper"] = false
+        }
+        if (userInfo["extension_IsBuyer"] != nil) {
+            obj["isBuyer"] = true
+        } else {
+            obj["isBuyer"] = false
+        }
+        if (userInfo["extension_IsOwner"] != nil) {
+            obj["isOwner"] = true
+        } else {
+            obj["isOwner"] = false
+        }
+        if (userInfo["extension_IsDriver"] != nil) {
+            obj["isDriver"] = true
+        } else {
+            obj["isDriver"] = false
+        }
+        
+        var jsonObj : Data? = nil
+        do {
+            jsonObj = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+            return jsonObj!
+        } catch {
+            print(error.localizedDescription)
+            return jsonObj!
+        }
+    }
+    
     open func getAccessToken() -> String {
         return keychainService.getToken(TokenType.access_token.rawValue)
     }
