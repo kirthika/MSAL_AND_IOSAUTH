@@ -111,6 +111,10 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                             self.presentingViewController!.view!.addSubview(viewController.view)
                         }
                     } else {    // Id Token is invalid, don't store and dismiss the webview without going to next story
+                        let azureProps = PListService("azure")
+                        let alert = UIAlertController(title: "Error", message: azureProps.getProperty("invalidTokenErrorMsg"), preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                         keychainService.removeTokens()
                     }
                     
