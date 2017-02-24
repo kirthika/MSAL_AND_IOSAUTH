@@ -110,7 +110,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                             self.presentingViewController!.addChildViewController(viewController)
                             self.presentingViewController!.view!.addSubview(viewController.view)
                         }
-                    } else {
+                    } else {    // Id Token is invalid, don't store and dismiss the webview without going to next story
                         keychainService.removeTokens()
                     }
                     
