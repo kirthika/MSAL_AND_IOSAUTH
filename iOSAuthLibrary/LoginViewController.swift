@@ -119,6 +119,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: {
                             keychainService.removeTokens()
+                            self.activityView.stopAnimating()
                         })
                     }
                 }
