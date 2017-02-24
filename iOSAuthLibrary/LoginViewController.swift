@@ -99,7 +99,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                     (token: Token) in
                     let authLibrary = AuthLibrary(self.brand)
                     let keychainService = KeychainService()
-                    if (authLibrary.isJwtValid(token.id_token)) {
+                    let invalidToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IklkVG9rZW5TaWduaW5nS2V5Q29udGFpbmVyLnYyIn0.eyJleHAiOjE0ODc4ODkxODUsIm5iZiI6MTQ4Nzg4NTU4NSwidmVyIjoiMS4wIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5taWNyb3NvZnRvbmxpbmUuY29tL2NkNzg2YzQ4LWRhZmItNDFkMS1hY2JmLWQ0ZWU3NzdhZGYwMi92Mi4wLyIsInN1YiI6IjlkZmU3M2JlLWFjNjUtNGMzZC1hNTAzLTRhYzE1MDI1YjA3MCIsImF1ZCI6ImRmMTVjZTRmLWYxZjEtNGM5MC05NTZjLTI5OWU1ZmQ5ZmVhZSIsImlhdCI6MTQ4Nzg4NTU4NSwiYXV0aF90aW1lIjoxNDg3ODg1NTg1LCJnaXZlbl9uYW1lIjoidGltIiwiZmFtaWx5X25hbWUiOiJwdXNhdGVyaSIsIm5hbWUiOiJ1bmtub3duIiwiZW1haWxzIjpbInRwdXNhdGVyaTQ0QGdtYWlsLmNvbSJdLCJ0ZnAiOiJCMkNfMV9TaWdudXBPclNpZ25pblRveW90YSIsImF0X2hhc2giOiJpb0lBS3NQYzVaYlpaNktHVXRMOGVRIn0.BR8YZCX9lN3RzRsmGX6Rzh2bHBQbHQ_miZ1CqKusztP9xiYHAtxIOfgj6W6uWurQ496Rj6W8rUbq64JZFFWG9PxJl_MrpVPcAgXi6ldh46rBASF3JholZqXBPgBULVLkQzoU80SgG808y2_B4_vUFuWqBc_YoxuGODkaCfJ_x6rRKOX8L9ajOe_sfMaC9xJ-3JcjVQmZxXCDHA8RQshiF_d82j4S1B0Ngv1G_zqUu6q-Bd-mfUG7DTSnHeRrduKjxoKG46UCUeGvUlTolJfbVz_xtGZSLSnw9oZhtMp65B-zbkRNiCPua7jtsYSo2qOMK-5zGT6snyJJZQr7BntSHA"
+                    if (authLibrary.isJwtValid(invalidToken)) {
                         keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
                         keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
                         keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
