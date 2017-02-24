@@ -103,18 +103,16 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
                         keychainService.storeToken(token.refresh_token, TokenType.refresh_token.rawValue)
                         keychainService.storeToken(token.access_token, TokenType.access_token.rawValue)
+                        
+                        // Redirect back to called controller
+                        if (self.presentingViewController != nil) {
+                            let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
+                            self.presentingViewController!.addChildViewController(viewController)
+                            self.presentingViewController!.view!.addSubview(viewController.view)
+                        }
                     } else {
                         print("TOKEN IS INVALID NOT STORING")
                         keychainService.removeTokens()
-                        self.activityView.stopAnimating()
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                        
-                    // Redirect back to called controller
-                    if (self.presentingViewController != nil) {
-                        let viewController = self.presentingViewController!.storyboard!.instantiateViewController(withIdentifier: state!)
-                        self.presentingViewController!.addChildViewController(viewController)
-                        self.presentingViewController!.view!.addSubview(viewController.view)
                     }
                     
                     self.activityView.stopAnimating()
