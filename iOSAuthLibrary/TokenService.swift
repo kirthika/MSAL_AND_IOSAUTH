@@ -41,8 +41,6 @@ open class TokenService {
             codeVar = "code"
         }
         
-        print("grant = " + grant)
-        
         let url = azureProps.getProperty("domain") +
             azureProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
@@ -52,7 +50,6 @@ open class TokenService {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
-                print(JSON)
                 token.id_token = JSON[TokenType.id_token.rawValue] as! String
                 token.refresh_token = JSON[TokenType.refresh_token.rawValue] as! String
                 token.access_token = JSON[TokenType.access_token.rawValue] as! String

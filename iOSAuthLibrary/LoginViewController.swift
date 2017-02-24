@@ -111,7 +111,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                             self.presentingViewController!.view!.addSubview(viewController.view)
                         }
                     } else {
-                        print("TOKEN IS INVALID NOT STORING")
                         keychainService.removeTokens()
                     }
                     
