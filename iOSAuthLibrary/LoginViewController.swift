@@ -113,7 +113,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         
                         self.activityView.stopAnimating()
                         self.dismiss(animated: true, completion: nil)
-                    } else {    // Id Token is invalid, don't store and dismiss the webview without going to next story
+                    } else {    // Id Token is invalid, don't store and display error alert
                         let azureProps = PListService("azure")
                         let alert = UIAlertController(title: "Error", message: azureProps.getProperty("invalidTokenErrorMsg"), preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: {
