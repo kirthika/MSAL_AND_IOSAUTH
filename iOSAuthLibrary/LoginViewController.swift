@@ -120,6 +120,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         self.present(alert, animated: true, completion: {
                             keychainService.removeTokens()
                             self.activityView.stopAnimating()
+                            self.dismiss(animated: true, completion: nil)
                         })
                     }
                 }
