@@ -46,13 +46,13 @@ open class TokenService {
             azureProps.getProperty("oauth") +
             azureProps.getProperty("token") + "?p=" + policy
         Alamofire.request(url, method: .post, parameters:
-            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant, "scope": azureProps.getProperty("scope")]).responseJSON {
+            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant]).responseJSON {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
                 token.id_token = JSON[TokenType.id_token.rawValue] as! String
-                //token.auth_token = JSON[TokenType.auth_token.rawValue] as! String
                 token.refresh_token = JSON[TokenType.refresh_token.rawValue] as! String
+                token.access_token = JSON[TokenType.access_token.rawValue] as! String
                 completion(token)
             case .failure:
                 print(response.result.error!)

@@ -1,3 +1,4 @@
 iOSAuthLibrary.xcodeproj/xcuserdata/*
 iOSAuthLibrary.xcodeproj/project.xcworkspace/xcuserdata/*
 Carthage/*
+*.xcworkspacedata

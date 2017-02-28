@@ -20,7 +20,7 @@ class iOSAuthLibraryTests: XCTestCase {
         let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         loginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         
-        authLibrary = AuthLibrary()
+        authLibrary = AuthLibrary("Toyota")
         keychainService = MockKeychainService()
     }
     
