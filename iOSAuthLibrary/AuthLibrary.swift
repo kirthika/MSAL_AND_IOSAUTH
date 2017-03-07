@@ -91,9 +91,9 @@ open class AuthLibrary {
     }
     
     open func getUserClaims() -> [String: Any] {
-        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
-        if (!id_token.isEmpty) {
-            return convertTokenToClaims(id_token)
+        let access_token = keychainService.getToken(TokenType.access_token.rawValue)
+        if (!access_token.isEmpty) {
+            return convertTokenToClaims(access_token)
         } else {
             return [String: Any]()
         }
