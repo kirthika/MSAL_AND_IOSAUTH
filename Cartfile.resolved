@@ -1,4 +1,4 @@
-github "Alamofire/Alamofire" "fa3c6d09b603f417c7788adb51ca0cade75b3d67"
-github "kishikawakatsumi/KeychainAccess" "20f0c126c3cdd279a385b8444b55d3499f41fb82"
+github "Alamofire/Alamofire" "b03b43cc381ec02eb9855085427186ef89055eef"
+github "kishikawakatsumi/KeychainAccess" "3bf435d89d70f6b78956d5f13239048b21014eef"
 github "soheilbm/Base64" "67083ec1e3e970ec920cbf126e6957c6e9e88ae4"
 github "yourkarma/JWT" "bab020fceeaeacc84b59046300dddd9f5f6b6513"

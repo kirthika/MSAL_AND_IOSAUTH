@@ -90,7 +90,16 @@ open class AuthLibrary {
         }
     }
     
-    open func getUserClaims() -> [String: Any] {
+    open func getIdTokenClaims() -> [String: Any] {
+        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
+        if (!id_token.isEmpty) {
+            return convertTokenToClaims(id_token)
+        } else {
+            return [String: Any]()
+        }
+    }
+    
+    open func getAccessTokenClaims() -> [String: Any] {
         let access_token = keychainService.getToken(TokenType.access_token.rawValue)
         if (!access_token.isEmpty) {
             return convertTokenToClaims(access_token)
@@ -100,7 +109,7 @@ open class AuthLibrary {
     }
     
     open func getRoles() -> [String:Any] {
-        let userInfo = getUserClaims()
+        let userInfo = getIdTokenClaims()
         var obj : [String: Any] = [:]
       
         if (userInfo["extension_IsShopper"] != nil) {
