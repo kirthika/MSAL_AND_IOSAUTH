@@ -92,17 +92,17 @@ open class AuthLibrary {
     
     open func getIdTokenClaims() -> [String: Any] {
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
-        if (!id_token.isEmpty) {
-            return convertTokenToClaims(id_token)
-        } else {
-            return [String: Any]()
-        }
+        return getClaimsFromToken(id_token)
     }
     
     open func getAccessTokenClaims() -> [String: Any] {
         let access_token = keychainService.getToken(TokenType.access_token.rawValue)
-        if (!access_token.isEmpty) {
-            return convertTokenToClaims(access_token)
+        return getClaimsFromToken(access_token)
+    }
+    
+    open func getClaimsFromToken(_ token: String) -> [String: Any] {
+        if (!token.isEmpty) {
+            return convertTokenToClaims(token)
         } else {
             return [String: Any]()
         }
