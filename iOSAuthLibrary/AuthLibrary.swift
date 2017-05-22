@@ -80,6 +80,8 @@ open class AuthLibrary {
         viewController.scopes = scopes
         viewController.state = state
         viewController.brand = brand
+        viewController.clientId = clientId
+        viewController.config = config
         return viewController
     }
     
