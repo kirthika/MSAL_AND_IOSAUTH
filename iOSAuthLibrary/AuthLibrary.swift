@@ -9,12 +9,18 @@ open class AuthLibrary {
     
     var keychainService: KeychainService
     let brand: String
+    let clientId: String
+    let config: String
     let azureProps: PListService
+    let envProps: PListService
     
-    required public init(_ branding: String) {
-        keychainService = KeychainService()
-        brand = branding.lowercased()
-        azureProps = PListService("azure")
+    required public init(_ brand: String,_ clientId: String,_ config: String) {
+        self.keychainService = KeychainService()
+        self.brand = brand.lowercased()
+        self.clientId = clientId
+        self.config = config
+        self.azureProps = PListService("azure")
+        self.envProps = PListService("azure-" + config.lowercased())
     }
 
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
@@ -48,7 +54,7 @@ open class AuthLibrary {
     open func renewTokens(completion: @escaping (Bool) -> Void) {
         let refresh_token = keychainService.getToken(TokenType.refresh_token.rawValue)
         if (!refresh_token.isEmpty) {
-            let tokenService = TokenService(brand, true)
+            let tokenService = TokenService(brand, clientId, config, true)
             tokenService.getTokens(refresh_token) {
                 (token: Token) in
                 if (self.isJwtValid(token.id_token)) {
@@ -81,8 +87,8 @@ open class AuthLibrary {
         var claims = convertTokenToClaims(token!)
         let issuer = claims["iss"] as! String
         let audience = claims["aud"] as! String
-        if ((issuer == azureProps.getProperty("domain") + azureProps.getProperty("tenant") + "/v2.0/")
-            && (audience == azureProps.getProperty("clientId"))) {
+        if ((issuer == azureProps.getProperty("domain") + envProps.getProperty("tenant") + "/v2.0/")
+            && (audience == clientId)) {
             return true
         }
         else {

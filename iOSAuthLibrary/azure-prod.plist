@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>tenant</key>
+	<string>/8c642d1d-d709-47b0-ab10-080af10798fb</string>
+	<key>scopeAccess</key>
+	<string>https://TOYOTA1.onmicrosoft.com/</string>
+</dict>
+</plist>

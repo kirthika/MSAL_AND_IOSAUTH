@@ -19,6 +19,10 @@
 		466910291DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */; };
 		466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466910371DAEBB4900E0DB35 /* Login.storyboard */; };
 		46FE9E461DCB9FBD006EEC75 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */; };
+		E176DAC71ED36F9A00C9E6D3 /* azure-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DAC61ED36F9A00C9E6D3 /* azure-dev.plist */; };
+		E176DAC91ED38A5900C9E6D3 /* azure-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DAC81ED38A5900C9E6D3 /* azure-test.plist */; };
+		E176DACB1ED38A6500C9E6D3 /* azure-stage.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DACA1ED38A6500C9E6D3 /* azure-stage.plist */; };
+		E176DACD1ED38A7500C9E6D3 /* azure-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DACC1ED38A7500C9E6D3 /* azure-prod.plist */; };
 		EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */; };
 		EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */; };
 		EB47F9EF1DBEE96A00A2ED70 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */; };
@@ -54,6 +58,10 @@
 		4669102A1DAEBAFD00E0DB35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		466910371DAEBB4900E0DB35 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		E176DAC61ED36F9A00C9E6D3 /* azure-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "azure-dev.plist"; sourceTree = "<group>"; };
+		E176DAC81ED38A5900C9E6D3 /* azure-test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "azure-test.plist"; sourceTree = "<group>"; };
+		E176DACA1ED38A6500C9E6D3 /* azure-stage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "azure-stage.plist"; sourceTree = "<group>"; };
+		E176DACC1ED38A7500C9E6D3 /* azure-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "azure-prod.plist"; sourceTree = "<group>"; };
 		EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthLibrary.swift; sourceTree = "<group>"; };
 		EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWT.framework; path = Carthage/Build/iOS/JWT.framework; sourceTree = "<group>"; };
@@ -122,6 +130,10 @@
 			children = (
 				EBFF96531DCA90FE004F7EE9 /* Mocks */,
 				46408CDB1DCA6FAF000715CD /* azure.plist */,
+				E176DAC61ED36F9A00C9E6D3 /* azure-dev.plist */,
+				E176DAC81ED38A5900C9E6D3 /* azure-test.plist */,
+				E176DACA1ED38A6500C9E6D3 /* azure-stage.plist */,
+				E176DACC1ED38A7500C9E6D3 /* azure-prod.plist */,
 				EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */,
 				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
 				4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */,
@@ -248,9 +260,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E176DACD1ED38A7500C9E6D3 /* azure-prod.plist in Resources */,
+				E176DAC71ED36F9A00C9E6D3 /* azure-dev.plist in Resources */,
 				EB6404761DC7F58F008AFAC9 /* Cartfile in Resources */,
+				E176DAC91ED38A5900C9E6D3 /* azure-test.plist in Resources */,
 				EB6404771DC7F58F008AFAC9 /* Cartfile.resolved in Resources */,
 				46408CDC1DCA6FAF000715CD /* azure.plist in Resources */,
+				E176DACB1ED38A6500C9E6D3 /* azure-stage.plist in Resources */,
 				4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */,
 				466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */,
 			);

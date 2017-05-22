@@ -10,15 +10,20 @@ import Alamofire
 open class TokenService {
     
     let brand: String
+    let clientId: String
+    let config: String
     let refresh: Bool
-    required public init(_ branding: String,_ refreshBool: Bool) {
-        brand = branding
-        refresh = refreshBool
+    required public init(_ brand: String,_ clientId: String,_ config: String,_ refresh: Bool) {
+        self.brand = brand
+        self.clientId = clientId
+        self.config = config
+        self.refresh = refresh
     }
     
     func getTokens(_ auth_code: String, completion: @escaping (_ token: Token) -> Void) {
         let token = Token()
         let azureProps = PListService("azure")
+        let envProps = PListService("azure-" + config.lowercased())
         
         // Get correct policy based on brand
         var policy = ""
@@ -42,11 +47,11 @@ open class TokenService {
         }
         
         let url = azureProps.getProperty("domain") +
-            azureProps.getProperty("tenant") +
+            envProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("token") + "?p=" + policy
         Alamofire.request(url, method: .post, parameters:
-            ["client_id": azureProps.getProperty("clientId"), "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant]).responseJSON {
+            ["client_id": clientId, "redirect_uri": azureProps.getProperty("redirectUri"), codeVar: auth_code, "grant_type": grant]).responseJSON {
             response in
             switch response.result {
             case .success(let JSON as [String: AnyObject]):
