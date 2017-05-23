@@ -12,7 +12,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var activityView: UIActivityIndicatorView!
     open var state: String
     open var clientId: String
-    open var config: String
+    open var envConfig: String
     open var brand: String
     open var resource: String
     open var scopes: [String]
@@ -20,7 +20,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     required public init?(coder aDecoder: NSCoder) {
         state = ""
         clientId = ""
-        config = ""
+        envConfig = ""
         brand = ""
         resource = ""
         scopes = []
@@ -30,7 +30,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     init() {
         state = ""
         clientId = ""
-        config = ""
+        envConfig = ""
         brand = ""
         resource = ""
         scopes = []
@@ -40,8 +40,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        let azureProps = PListService("azure")
-        let envProps = PListService("azure-" + config.lowercased())
+        let azureProps = PList("azure")
+        let envProps = PList(envConfig.lowercased() + "-tenant")
         
         // Get policy based on brand
         var policy = ""
@@ -101,10 +101,10 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 let auth_code = url?.substring(from: codeUpperIndex!)
                 
                 // Retrieve tokens using code
-                let service = TokenService(brand, clientId, config, false)
+                let service = TokenService(brand, clientId, envConfig, false)
                 service.getTokens(auth_code!) {
                     (token: Token) in
-                    let authLibrary = AuthLibrary(self.brand, self.clientId, self.config)
+                    let authLibrary = AuthLibrary(self.brand, self.clientId, self.envConfig)
                     let keychainService = KeychainService()
                     if (authLibrary.isJwtValid(token.id_token)) {
                         keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
@@ -121,7 +121,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         self.activityView.stopAnimating()
                         self.dismiss(animated: true, completion: nil)
                     } else {    // Id Token is invalid, don't store and display error alert
-                        let azureProps = PListService("azure")
+                        let azureProps = PList("azure")
                         let alert = UIAlertController(title: "Error", message: azureProps.getProperty("invalidTokenErrorMsg"), preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: {
                             (alert: UIAlertAction!) in
@@ -138,8 +138,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 // Password Reset
                 let forgotPassword = url?.range(of: "AADB2C90118")
                 if (forgotPassword != nil) {
-                    let azureProps = PListService("azure")
-                    let envProps = PListService("azure-" + config.lowercased())
+                    let azureProps = PList("azure")
+                    let envProps = PList(envConfig.lowercased() + "-tenant")
                     var policy = ""
                     if (brand == "lexus") {
                         policy = azureProps.getProperty("policyResetLexus")

@@ -11,19 +11,19 @@ open class TokenService {
     
     let brand: String
     let clientId: String
-    let config: String
+    let envConfig: String
     let refresh: Bool
-    required public init(_ brand: String,_ clientId: String,_ config: String,_ refresh: Bool) {
+    required public init(_ brand: String,_ clientId: String,_ envConfig: String,_ refresh: Bool) {
         self.brand = brand
         self.clientId = clientId
-        self.config = config
+        self.envConfig = envConfig
         self.refresh = refresh
     }
     
     func getTokens(_ auth_code: String, completion: @escaping (_ token: Token) -> Void) {
         let token = Token()
-        let azureProps = PListService("azure")
-        let envProps = PListService("azure-" + config.lowercased())
+        let azureProps = PList("azure")
+        let envProps = PList(envConfig.lowercased() + "-tenant")
         
         // Get correct policy based on brand
         var policy = ""

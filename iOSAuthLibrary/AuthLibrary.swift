@@ -10,17 +10,17 @@ open class AuthLibrary {
     var keychainService: KeychainService
     let brand: String
     let clientId: String
-    let config: String
-    let azureProps: PListService
-    let envProps: PListService
+    let envConfig: String
+    let azureProps: PList
+    let envProps: PList
     
-    required public init(_ brand: String,_ clientId: String,_ config: String) {
+    required public init(_ brand: String,_ clientId: String,_ envConfig: String) {
         self.keychainService = KeychainService()
         self.brand = brand.lowercased()
         self.clientId = clientId
-        self.config = config
-        self.azureProps = PListService("azure")
-        self.envProps = PListService("azure-" + config.lowercased())
+        self.envConfig = envConfig
+        self.azureProps = PList("azure")
+        self.envProps = PList(envConfig.lowercased() + "-tenant")
     }
 
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
@@ -54,7 +54,7 @@ open class AuthLibrary {
     open func renewTokens(completion: @escaping (Bool) -> Void) {
         let refresh_token = keychainService.getToken(TokenType.refresh_token.rawValue)
         if (!refresh_token.isEmpty) {
-            let tokenService = TokenService(brand, clientId, config, true)
+            let tokenService = TokenService(brand, clientId, envConfig, true)
             tokenService.getTokens(refresh_token) {
                 (token: Token) in
                 if (self.isJwtValid(token.id_token)) {
@@ -81,7 +81,7 @@ open class AuthLibrary {
         viewController.state = state
         viewController.brand = brand
         viewController.clientId = clientId
-        viewController.config = config
+        viewController.envConfig = envConfig
         return viewController
     }
     
