@@ -9,12 +9,18 @@ open class AuthLibrary {
     
     var keychainService: KeychainService
     let brand: String
-    let azureProps: PListService
+    let clientId: String
+    let envConfig: String
+    let azureProps: PList
+    let envProps: PList
     
-    required public init(_ branding: String) {
-        keychainService = KeychainService()
-        brand = branding.lowercased()
-        azureProps = PListService("azure")
+    required public init(_ brand: String,_ clientId: String,_ envConfig: String) {
+        self.keychainService = KeychainService()
+        self.brand = brand.lowercased()
+        self.clientId = clientId
+        self.envConfig = envConfig
+        self.azureProps = PList("azure")
+        self.envProps = PList(envConfig.lowercased() + "-tenant")
     }
 
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
@@ -48,7 +54,7 @@ open class AuthLibrary {
     open func renewTokens(completion: @escaping (Bool) -> Void) {
         let refresh_token = keychainService.getToken(TokenType.refresh_token.rawValue)
         if (!refresh_token.isEmpty) {
-            let tokenService = TokenService(brand, true)
+            let tokenService = TokenService(brand, clientId, envConfig, true)
             tokenService.getTokens(refresh_token) {
                 (token: Token) in
                 if (self.isJwtValid(token.id_token)) {
@@ -74,6 +80,8 @@ open class AuthLibrary {
         viewController.scopes = scopes
         viewController.state = state
         viewController.brand = brand
+        viewController.clientId = clientId
+        viewController.envConfig = envConfig
         return viewController
     }
     
@@ -81,8 +89,8 @@ open class AuthLibrary {
         var claims = convertTokenToClaims(token!)
         let issuer = claims["iss"] as! String
         let audience = claims["aud"] as! String
-        if ((issuer == azureProps.getProperty("domain") + azureProps.getProperty("tenant") + "/v2.0/")
-            && (audience == azureProps.getProperty("clientId"))) {
+        if ((issuer == azureProps.getProperty("domain") + envProps.getProperty("tenant") + "/v2.0/")
+            && (audience == clientId)) {
             return true
         }
         else {

@@ -11,12 +11,16 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var loginView: UIWebView!
     @IBOutlet open var activityView: UIActivityIndicatorView!
     open var state: String
+    open var clientId: String
+    open var envConfig: String
     open var brand: String
     open var resource: String
     open var scopes: [String]
     
     required public init?(coder aDecoder: NSCoder) {
         state = ""
+        clientId = ""
+        envConfig = ""
         brand = ""
         resource = ""
         scopes = []
@@ -25,6 +29,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     
     init() {
         state = ""
+        clientId = ""
+        envConfig = ""
         brand = ""
         resource = ""
         scopes = []
@@ -34,7 +40,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        let azureProps = PListService("azure")
+        let azureProps = PList("azure")
+        let envProps = PList(envConfig.lowercased() + "-tenant")
         
         // Get policy based on brand
         var policy = ""
@@ -47,7 +54,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         
         var scopeUrl = azureProps.getProperty("scopeIdRefresh")
         for scope in scopes {
-            scopeUrl += " " + azureProps.getProperty("scopeAccess") + resource + "/" + scope
+            scopeUrl += " " + envProps.getProperty("scopeAccess") + resource + "/" + scope
         }
         
         let encodedScopeUrl = scopeUrl
@@ -55,11 +62,11 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             .addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)  // replaces "#%/:<>?@[\]^` with percent encoding
         
         let url = azureProps.getProperty("domain") +
-            azureProps.getProperty("tenant") +
+            envProps.getProperty("tenant") +
             azureProps.getProperty("oauth") +
             azureProps.getProperty("authorize") +
             "?p=\(policy)" +
-            "&client_id=\(azureProps.getProperty("clientId"))" +
+            "&client_id=\(clientId)" +
             "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!)" +
             "&scope=\(encodedScopeUrl!)" +
             "&state=\(state)" +
@@ -94,10 +101,10 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 let auth_code = url?.substring(from: codeUpperIndex!)
                 
                 // Retrieve tokens using code
-                let service = TokenService(brand, false)
+                let service = TokenService(brand, clientId, envConfig, false)
                 service.getTokens(auth_code!) {
                     (token: Token) in
-                    let authLibrary = AuthLibrary(self.brand)
+                    let authLibrary = AuthLibrary(self.brand, self.clientId, self.envConfig)
                     let keychainService = KeychainService()
                     if (authLibrary.isJwtValid(token.id_token)) {
                         keychainService.storeToken(token.id_token, TokenType.id_token.rawValue)
@@ -114,7 +121,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         self.activityView.stopAnimating()
                         self.dismiss(animated: true, completion: nil)
                     } else {    // Id Token is invalid, don't store and display error alert
-                        let azureProps = PListService("azure")
+                        let azureProps = PList("azure")
                         let alert = UIAlertController(title: "Error", message: azureProps.getProperty("invalidTokenErrorMsg"), preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: {
                             (alert: UIAlertAction!) in
@@ -131,7 +138,8 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                 // Password Reset
                 let forgotPassword = url?.range(of: "AADB2C90118")
                 if (forgotPassword != nil) {
-                    let azureProps = PListService("azure")
+                    let azureProps = PList("azure")
+                    let envProps = PList(envConfig.lowercased() + "-tenant")
                     var policy = ""
                     if (brand == "lexus") {
                         policy = azureProps.getProperty("policyResetLexus")
@@ -140,11 +148,11 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                         policy = azureProps.getProperty("policyReset")
                     }
                     let url = azureProps.getProperty("domain") +
-                        azureProps.getProperty("tenant") +
+                        envProps.getProperty("tenant") +
                         azureProps.getProperty("oauth") +
                         azureProps.getProperty("authorize") +
                         "?p=\(policy)" +
-                        "&client_id=\(azureProps.getProperty("clientId"))" +
+                        "&client_id=\(clientId)" +
                         "&redirect_uri=\(azureProps.getProperty("redirectUri").addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!)" +
                         "&scope=openid" +
                         "&state=\(state)" +
