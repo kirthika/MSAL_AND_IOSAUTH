@@ -44,8 +44,11 @@ open class AuthLibrary2 {
         do {
             print(kScopes)
             // introduce error messages later after refactoring
-            let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
-            print(myApplication)
+            do {
+                let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
+            } catch {
+                print("Error info: \(error)")
+            }
             myApplication.acquireToken(forScopes: kScopes) { (result, error) in
                 if  error == nil {
                     let accessToken = (result?.accessToken)!
