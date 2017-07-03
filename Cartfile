@@ -1,3 +1,4 @@
+github "AzureAD/microsoft-authentication-library-for-objc" "master"
 github "yourkarma/JWT" "master"
 github "kishikawakatsumi/KeychainAccess" "master"
 github "Alamofire/Alamofire" "master"

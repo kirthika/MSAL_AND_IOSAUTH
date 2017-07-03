@@ -1,4 +1,5 @@
-github "Alamofire/Alamofire" "b03b43cc381ec02eb9855085427186ef89055eef"
-github "kishikawakatsumi/KeychainAccess" "3bf435d89d70f6b78956d5f13239048b21014eef"
+github "Alamofire/Alamofire" "9234355894206a43c2d3b1b0e4feb7be4385f5dd"
+github "AzureAD/microsoft-authentication-library-for-objc" "cd9e3ea353f134ea779dfd5cc2bd778aebdd26f9"
+github "kishikawakatsumi/KeychainAccess" "906b0021b36d8bbd6c1a7cef68fa25b19a62c92e"
 github "soheilbm/Base64" "67083ec1e3e970ec920cbf126e6957c6e9e88ae4"
-github "yourkarma/JWT" "bab020fceeaeacc84b59046300dddd9f5f6b6513"
+github "yourkarma/JWT" "dd5b5a9bc650b80b1326bd64d055bfd005ef9bdd"
