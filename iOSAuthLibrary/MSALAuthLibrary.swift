@@ -42,6 +42,8 @@ open class AuthLibrary2 {
     
     open func login(_ kScopes: [String]) -> String {
         do {
+            print(self.clientId)
+            print(self.authority)
             // introduce error messages later after refactoring
             let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             myApplication.acquireToken(forScopes: kScopes) { (result, error) in
@@ -56,8 +58,9 @@ open class AuthLibrary2 {
             print(myApplication)
             
         } catch {
+            print("error2")
             // error handle here
-            return "error"
+            return "error2"
         }
         return "in login"
     }
