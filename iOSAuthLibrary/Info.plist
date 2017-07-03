@@ -22,9 +22,6 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
@@ -34,7 +31,5 @@
                 <string>msaldf15ce4f-f1f1-4c90-956c-299e5fd9feae</string>
                 <string>auth</string>
             </array>
-        </dict>
-    </array>
 </dict>
 </plist>

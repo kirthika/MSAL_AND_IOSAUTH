@@ -41,7 +41,6 @@ open class AuthLibrary2 {
     }
     
     open func login(_ kScopes: [String]) -> String {
-        do {
             print(kScopes)
             // introduce error messages later after refactoring
             do {
@@ -53,18 +52,13 @@ open class AuthLibrary2 {
                         print(accessToken)
                     } else {
                         print("error occurred")
-                        print("Error info: \(error)")
+                        print("Error info: \(String(describing: error))")
                     }
                 }
                 print(myApplication)
             } catch {
                 print("Error info: \(error)")
             }
-            
-        } catch {
-            // error handle here
-            return "error2"
-        }
         return "application created?"
     }
     /*
