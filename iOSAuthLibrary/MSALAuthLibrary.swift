@@ -53,6 +53,7 @@ open class AuthLibrary2 {
                         print(accessToken)
                     } else {
                         print("error occurred")
+                        print("Error info: \(error)")
                     }
                 }
                 print(myApplication)
@@ -64,7 +65,7 @@ open class AuthLibrary2 {
             // error handle here
             return "error2"
         }
-        return "in login"
+        return "application created?"
     }
     /*
     open func isAuthenticated(){
