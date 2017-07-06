@@ -55,11 +55,11 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
         print("in view function")
         do {
-            let myApplication = try MSALPublicClientApplication.init(clientId: clientId,authority: authority)
+            let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority)
             print(myApplication)
-            myApplication.acquireToken(forScopes: kScopes) { (result, error) in
+            myApplication.acquireToken(forScopes: self.kScopes) { (result, error) in
                 print("in callback")
-                print(kScopes)
+                print(self.kScopes)
                 if  error == nil {
                     let accessToken = (result?.accessToken)!
                     print("first Access token")
