@@ -30,7 +30,7 @@ open class MSALAuthLibrary {
     }
     
     open func login(_ kScopes: [String]) -> () {
-        do {
+        print(kScopes)
             let authority = String(format: self.endpoint, self.tenantName, self.SignupOrSigninPolicy)
             if let myApplication = try? MSALPublicClientApplication.init(clientId: clientId,authority: authority) {
             myApplication.acquireToken(forScopes: kScopes) { (result, error) in // seems to not call this function?
@@ -49,10 +49,6 @@ open class MSALAuthLibrary {
             } else {
                     print("error occurred")
                 }
-        } catch {
-            print("Error info: \(error)")
-            print("another error")
-        }
     }
     
     open func isAuthenticated() -> () {
