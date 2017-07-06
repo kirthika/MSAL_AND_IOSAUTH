@@ -30,6 +30,10 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         brand = ""
         resource = ""
         scopes = []
+        
+        kScopes = []
+        authority = ""
+        
         super.init(coder: aDecoder)
     }
     
@@ -40,10 +44,14 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
         brand = ""
         resource = ""
         scopes = []
+        
+        kScopes = []
+        authority = ""
+        
         super.init(nibName: nil, bundle: nil)
     }
     
-    override open func viewDidLoad() {
+    override open func viewDidLoad(){
         super.viewDidLoad()
         print("in view function")
         do {
@@ -54,19 +62,16 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
                     let accessToken = (result?.accessToken)!
                     print("first Access token")
                     print(accessToken)
-                    string = "access token"
                 } else {
                     print("error occurred getting token")
                     print("Error info: \(String(describing: error))")
-                    string = "error getting token"
+                    print("error getting token")
                 }
             }
         } catch {
             print("Error info: \(error)")
-            string = "another error"
-        }
-        return string;
-        
+            print("another error")
+        }        
         /*
         let azureProps = PList("azure")
         let envProps = PList(envConfig.lowercased() + "-tenant")

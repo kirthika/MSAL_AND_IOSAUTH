@@ -29,9 +29,8 @@ open class MSALAuthLibrary {
         self.tenantName = tenantName
     }
     
-    open func login(_ kScopes: [String]) -> String {
+    open func login(_ kScopes: [String]) -> LoginViewController {
         let authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
-        var string = ""
         let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
         let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
         viewController.kScopes = kScopes
