@@ -37,6 +37,46 @@ open class MSALAuthLibrary {
         viewController.authority = authority
         viewController.clientId = clientId
         return viewController
+    }
+    
+    open func isAuthenticated() -> () {
+        /*
+         / @property BOOL validateAuthority -> this seems to be just preventing from malicious things
+         it always is true -> how do you check if the token is valid?
+         
+         ! The authority the application will use to obtain tokens
+        @property (readonly) NSURL *authority;
+         
+         @property (readonly) NSDate *expiresOn; - this is from the MSALuser/result class
+         */
+        
+        let id_token = keychainService.getToken(TokenType.id_token.rawValue)
+        if (!id_token.isEmpty) {
+            if (!isJwtValid(id_token)) {    // An Id Token exists, but it's not valid
+                renewTokens(completion: { (success) in
+                    if (success) {
+                        completion(success)
+                    } else {
+                        completion(false)
+                    }
+                })
+            } else {
+                completion(true)    // A saved, valid token exists
+            }
+        } else {    // No ID Token exists
+            renewTokens(completion: { (success) in
+                if (success) {
+                    completion(success)
+                } else {
+                    completion(false)
+                }
+            })
+        }
+    }
+        /*
+ I think the view controller can be replaced w/ just the application functionality though I am not sure why it's not working
+         
+ */
  
     /*    do {
             let myApplication = try MSALPublicClientApplication.init(clientId: clientId,authority: authority)
@@ -58,7 +98,6 @@ open class MSALAuthLibrary {
                 string = "another error"
         }
         return string;*/
-    }
     /*
     open func isAuthenticated(){
     
