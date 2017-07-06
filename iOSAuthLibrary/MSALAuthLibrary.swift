@@ -2,7 +2,6 @@
 //  MSALAuthLibrary.swift
 //  iOSAuthLibrary
 //
-//  Created by Katie Quinn on 7/2/17.
 //  Copyright © 2017 Pariveda Solutions. All rights reserved.
 //
 
@@ -15,6 +14,7 @@ open class MSALAuthLibrary {
     let tenantName: String
     let SignupOrSigninPolicy: String
     let EditProfilePolicy: String
+    var authority: String
 
     // let kGraphURI: String
     // let kScopes: [String]
@@ -27,34 +27,86 @@ open class MSALAuthLibrary {
         self.SignupOrSigninPolicy = SignupOrSigninPolicy
         self.EditProfilePolicy = EditProfilePolicy
         self.tenantName = tenantName
+        self.authority = ""
     }
     
-    open func login(_ kScopes: [String]) -> () {
-        print(kScopes)
-            let authority = String(format: self.endpoint, self.tenantName, self.SignupOrSigninPolicy)
-            if let application = try? MSALPublicClientApplication.init(clientId: clientId,authority: authority) {
-                application.acquireToken(forScopes: kScopes) { (result, error) in
-                    DispatchQueue.main.async {
-                        print("in callback")
-                        print(kScopes)
-                        if  error == nil {
-                            let accessToken = (result?.accessToken)!
-                            print("first Access token")
-                            print(accessToken)
-                        } else {
-                            print("error occurred getting token")
-                            print("Error info: \(String(describing: error))")
-                            print("error getting token")
-                        }
+    open func login(_ scopes: [String]) -> () {
+        self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
+        if let application = try? MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority) {
+            application.acquireToken(forScopes: scopes) { (result, error) in
+                if  error == nil {
+                    let accessToken = (result?.accessToken)!
+                    print("first Access token")
+                    print(accessToken)
+                } else {
+                    print("error occurred getting token")
+                    print("Error info: \(String(describing: error))")
+                }
+            }
+        } else {
+            print("error instantiating MSAL application")
+        }
+    }
+    
+    // RenewTokens function: Retrieves refresh token from storage and requests a fresh set of tokens
+    // from Azure AD B2C
+  /*  open func renewTokens(completion: @escaping (Bool) -> Void) {
+        let application = try MSALPublicClientApplication.init(clientId: self.clientID, authority: self.authority)
+        let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
+        
+        application.acquireTokenSilent(forScopes: kScopes, user: thisUser ) { (result, error) in
+            if error == nil {
+                self.accessToken = (result?.accessToken)!
+                print("Refreshed access Token is")
+                print(self.accessToken)
+            }  else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
+                // Notice we supply the user here. This ensures we acquire token for the same user
+                // as we originally authenticated.
+                
+                application.acquireToken(forScopes: self.kScopes, user: thisUser) { (result, error) in
+                    if error == nil {
+                        
+                    }if error == nil {
+                        self.accessToken = (result?.accessToken)!
+                        self.loggingText.text = "Access token is \(self.accessToken)"
+                        
+                    } else  {
+                        self.loggingText.text = "Could not acquire new token: \(error ?? "No error informarion" as! Error)"
                     }
                 }
             } else {
-                    print("error occurred")
+                self.loggingText.text = "Could not acquire token: \(error ?? "No error informarion" as! Error)"
             }
+        }
+        } catch {
+        self.loggingText.text = "Unable to create application \(error)"
     }
+
+    */
     
-    open func isAuthenticated() -> () {
-        /*
+    }
+
+    func getUserByPolicy (withUsers: [MSALUser], forPolicy: String) throws -> MSALUser? {
+        
+        // let forPolicy = forPolicy.lowercased()
+        
+        for user in withUsers {
+            
+            if (user.userIdentifier().components(separatedBy: ".")[0].hasSuffix(forPolicy.lowercased())) {
+                return user
+            }
+        }
+        return nil
+    }
+
+    
+
+        // check if there's a proper token NSDate *expiresOn could be used
+        
+        // if no token - acquireTokenSilentAsync
+        
+        
+        /* open func isAuthenticated() -> () {
          / @property BOOL validateAuthority -> this seems to be just preventing from malicious things
          it always is true -> how do you check if the token is valid?
          
@@ -86,59 +138,12 @@ open class MSALAuthLibrary {
                 }
             })
         }*/
-    }
-        /*
- I think the view controller can be replaced w/ just the application functionality though I am not sure why it's not working
-         
- */
- 
-    /*    do {
-            let myApplication = try MSALPublicClientApplication.init(clientId: clientId,authority: authority)
-            print(myApplication)
-            myApplication.acquireToken(forScopes: kScopes) { (result, error) in
-                if  error == nil {
-                    let accessToken = (result?.accessToken)!
-                    print("first Access token")
-                    print(accessToken)
-                    string = "access token"
-                } else {
-                    print("error occurred getting token")
-                    print("Error info: \(String(describing: error))")
-                    string = "error getting token"
-                }
-            }
-        } catch {
-                print("Error info: \(error)")
-                string = "another error"
-        }
-        return string;*/
-    /*
-    open func isAuthenticated(){
-    
-    }
-    
-    open func login(){
-        let application = try MSALPublicClientApplication.init(clientId: kClientID, authority: kAuthority)
-        application.acquireToken(forScopes: kScopes) { (result, error) in
-            if  error == nil {
-                self.accessToken = (result?.accessToken)!
-                print(self.accessToken)
-                
-                
-            } else {
-                //self.loggingText.text = "Could not acquire token: \(error ?? "No error informarion" as! Error)"
-            }
-    
-    }
-    
-    open func refreshTokens(){
-        
-    }
-        
+/*
+
     open func editProfile() {
             
     }
-        
+ 
 
         open func signOut() {
             /**
@@ -168,18 +173,6 @@ open class MSALAuthLibrary {
             
             try application.remove(thisUser)
         }
-    
-        func getUserByPolicy (withUsers: [MSALUser], forPolicy: String) throws -> MSALUser? {
-            
-            let forPolicy2 = forPolicy.lowercased() // doesn't fix it
-            
-            for user in withUsers {
-                
-                if (user.userIdentifier().components(separatedBy: ".")[0].hasSuffix(forPolicy2)) {
-                    return user
-                }
-            }
-            return nil
-        }
  */
-}
+
+
