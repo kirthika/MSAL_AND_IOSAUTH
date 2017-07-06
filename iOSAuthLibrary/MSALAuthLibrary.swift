@@ -9,57 +9,44 @@
 import Foundation
 import MSAL
 
-open class AuthLibrary2 {
- 
-    /* var keychainService: KeychainService
-    let brand: String
-    let envConfig: String
-    let azureProps: PList
-    let envProps: PList */
-    
-    // testing out MSAL - this needs to be passed in through the sample app instead of the library directly TODO
-    
+open class MSALAuthLibrary {
+  
     let clientId: String
     let tenantName: String
     let SignupOrSigninPolicy: String
-    // let kEditProfilePolicy: String
+    let EditProfilePolicy: String
+
     // let kGraphURI: String
     // let kScopes: [String]
-    let authority: String
     
     // DO NOT CHANGE - This is the format of OIDC Token and Authorization endpoints for Azure AD B2C.
-    let endpoint: String
+    lazy var endpoint: String = "https://login.microsoftonline.com/tfp/%@/%@"
     
-    required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String) {
-        // set up the client id and authority here
-        // kEndpoint, kTenantName, kSignupOrSigninPolicy
+    required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String, _ EditProfilePolicy: String) {
         self.clientId = clientId
         self.SignupOrSigninPolicy = SignupOrSigninPolicy
+        self.EditProfilePolicy = EditProfilePolicy
         self.tenantName = tenantName
-        self.endpoint = "https://login.microsoftonline.com/tfp/%@/%@" // this is a constant TODO: look up best practices for constants
-        self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
     }
     
-    open func login(_ kScopes: [String]) -> String {
-            print(kScopes)
-            // introduce error messages later after refactoring
+    open func login(_ kScopes: [String]) -> String { // TODO: have to have this interact with a view controller like the other library
             do {
-                let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
+                let authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
+                let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId, authority: authority)
                 myApplication.acquireToken(forScopes: kScopes) { (result, error) in
                     if  error == nil {
                         let accessToken = (result?.accessToken)!
                         print("first Access token")
                         print(accessToken)
                     } else {
-                        print("error occurred")
+                        print("error occurred getting token")
                         print("Error info: \(String(describing: error))")
                     }
                 }
-                print(myApplication)
             } catch {
                 print("Error info: \(error)")
             }
-        return "application created?"
+        return "logged in"
     }
     /*
     open func isAuthenticated(){
