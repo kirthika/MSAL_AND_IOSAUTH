@@ -33,9 +33,12 @@ open class MSALAuthLibrary {
         do {
             var authority = String(format: self.endpoint, self.tenantName, self.SignupOrSigninPolicy)
             print("in login")
-            /*let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId,authority: authority)
+            print("authority")
+            print(authority)
+            print(clientId)
+            let myApplication = try MSALPublicClientApplication.init(clientId: clientId,authority: authority)
             print(myApplication)
-            myApplication.acquireToken(forScopes: kScopes) { (result, error) in
+            myApplication.acquireToken(forScopes: kScopes) { (result, error) in // seems to not call this function?
                 print("in callback")
                 print(kScopes)
                 if  error == nil {
@@ -47,7 +50,7 @@ open class MSALAuthLibrary {
                     print("Error info: \(String(describing: error))")
                     print("error getting token")
                 }
-            }*/
+            }
         } catch {
             print("Error info: \(error)")
             print("another error")
