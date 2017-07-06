@@ -29,24 +29,39 @@ open class MSALAuthLibrary {
         self.tenantName = tenantName
     }
     
-    open func login(_ kScopes: [String]) -> String { // TODO: have to have this interact with a view controller like the other library
-            do {
-                let authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
-                let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId, authority: authority)
+    open func login(_ kScopes: [String]) -> String {
+        let authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
+        var string = ""
+ /*       let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
+        let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
+        // viewController.resource = resource
+        viewController.scopes = kScopes
+        viewController.authority = authority
+        // viewController.brand = brand how does brand affect the
+        viewController.clientId = self.clientId
+        viewController.envConfig = envConfig
+        return viewController
+    */
+        do {
+            let myApplication = try MSALPublicClientApplication.init(clientId: clientId,authority: authority)
+            print(myApplication)
                 myApplication.acquireToken(forScopes: kScopes) { (result, error) in
                     if  error == nil {
                         let accessToken = (result?.accessToken)!
                         print("first Access token")
                         print(accessToken)
+                        string = "access token"
                     } else {
                         print("error occurred getting token")
                         print("Error info: \(String(describing: error))")
+                        string = "error getting token"
                     }
                 }
             } catch {
                 print("Error info: \(error)")
+                string = "another error"
             }
-        return "logged in"
+        return string;
     }
     /*
     open func isAuthenticated(){

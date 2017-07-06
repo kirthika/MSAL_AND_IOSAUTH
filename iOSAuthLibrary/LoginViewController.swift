@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MSAL
 
 open class LoginViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet open var loginView: UIWebView!
