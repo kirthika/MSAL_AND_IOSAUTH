@@ -31,8 +31,9 @@ open class MSALAuthLibrary {
     
     open func login(_ kScopes: [String]) -> () {
         do {
+            var authority = String(format: self.endpoint, self.tenantName, self.SignupOrSigninPolicy)
             print("in login")
-            let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority)
+            let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId,authority: authority)
             print(myApplication)
             myApplication.acquireToken(forScopes: kScopes) { (result, error) in
                 print("in callback")
