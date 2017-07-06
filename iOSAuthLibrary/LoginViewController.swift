@@ -53,27 +53,6 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     
     override open func viewDidLoad(){
         super.viewDidLoad()
-        print("in view function")
-        do {
-            let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority)
-            print(myApplication)
-            myApplication.acquireToken(forScopes: self.kScopes) { (result, error) in
-                print("in callback")
-                print(self.kScopes)
-                if  error == nil {
-                    let accessToken = (result?.accessToken)!
-                    print("first Access token")
-                    print(accessToken)
-                } else {
-                    print("error occurred getting token")
-                    print("Error info: \(String(describing: error))")
-                    print("error getting token")
-                }
-            }
-        } catch {
-            print("Error info: \(error)")
-            print("another error")
-        }        
         /*
         let azureProps = PList("azure")
         let envProps = PList(envConfig.lowercased() + "-tenant")

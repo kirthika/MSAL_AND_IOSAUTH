@@ -29,14 +29,28 @@ open class MSALAuthLibrary {
         self.tenantName = tenantName
     }
     
-    open func login(_ kScopes: [String]) -> LoginViewController {
-        let authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
-        let storyboard = UIStoryboard (name: "Login", bundle: Bundle(for: LoginViewController.self))
-        let viewController: LoginViewController = storyboard.instantiateInitialViewController() as! LoginViewController
-        viewController.kScopes = kScopes
-        viewController.authority = authority
-        viewController.clientId = clientId
-        return viewController
+    open func login(_ kScopes: [String]) -> () {
+        do {
+            print("in login")
+            let myApplication = try MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority)
+            print(myApplication)
+            myApplication.acquireToken(forScopes: kScopes) { (result, error) in
+                print("in callback")
+                print(kScopes)
+                if  error == nil {
+                    let accessToken = (result?.accessToken)!
+                    print("first Access token")
+                    print(accessToken)
+                } else {
+                    print("error occurred getting token")
+                    print("Error info: \(String(describing: error))")
+                    print("error getting token")
+                }
+            }
+        } catch {
+            print("Error info: \(error)")
+            print("another error")
+        }
     }
     
     open func isAuthenticated() -> () {
