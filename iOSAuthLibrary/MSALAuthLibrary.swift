@@ -49,7 +49,7 @@ open class MSALAuthLibrary {
          
          @property (readonly) NSDate *expiresOn; - this is from the MSALuser/result class
          */
-        
+        /*
         let id_token = keychainService.getToken(TokenType.id_token.rawValue)
         if (!id_token.isEmpty) {
             if (!isJwtValid(id_token)) {    // An Id Token exists, but it's not valid
@@ -71,7 +71,7 @@ open class MSALAuthLibrary {
                     completion(false)
                 }
             })
-        }
+        }*/
     }
         /*
  I think the view controller can be replaced w/ just the application functionality though I am not sure why it's not working
