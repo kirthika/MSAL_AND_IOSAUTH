@@ -18,6 +18,11 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     open var resource: String
     open var scopes: [String]
     
+    
+    // new vars introducted for MSAL
+    open var kScopes: [String]
+    open var authority: String
+    
     required public init?(coder aDecoder: NSCoder) {
         state = ""
         clientId = ""
@@ -40,7 +45,29 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-
+        print("in view function")
+        do {
+            let myApplication = try MSALPublicClientApplication.init(clientId: clientId,authority: authority)
+            print(myApplication)
+            myApplication.acquireToken(forScopes: kScopes) { (result, error) in
+                if  error == nil {
+                    let accessToken = (result?.accessToken)!
+                    print("first Access token")
+                    print(accessToken)
+                    string = "access token"
+                } else {
+                    print("error occurred getting token")
+                    print("Error info: \(String(describing: error))")
+                    string = "error getting token"
+                }
+            }
+        } catch {
+            print("Error info: \(error)")
+            string = "another error"
+        }
+        return string;
+        
+        /*
         let azureProps = PList("azure")
         let envProps = PList(envConfig.lowercased() + "-tenant")
         
@@ -75,7 +102,7 @@ open class LoginViewController: UIViewController, UIWebViewDelegate {
             "&response_mode=\(azureProps.getProperty("responseMode"))" +
             "&prompt=\(azureProps.getProperty("prompt"))"
         loginView.loadRequest(URLRequest(url: URL(string: url)!))
-        loginView.delegate = self
+        loginView.delegate = self */
     }
 
     override open func didReceiveMemoryWarning() {
