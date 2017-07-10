@@ -73,9 +73,7 @@ open class MSALAuthLibrary {
             completion(false)
         }
     }
-} // class level
-    
- /*
+
     open func renewTokens(completion: @escaping (Bool) -> Void) {
         // todo: test
         // check if current access token or refreshes the token!
@@ -151,7 +149,6 @@ open class MSALAuthLibrary {
     
 
 }
-*/
 
     // RenewTokens function: Retrieves refresh token from storage and requests a fresh set of tokens
     // from Azure AD B2C
