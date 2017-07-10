@@ -53,9 +53,7 @@ open class MSALAuthLibrary {
     }
     
     open func login(completion: @escaping (Bool) -> Void){
-        // should I implement completion here?
-        
-        // where should scopes be declared?
+        print("in login")
         self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
         if let application = try? MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority) {
             application.acquireToken(forScopes: self.scopes) { (result, error) in
@@ -76,7 +74,7 @@ open class MSALAuthLibrary {
         }
     }
     
-    
+ /*
     open func renewTokens(completion: @escaping (Bool) -> Void) {
         // todo: test
         // check if current access token or refreshes the token!
@@ -152,7 +150,7 @@ open class MSALAuthLibrary {
     
 
 }
-
+*/
 
     // RenewTokens function: Retrieves refresh token from storage and requests a fresh set of tokens
     // from Azure AD B2C
