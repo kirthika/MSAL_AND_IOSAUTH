@@ -73,6 +73,7 @@ open class MSALAuthLibrary {
             completion(false)
         }
     }
+} // class level
     
  /*
     open func renewTokens(completion: @escaping (Bool) -> Void) {
