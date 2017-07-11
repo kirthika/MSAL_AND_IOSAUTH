@@ -91,7 +91,7 @@ open class MSALAuthLibrary {
             if (thisUser != nil) {
                 // issue w/ forcing reset : you need a UUID look into this
            //     application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force,correlationId: UUID!, completionBlock:){(result, error) in
-            let uuid = NSUUID() // check if right sematics
+            let uuid = UUID() // check if right sematics
                 application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
       //          application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
                     if error == nil {
