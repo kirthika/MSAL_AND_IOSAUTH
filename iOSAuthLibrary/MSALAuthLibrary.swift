@@ -215,7 +215,7 @@ open class MSALAuthLibrary {
             if(success){
                 print("resonse from get")
                 print(response)
-                accessToken = response["accessToken"]
+                accessToken = response["accessToken"]!
             } else {
                 accessToken = ""
             }
