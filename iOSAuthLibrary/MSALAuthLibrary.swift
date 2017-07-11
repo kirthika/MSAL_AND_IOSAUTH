@@ -130,7 +130,7 @@ open class MSALAuthLibrary {
                 completion(false)
             }
         } catch {
-            print("error occurred")
+            print("error occurred") // this could be if user doesn't exist -> then will go to in login TODO handle errors better
             self.token.removeAll()
             completion(false)
         }
