@@ -63,6 +63,8 @@ open class MSALAuthLibrary {
                     let accessToken = (result?.accessToken)!
                     print("first Access token")
                     print(accessToken)
+                    print("id token")
+                    print(result?.idToken)!
                     completion(true)
                 } else {
                     print("error occurred getting token")
@@ -107,8 +109,8 @@ open class MSALAuthLibrary {
                         // requires re sign in to get token
                         application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
                             if error == nil {
-                                self.token["access_token"] = result?.accessToken!
-                                self.token["id_token"] = result?.idToken!
+                                self.token["accessToken"] = result?.accessToken!
+                                self.token["idToken"] = result?.idToken!
                                 
                                 completion(true)
 
@@ -205,19 +207,19 @@ open class MSALAuthLibrary {
     }
     
     open func getAccessToken() -> String {
-        /*var accessToken = String()
+        var accessToken = String()
         silentTokenRenewal(){(success) in
             if(success){
                 accessToken = self.token["accessToken"]!
             } else {
                 accessToken = ""
             }
-        }*/
-        return ""
+        }
+        return accessToken
     }
     
     open func getIdToken() -> String {
-        /*var idToken = String()
+        var idToken = String()
         silentTokenRenewal(){(success) in
             if(success){
                 idToken = self.token["idToken"]!
@@ -225,8 +227,7 @@ open class MSALAuthLibrary {
                 idToken = "" // is there a better practice for this?
             }
         }
-        return idToken*/
-        return ""
+        return idToken
     }
 
     /* -> do we want this functionality?
