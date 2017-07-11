@@ -104,16 +104,16 @@ open class MSALAuthLibrary {
                 application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
                     if error == nil {
                         var response: [String:String] = [:]
-                        response["access_token"] = result?.accessToken!
-                        response["id_token"] = result?.idToken!
+                        response["accessToken"] = result?.accessToken!
+                        response["idToken"] = result?.idToken!
                         completion(true,response)
                     } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
                         // requires re sign in to get token
                         application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
                             if error == nil {
                                 var response: [String:String] = [:]
-                                response["access_token"] = result?.accessToken!
-                                response["id_token"] = result?.idToken!
+                                response["accessToken"] = result?.accessToken!
+                                response["idToken"] = result?.idToken!
                                 completion(true,response)
                                 /*
                                 self.token["accessToken"] = result?.accessToken!
