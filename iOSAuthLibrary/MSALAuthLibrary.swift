@@ -53,7 +53,7 @@ open class MSALAuthLibrary {
         self.tenantName = tenantName
         self.scopes = scopes
         self.authority = ""
-        self.token = [:]
+        // self.token = [:]
     }
     
     open func login(completion: @escaping (Bool) -> Void){
@@ -81,7 +81,7 @@ open class MSALAuthLibrary {
     }
 
     open func renewTokens(completion: @escaping (Bool) -> Void) {
-        silentTokenRenewal(force: true){(success) in
+        silentTokenRenewal(force: true){(success,response) in
             if(success){
                 completion(true)
             } else {
@@ -103,18 +103,18 @@ open class MSALAuthLibrary {
            //     application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force,correlationId: UUID!, completionBlock:){(result, error) in
                 application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
                     if error == nil {
-                        var response: [String:String]
+                        var response: [String:String] = [:]
                         response["access_token"] = result?.accessToken!
                         response["id_token"] = result?.idToken!
-                        completion(success:true,tokens:response)
+                        completion(true,response)
                     } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
                         // requires re sign in to get token
                         application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
                             if error == nil {
-                                var response: [String:String]
+                                var response: [String:String] = [:]
                                 response["access_token"] = result?.accessToken!
                                 response["id_token"] = result?.idToken!
-                                completion(success:true,tokens:response)
+                                completion(true,response)
                                 /*
                                 self.token["accessToken"] = result?.accessToken!
                                 self.token["idToken"] = result?.idToken!
@@ -123,30 +123,26 @@ open class MSALAuthLibrary {
 */
                             } else {
                                 print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
-                                self.token.removeAll()
-                                completion(success:false,[:])                        }
+                                completion(false,[:])                        }
                         }
                     } else {
                         print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
-                        self.token.removeAll()
-                        completion(success:false,[:])
+                        completion(false,[:])
                     }
 
             }
             } else {
                 print("user is not in system, no tokens available")
-                self.token.removeAll()
-                completion(false)
+                completion(false,[:])
             }
         } catch {
             print("error occurred") // this could be if user doesn't exist -> then will go to in login TODO handle errors better
-            self.token.removeAll()
-            completion(false)
+            completion(false,[:]) //check if second argument is needed -> make it an optional in the completion block
         }
     }
     
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
-        silentTokenRenewal(){(isAuthenticated: Bool) in
+        silentTokenRenewal(){(isAuthenticated: Bool, response: [String:String]) in
             if(isAuthenticated){
                 completion(true)
             } else {
@@ -215,9 +211,9 @@ open class MSALAuthLibrary {
     
     open func getAccessToken() -> String {
         var accessToken = String()
-        silentTokenRenewal(){(success) in
+        silentTokenRenewal(){(success,response) in
             if(success){
-                accessToken = self.token["accessToken"]!
+                accessToken = response["accessToken"]!
             } else {
                 accessToken = ""
             }
@@ -227,9 +223,9 @@ open class MSALAuthLibrary {
     
     open func getIdToken() -> String {
         var idToken = String()
-        silentTokenRenewal(){(success) in
+        silentTokenRenewal(){(success,response) in
             if(success){
-                idToken = self.token["idToken"]!
+                idToken = response["idToken"]!
             } else {
                 idToken = "" // is there a better practice for this?
             }
@@ -243,9 +239,7 @@ open class MSALAuthLibrary {
      */
 
     open func clearTokens() { // old library had clear Id token
-        do {
-            self.token.removeAll() // look up more how to store this
-            
+        do {            
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             try application.remove(thisUser)
