@@ -27,6 +27,8 @@ open class MSALAuthLibrary {
      
      5.) change dictionary to a closure
      
+     6.) renew tokens
+     
 */
   
     let clientId: String
