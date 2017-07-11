@@ -205,19 +205,19 @@ open class MSALAuthLibrary {
     }
     
     open func getAccessToken() -> String {
-        var accessToken = String()
+        /*var accessToken = String()
         silentTokenRenewal(){(success) in
             if(success){
                 accessToken = self.token["accessToken"]!
             } else {
                 accessToken = ""
             }
-        }
-        return accessToken // is this async? check
+        }*/
+        return ""
     }
     
     open func getIdToken() -> String {
-        var idToken = String()
+        /*var idToken = String()
         silentTokenRenewal(){(success) in
             if(success){
                 idToken = self.token["idToken"]!
@@ -225,7 +225,8 @@ open class MSALAuthLibrary {
                 idToken = "" // is there a better practice for this?
             }
         }
-        return idToken
+        return idToken*/
+        ""
     }
 
     /* -> do we want this functionality?
