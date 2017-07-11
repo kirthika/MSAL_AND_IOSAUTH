@@ -37,7 +37,7 @@ open class MSALAuthLibrary {
     let EditProfilePolicy: String
     var authority: String
     let scopes: [String]
-    private var token: [String : String]
+  //  private var token: [String : String]
     
     //self.application = application: we should only instantiate this once!
     
@@ -67,8 +67,6 @@ open class MSALAuthLibrary {
                     print(accessToken)
                     print("id token")
                     print(result?.idToken)
-                    self.token["accessToken"] = result?.accessToken!
-                    self.token["idToken"] = result?.idToken!
                     completion(true)
                 } else {
                     print("error occurred getting token")
@@ -92,7 +90,7 @@ open class MSALAuthLibrary {
         }
     }
     
-    func silentTokenRenewal(force: Bool = false, completion: @escaping (Bool) -> Void){
+    func silentTokenRenewal(force: Bool = false, completion: @escaping (_ success: Bool,_ tokens: [String:String]) -> Void){
         //export token dictionary : token: @escaping ([String : String]) -> Void?
         // should the tokens be stored as a member variable or a closure?
         
@@ -105,28 +103,33 @@ open class MSALAuthLibrary {
            //     application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force,correlationId: UUID!, completionBlock:){(result, error) in
                 application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
                     if error == nil {
-                        self.token["access_token"] = result?.accessToken!
-                        self.token["id_token"] = result?.idToken!
-                        
-                        completion(true)
+                        var response: [String:String]
+                        response["access_token"] = result?.accessToken!
+                        response["id_token"] = result?.idToken!
+                        completion(success:true,tokens:response)
                     } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
                         // requires re sign in to get token
                         application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
                             if error == nil {
+                                var response: [String:String]
+                                response["access_token"] = result?.accessToken!
+                                response["id_token"] = result?.idToken!
+                                completion(success:true,tokens:response)
+                                /*
                                 self.token["accessToken"] = result?.accessToken!
                                 self.token["idToken"] = result?.idToken!
                                 
                                 completion(true)
-
+*/
                             } else {
                                 print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
                                 self.token.removeAll()
-                                completion(false)                        }
+                                completion(success:false,[:])                        }
                         }
                     } else {
                         print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
                         self.token.removeAll()
-                        completion(false)
+                        completion(success:false,[:])
                     }
 
             }
