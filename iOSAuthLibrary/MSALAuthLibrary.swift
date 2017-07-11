@@ -64,7 +64,7 @@ open class MSALAuthLibrary {
                     print("first Access token")
                     print(accessToken)
                     print("id token")
-                    print(result?.idToken)!
+                    print(result?.idToken)
                     completion(true)
                 } else {
                     print("error occurred getting token")
