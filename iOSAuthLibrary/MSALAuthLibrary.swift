@@ -25,9 +25,7 @@ open class MSALAuthLibrary {
      
      4.) Application should be instiantiated once, as opposed to calling in every function
      
-     5.) change dictionary to a closure
-     
-     6.) renew tokens
+     5.) renew tokens
      
 */
   
@@ -35,9 +33,9 @@ open class MSALAuthLibrary {
     let tenantName: String
     let SignupOrSigninPolicy: String
     let EditProfilePolicy: String
-    var authority: String
+    var authority: String //TODO: add edit profile policy or leave alone
     let scopes: [String]
-  //  private var token: [String : String]
+    
     
     //self.application = application: we should only instantiate this once!
     
@@ -53,7 +51,6 @@ open class MSALAuthLibrary {
         self.tenantName = tenantName
         self.scopes = scopes
         self.authority = ""
-        // self.token = [:]
     }
     
     open func login(completion: @escaping (Bool) -> Void){
@@ -62,11 +59,6 @@ open class MSALAuthLibrary {
         if let application = try? MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority) {
             application.acquireToken(forScopes: self.scopes) { (result, error) in
                 if  error == nil {
-                    let accessToken = (result?.accessToken)!
-                    print("first Access token")
-                    print(accessToken)
-                    print("id token")
-                    print(result?.idToken)
                     completion(true)
                 } else {
                     print("error occurred getting token")
@@ -81,6 +73,7 @@ open class MSALAuthLibrary {
     }
 
     open func renewTokens(completion: @escaping (Bool) -> Void) {
+        //TODO: force refresh here
         silentTokenRenewal(force: true){(success,response) in
             if(success){
                 completion(true)
@@ -91,9 +84,6 @@ open class MSALAuthLibrary {
     }
     
     func silentTokenRenewal(force: Bool = false, completion: @escaping (_ success: Bool,_ tokens: [String:String]) -> Void){
-        //export token dictionary : token: @escaping ([String : String]) -> Void?
-        // should the tokens be stored as a member variable or a closure?
-        
         // TODO: add more exceptions
         do {
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
@@ -101,7 +91,9 @@ open class MSALAuthLibrary {
             if (thisUser != nil) {
                 // issue w/ forcing reset : you need a UUID look into this
            //     application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force,correlationId: UUID!, completionBlock:){(result, error) in
-                application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
+            let uuid = NSUUID() // check if right sematics
+                application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
+      //          application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
                     if error == nil {
                         var response: [String:String] = [:]
                         response["accessToken"] = result?.accessToken!
@@ -115,12 +107,6 @@ open class MSALAuthLibrary {
                                 response["accessToken"] = result?.accessToken!
                                 response["idToken"] = result?.idToken!
                                 completion(true,response)
-                                /*
-                                self.token["accessToken"] = result?.accessToken!
-                                self.token["idToken"] = result?.idToken!
-                                
-                                completion(true)
-*/
                             } else {
                                 print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
                                 completion(false,[:])                        }
@@ -137,7 +123,7 @@ open class MSALAuthLibrary {
             }
         } catch {
             print("error occurred") // this could be if user doesn't exist -> then will go to in login TODO handle errors better
-            completion(false,[:]) //check if second argument is needed -> make it an optional in the completion block
+            completion(false,[:])
         }
     }
     
@@ -213,8 +199,6 @@ open class MSALAuthLibrary {
         var accessToken = String()
         silentTokenRenewal(){(success,response) in
             if(success){
-                print("resonse from get")
-                print(response)
                 accessToken = response["accessToken"]!
             } else {
                 accessToken = ""
@@ -229,7 +213,7 @@ open class MSALAuthLibrary {
             if(success){
                 idToken = response["idToken"]!
             } else {
-                idToken = "" // is there a better practice for this?
+                idToken = ""
             }
         }
         return idToken
