@@ -213,7 +213,9 @@ open class MSALAuthLibrary {
         var accessToken = String()
         silentTokenRenewal(){(success,response) in
             if(success){
-                accessToken = response["accessToken"]!
+                print("resonse from get")
+                print(response)
+                accessToken = response["accessToken"]
             } else {
                 accessToken = ""
             }
