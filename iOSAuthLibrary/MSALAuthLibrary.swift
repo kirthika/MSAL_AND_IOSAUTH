@@ -67,6 +67,8 @@ open class MSALAuthLibrary {
                     print(accessToken)
                     print("id token")
                     print(result?.idToken)
+                    self.token["accessToken"] = result?.accessToken!
+                    self.token["idToken"] = result?.idToken!
                     completion(true)
                 } else {
                     print("error occurred getting token")
