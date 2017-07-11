@@ -226,7 +226,7 @@ open class MSALAuthLibrary {
             }
         }
         return idToken*/
-        ""
+        return ""
     }
 
     /* -> do we want this functionality?
