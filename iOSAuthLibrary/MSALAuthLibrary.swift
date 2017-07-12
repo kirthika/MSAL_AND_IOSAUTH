@@ -10,23 +10,14 @@ import MSAL
 
 open class MSALAuthLibrary {
     
- /*
-     todo:
-    1.) let brand: String -> what of these need to stay/go
-     let envConfig: String
-     let azureProps: PList
-     let envProps: PList
-     -  policyName = brand.equalsIgnoreCase("Lexus") ? "policySignupOrSigninLexus": "policySignupOrSigninToyota";
-        refactor to take in brand and then use the signuporsign policies based on what particular brand it is
+ /*todos:
+     1.) get right sign in/edit policies
+     2.) UUID
+     Ask about these ^
      
-     2.) introduce logging like the Android application?
-     
-     3.) test
-     
-     4.) renew tokens
-     
-     5.) Edit profile?
-*/
+     work on v
+     3.) introduce logging like the Android application or pass string back? more exceptions?
+     4.) test*/
   
     let clientId: String
     let tenantName: String
@@ -35,13 +26,15 @@ open class MSALAuthLibrary {
     var authority: String
     let scopes: [String]
     
-    // let kGraphURI: String
-
-    // DO NOT CHANGE - This is the format of OIDC Token and Authorization endpoints for Azure AD B2C.
+    // Format of OIDC Token and Authorization endpoints for Azure AD B2C.
     lazy var endpoint: String = "https://login.microsoftonline.com/tfp/%@/%@"
     
     required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String,_ EditProfilePolicy: String, _ scopes: [String]) {
         self.clientId = clientId
+        //self.SignupOrSigninPolicy = brand.equalsIgnoreCase("Lexus") ? "B2C_1_SignupOrSigninLexus": "B2C_1_SignupOrSigninToyota"
+        //self.EditProfilePolicy = brand.equalsIgnoreCase("Lexus") ? "B2C_1_EditProfileLexus": "B2C_1_EditProfileToyota"
+        // todo: pass in brand and correct policies based on this
+        
         self.SignupOrSigninPolicy = SignupOrSigninPolicy
         self.EditProfilePolicy = EditProfilePolicy
         self.tenantName = tenantName
@@ -50,14 +43,29 @@ open class MSALAuthLibrary {
     }
     
     open func login(completion: @escaping (Bool) -> Void){
-        print("in login")
         self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
         if let application = try? MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority) {
             application.acquireToken(forScopes: self.scopes) { (result, error) in
                 if  error == nil {
                     completion(true)
-                } else {
-                    print("error occurred getting token")
+                } else if (error! as NSError).code == MSALErrorCode.noAccessTokenInResponse.rawValue{
+                    print("error occurred getting access token, check scopes you're passing in")
+                    print("Error info: \(String(describing: error))")
+                    completion(false)
+                } else if (error! as NSError).code == MSALErrorCode.invalidClient.rawValue{
+                    print("invalid client")
+                    print("Error info: \(String(describing: error))")
+                    completion(false)
+                } else if (error! as NSError).code == MSALErrorCode.userNotFound.rawValue{
+                    print("invalid user")
+                    print("Error info: \(String(describing: error))")
+                    completion(false)
+                } else if (error! as NSError).code == MSALErrorCode.userCanceled.rawValue{
+                    print("user cancelled login")
+                    print("Error info: \(String(describing: error))")
+                    completion(false)
+                } else if (error! as NSError).code == MSALErrorCode.authorizationFailed.rawValue{
+                    print("error occurred authorizing")
                     print("Error info: \(String(describing: error))")
                     completion(false)
                 }
@@ -67,9 +75,8 @@ open class MSALAuthLibrary {
             completion(false)
         }
     }
-
+    
     open func renewTokens(completion: @escaping (Bool) -> Void) {
-        //TODO: force refresh here
         silentTokenRenewal(force: true){(success,response) in
             if(success){
                 completion(true)
@@ -86,7 +93,7 @@ open class MSALAuthLibrary {
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if (thisUser != nil) {
-            let uuid = UUID() // ask about this
+            let uuid = UUID()
             application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
       //          application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
                 if error == nil {
@@ -95,17 +102,36 @@ open class MSALAuthLibrary {
                     response["idToken"] = result?.idToken!
                     completion(true,response)
                 } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
-                // requires re sign in to get token
                     application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
                         if error == nil {
                             var response: [String:String] = [:]
                             response["accessToken"] = result?.accessToken!
                             response["idToken"] = result?.idToken!
-                            completion(true,response)
+                            completion(false,[:])
+                        } else if (error! as NSError).code == MSALErrorCode.noAccessTokenInResponse.rawValue{
+                            print("error occurred getting access token, check scopes you're passing in")
+                            print("Error info: \(String(describing: error))")
+                            completion(false,[:])
+                        } else if (error! as NSError).code == MSALErrorCode.userCanceled.rawValue{
+                            print("user cancelled login")
+                            print("Error info: \(String(describing: error))")
+                            completion(false,[:])
+                        } else if (error! as NSError).code == MSALErrorCode.authorizationFailed.rawValue{
+                            print("error occurred authorizing")
+                            print("Error info: \(String(describing: error))")
+                            completion(false,[:])
                         } else {
                             print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
                             completion(false,[:])                        }
                         }
+                    } else if (error! as NSError).code == MSALErrorCode.invalidClient.rawValue{
+                        print("invalid client")
+                        print("Error info: \(String(describing: error))")
+                        completion(false,[:])
+                    } else if (error! as NSError).code == MSALErrorCode.userNotFound.rawValue{
+                        print("invalid user")
+                        print("Error info: \(String(describing: error))")
+                        completion(false,[:])
                     } else {
                         print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
                         completion(false,[:])
@@ -211,12 +237,15 @@ open class MSALAuthLibrary {
         return idToken
     }
 
-    open func clearTokens() { // old library had clear Id token
+    open func logout() { // old iOS library had clear Id token
         do {            
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
-            try application.remove(thisUser)
+            if(thisUser != nil){
+                try application.remove(thisUser)
+            }
         } catch {
+            // could be no token in cache or that that user does not exist at this position
             print("error occurred signing out/removing tokens")
         }
     }
@@ -228,7 +257,6 @@ open class MSALAuthLibrary {
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.EditProfilePolicy)
             application.acquireToken(forScopes: self.scopes, user: thisUser ) { (result, error) in
                 if error == nil {
-                    // print("successfully edited profile")
                     completion(true)
                 } else {
                     // print("Could not edit profile: \(error ?? "No error informarion" as! Error)")
@@ -237,7 +265,6 @@ open class MSALAuthLibrary {
             }
         } catch {
             completion(false)
-            //print("Unable to create application \(error)")
         }
     }
     
