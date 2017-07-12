@@ -218,6 +218,7 @@ open class MSALAuthLibrary {
     open func getAccessToken() -> String {
         var accessToken = String()
         silentTokenRenewal(){(success,response) in
+            print("in silent token renewal")
             if(success){
                 accessToken = response["accessToken"]!
                 print(success)
