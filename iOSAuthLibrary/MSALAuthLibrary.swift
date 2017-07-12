@@ -31,8 +31,8 @@ open class MSALAuthLibrary {
     let clientId: String
     let tenantName: String
     let SignupOrSigninPolicy: String
-    // let EditProfilePolicy: String
-    let authority: String
+    let EditProfilePolicy: String
+    var authority: String
     let scopes: [String]
     
     // let kGraphURI: String
@@ -40,10 +40,10 @@ open class MSALAuthLibrary {
     // DO NOT CHANGE - This is the format of OIDC Token and Authorization endpoints for Azure AD B2C.
     lazy var endpoint: String = "https://login.microsoftonline.com/tfp/%@/%@"
     
-    required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String, _ scopes: [String]) {
+    required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String,_ EditProfilePolicy: String, _ scopes: [String]) {
         self.clientId = clientId
         self.SignupOrSigninPolicy = SignupOrSigninPolicy
-        //self.EditProfilePolicy = EditProfilePolicy
+        self.EditProfilePolicy = EditProfilePolicy
         self.tenantName = tenantName
         self.scopes = scopes
         self.authority = ""
@@ -82,6 +82,7 @@ open class MSALAuthLibrary {
     func silentTokenRenewal(force: Bool = false, completion: @escaping (_ success: Bool,_ tokens: [String:String]) -> Void){
         // TODO: add more exceptions
         do {
+            self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if (thisUser != nil) {
@@ -217,6 +218,23 @@ open class MSALAuthLibrary {
             try application.remove(thisUser)
         } catch {
             print("error occurred signing out/removing tokens")
+        }
+    }
+    
+    open func editProfile() {
+        do {
+            self.authority = String(format: self.endpoint, self.tenantName, self.EditProfilePolicy)
+            let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
+            let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.EditProfilePolicy)
+            application.acquireToken(forScopes: self.scopes, user: thisUser ) { (result, error) in
+                if error == nil {
+                    print("successfully edited profile")
+                } else {
+                    print("Could not edit profile: \(error ?? "No error informarion" as! Error)")
+                }
+            }
+        } catch {
+            print("Unable to create application \(error ?? "No error informarion" as! Error)")
         }
     }
     
