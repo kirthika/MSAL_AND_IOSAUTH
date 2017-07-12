@@ -23,30 +23,27 @@ open class MSALAuthLibrary {
      
      3.) test
      
-     4.) Application should be instiantiated once, as opposed to calling in every function
+     4.) renew tokens
      
-     5.) renew tokens
+     5.) Edit profile?
 */
   
     let clientId: String
     let tenantName: String
     let SignupOrSigninPolicy: String
-    let EditProfilePolicy: String
-    var authority: String //TODO: add edit profile policy or leave alone
+    // let EditProfilePolicy: String
+    let authority: String
     let scopes: [String]
-    
-    
-    //self.application = application
     
     // let kGraphURI: String
 
     // DO NOT CHANGE - This is the format of OIDC Token and Authorization endpoints for Azure AD B2C.
     lazy var endpoint: String = "https://login.microsoftonline.com/tfp/%@/%@"
     
-    required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String, _ EditProfilePolicy: String, _ scopes: [String]) {
+    required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String, _ scopes: [String]) {
         self.clientId = clientId
         self.SignupOrSigninPolicy = SignupOrSigninPolicy
-        self.EditProfilePolicy = EditProfilePolicy
+        //self.EditProfilePolicy = EditProfilePolicy
         self.tenantName = tenantName
         self.scopes = scopes
         self.authority = ""
@@ -125,7 +122,7 @@ open class MSALAuthLibrary {
     }
     
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
-        silentTokenRenewal(){(isAuthenticated: Bool, response: [String:String]) in
+        silentTokenRenewal(){(isAuthenticated, response) in
             if(isAuthenticated){
                 completion(true)
             } else {
@@ -135,10 +132,7 @@ open class MSALAuthLibrary {
     }
     
     func getUserByPolicy (withUsers: [MSALUser], forPolicy: String) throws -> MSALUser? {
-        let forPolicy2 = forPolicy.lowercased()// - check to see if this works without this line
-        
         for user in withUsers {
-            
             if (user.userIdentifier().components(separatedBy: ".")[0].hasSuffix(forPolicy.lowercased())) {
                 return user
             }
@@ -215,11 +209,6 @@ open class MSALAuthLibrary {
         }
         return idToken
     }
-
-    /* -> do we want this functionality?
-     open func editProfile() { -> requires a different policy - how do you deal with this?
-     }
-     */
 
     open func clearTokens() { // old library had clear Id token
         do {            
