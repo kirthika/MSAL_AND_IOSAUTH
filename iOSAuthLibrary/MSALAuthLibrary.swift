@@ -182,6 +182,8 @@ open class MSALAuthLibrary {
 
     open func getAccessTokenClaims() -> [String: Any] {
         let accessToken = getAccessToken()
+        print("access token for claims")
+        print(accessToken)
         return getClaimsFromToken(accessToken)
     }
     
