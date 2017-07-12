@@ -26,7 +26,6 @@ open class MSALAuthLibrary {
      4.) Application should be instiantiated once, as opposed to calling in every function
      
      5.) renew tokens
-     
 */
   
     let clientId: String
@@ -37,7 +36,7 @@ open class MSALAuthLibrary {
     let scopes: [String]
     
     
-    //self.application = application: we should only instantiate this once!
+    //self.application = application
     
     // let kGraphURI: String
 
@@ -89,34 +88,32 @@ open class MSALAuthLibrary {
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if (thisUser != nil) {
-                // issue w/ forcing reset : you need a UUID look into this
-           //     application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force,correlationId: UUID!, completionBlock:){(result, error) in
-            let uuid = UUID() // check if right sematics
-                application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
+            let uuid = UUID() // ask about this
+            application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
       //          application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
-                    if error == nil {
-                        var response: [String:String] = [:]
-                        response["accessToken"] = result?.accessToken!
-                        response["idToken"] = result?.idToken!
-                        completion(true,response)
-                    } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
-                        // requires re sign in to get token
-                        application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
-                            if error == nil {
-                                var response: [String:String] = [:]
-                                response["accessToken"] = result?.accessToken!
-                                response["idToken"] = result?.idToken!
-                                completion(true,response)
-                            } else {
-                                print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
-                                completion(false,[:])                        }
+                if error == nil {
+                    var response: [String:String] = [:]
+                    response["accessToken"] = result?.accessToken!
+                    response["idToken"] = result?.idToken!
+                    completion(true,response)
+                } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
+                // requires re sign in to get token
+                    application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
+                        if error == nil {
+                            var response: [String:String] = [:]
+                            response["accessToken"] = result?.accessToken!
+                            response["idToken"] = result?.idToken!
+                            completion(true,response)
+                        } else {
+                            print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
+                            completion(false,[:])                        }
                         }
                     } else {
                         print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
                         completion(false,[:])
                     }
 
-            }
+                }
             } else {
                 print("user is not in system, no tokens available")
                 completion(false,[:])
@@ -142,7 +139,7 @@ open class MSALAuthLibrary {
         
         for user in withUsers {
             
-            if (user.userIdentifier().components(separatedBy: ".")[0].hasSuffix(forPolicy2)) {
+            if (user.userIdentifier().components(separatedBy: ".")[0].hasSuffix(forPolicy.lowercased())) {
                 return user
             }
         }
