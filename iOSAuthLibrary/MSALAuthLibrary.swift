@@ -220,7 +220,10 @@ open class MSALAuthLibrary {
         silentTokenRenewal(){(success,response) in
             if(success){
                 accessToken = response["accessToken"]!
+                print(success)
+                print("success in authenticating")
             } else {
+                print("error getting access token")
                 accessToken = ""
             }
         }
