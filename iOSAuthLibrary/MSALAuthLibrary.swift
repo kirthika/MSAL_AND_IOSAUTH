@@ -221,20 +221,23 @@ open class MSALAuthLibrary {
         }
     }
     
-    open func editProfile() {
+    open func editProfile(completion: @escaping (Bool) -> Void) {
         do {
             self.authority = String(format: self.endpoint, self.tenantName, self.EditProfilePolicy)
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.EditProfilePolicy)
             application.acquireToken(forScopes: self.scopes, user: thisUser ) { (result, error) in
                 if error == nil {
-                    print("successfully edited profile")
+                    // print("successfully edited profile")
+                    completion(true)
                 } else {
-                    print("Could not edit profile: \(error ?? "No error informarion" as! Error)")
+                    // print("Could not edit profile: \(error ?? "No error informarion" as! Error)")
+                    completion(false)
                 }
             }
         } catch {
-            print("Unable to create application \(error ?? "No error informarion" as! Error)")
+            completion(false)
+            //print("Unable to create application \(error)")
         }
     }
     
