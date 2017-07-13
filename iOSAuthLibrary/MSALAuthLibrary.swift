@@ -88,7 +88,6 @@ open class MSALAuthLibrary {
     }
     
     func silentTokenRenewal(force: Bool = false, completion: @escaping (_ success: Bool,_ tokens: [String:String]) -> Void){
-        // TODO: add more exceptions
         do {
             self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
@@ -169,6 +168,7 @@ open class MSALAuthLibrary {
     }
     
     open func getClaimsFromToken(_ token: String) -> [String: Any] {
+        // change to return an object
         if (!token.isEmpty) {
             return convertTokenToClaims(token)
         } else {
@@ -177,18 +177,21 @@ open class MSALAuthLibrary {
     }
     
     open func getIdTokenClaims(completion: @escaping ([String:Any]) -> Void){
+        // change to return an object
         getIdToken(){(result) in
             completion(self.getClaimsFromToken(result))
         }
     }
 
     open func getAccessTokenClaims(completion: @escaping ([String:Any]) -> Void) {
+        //change to return an object
         getAccessToken(){(result) in
             completion(self.getClaimsFromToken(result))
         }
     }
     
     open func getRoles(completion: @escaping ([String:Any]) -> Void) {
+        // change to return an obj
         getIdTokenClaims(){(userInfo) in
             var obj : [String: Any] = [:]
             
@@ -245,6 +248,7 @@ open class MSALAuthLibrary {
     }
     
     open func getAccessToken(completion: @escaping (String) -> Void){
+        // change to return a string
         silentTokenRenewal(){(success,response) in
             if(success){
                 completion(response["accessToken"]!)
@@ -255,7 +259,23 @@ open class MSALAuthLibrary {
         }
     }
     
-    open func getIdToken(completion: @escaping (String) -> Void){
+    open func getIdToken() -> String {
+        var idToken : String
+        DispatchQueue.global(qos: .background).async {
+            // Do some background work
+            silentTokenRenewal(){(success, response) in
+                if(success){
+                    idToken = response["idToken"]!
+                } else {
+                    idToken = ""
+                }
+            }
+            DispatchQueue.main.async {
+                return idToken
+            }
+        }
+        /* completion: @escaping (String) -> Void
+        // change to return a string
         silentTokenRenewal(){(success,response) in
             if(success){
                 completion(response["idToken"]!)
@@ -264,9 +284,11 @@ open class MSALAuthLibrary {
                 completion("")
             }
         }
+ */
     }
 
     open func logout() { // old iOS library had clear Id token
+        // add completion success here
         do {            
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
