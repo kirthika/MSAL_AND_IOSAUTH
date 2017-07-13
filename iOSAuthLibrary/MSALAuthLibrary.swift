@@ -12,8 +12,7 @@ open class MSALAuthLibrary {
     
  /*todos:
      1.) get right sign in/edit policies
-     2.) UUID
-     3.) introduce logging like the Android application or pass string back? more exceptions?
+     2.) introduce logging like the Android application or pass string back? more exceptions?
      Ask about these ^
      
      work on v
@@ -93,9 +92,8 @@ open class MSALAuthLibrary {
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if (thisUser != nil) {
-            let uuid = UUID()
-            application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
-      //          application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority){(result, error) in
+                let uuid : UUID = getUUIDTimeBased()
+                application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
                 if error == nil {
                     var response: [String:String] = [:]
                     response["accessToken"] = result?.accessToken!
@@ -148,6 +146,18 @@ open class MSALAuthLibrary {
         }
     }
     
+    func getUUIDTimeBased() -> UUID {
+        // time based uuid, swift supported uuid is randomly generated
+        var uuid: uuid_t = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+        withUnsafeMutablePointer(to: &uuid) {
+            $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
+                uuid_generate_time($0)
+            }
+        }
+        return UUID(uuid: uuid)
+        
+    }
+    
     open func isAuthenticated(completion: @escaping (Bool) -> Void) {
         silentTokenRenewal(){(isAuthenticated, response) in
             if(isAuthenticated){
@@ -177,10 +187,10 @@ open class MSALAuthLibrary {
     }
     
     open func getIdTokenClaims(completion: @escaping ([String:Any]) -> Void){
-        // change to return an object
-        getIdToken(){(result) in
-            completion(self.getClaimsFromToken(result))
-        }
+        // change to return an object TODO fix
+        //getIdToken(){(result) in
+            completion(self.getClaimsFromToken(""))
+        //}
     }
 
     open func getAccessTokenClaims(completion: @escaping ([String:Any]) -> Void) {
@@ -259,22 +269,7 @@ open class MSALAuthLibrary {
         }
     }
     
-    open func getIdToken() -> String {
-        var idToken : String
-        DispatchQueue.global(qos: .background).async {
-            // Do some background work
-            silentTokenRenewal(){(success, response) in
-                if(success){
-                    idToken = response["idToken"]!
-                } else {
-                    idToken = ""
-                }
-            }
-            DispatchQueue.main.async {
-                return idToken
-            }
-        }
-        /* completion: @escaping (String) -> Void
+    open func getIdToken(completion: @escaping (String) -> Void) {
         // change to return a string
         silentTokenRenewal(){(success,response) in
             if(success){
@@ -284,12 +279,10 @@ open class MSALAuthLibrary {
                 completion("")
             }
         }
- */
     }
 
     open func logout() { // old iOS library had clear Id token
-        // add completion success here
-        do {            
+        do {
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if(thisUser != nil){
