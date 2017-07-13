@@ -13,11 +13,12 @@ open class MSALAuthLibrary {
  /*todos:
      1.) get right sign in/edit policies
      2.) UUID
+     3.) introduce logging like the Android application or pass string back? more exceptions?
      Ask about these ^
      
      work on v
-     3.) introduce logging like the Android application or pass string back? more exceptions?
-     4.) test*/
+     4.) test
+    */
   
     let clientId: String
     let tenantName: String
@@ -175,19 +176,46 @@ open class MSALAuthLibrary {
         }
     }
     
-    open func getIdTokenClaims() -> [String: Any] {
-        let idToken = getIdToken()
-        return getClaimsFromToken(idToken)
+    open func getIdTokenClaims(completion: @escaping ([String:Any]) -> Void){
+        getIdToken(){(result) in
+            completion(self.getClaimsFromToken(result))
+        }
     }
 
-    open func getAccessTokenClaims() -> [String: Any] {
-        let accessToken = getAccessToken()
-        print("access token for claims")
-        print(accessToken)
-        return getClaimsFromToken(accessToken)
+    open func getAccessTokenClaims(completion: @escaping ([String:Any]) -> Void) {
+        getAccessToken(){(result) in
+            completion(self.getClaimsFromToken(result))
+        }
     }
     
-    open func getRoles() -> [String:Any] {
+    open func getRoles(completion: @escaping ([String:Any]) -> Void) {
+        getIdTokenClaims(){(userInfo) in
+            var obj : [String: Any] = [:]
+            
+            if (userInfo["extension_IsShopper"] != nil) {
+                obj["isShopper"] = true
+            } else {
+                obj["isShopper"] = false
+            }
+            if (userInfo["extension_IsBuyer"] != nil) {
+                obj["isBuyer"] = true
+            } else {
+                obj["isBuyer"] = false
+            }
+            if (userInfo["extension_IsOwner"] != nil) {
+                obj["isOwner"] = true
+            } else {
+                obj["isOwner"] = false
+            }
+            if (userInfo["extension_IsDriver"] != nil) {
+                obj["isDriver"] = true
+            } else {
+                obj["isDriver"] = false
+            }
+            completion(obj)
+            
+        }
+        /* return type:  -> [String:Any]
         let userInfo = getIdTokenClaims()
         var obj : [String: Any] = [:]
         
@@ -213,34 +241,29 @@ open class MSALAuthLibrary {
         }
         
         return obj
+        */
     }
     
-    open func getAccessToken() -> String {
-        var accessToken = String()
+    open func getAccessToken(completion: @escaping (String) -> Void){
         silentTokenRenewal(){(success,response) in
-            print("in silent token renewal")
             if(success){
-                accessToken = response["accessToken"]!
-                print(success)
-                print("success in authenticating")
+                completion(response["accessToken"]!)
             } else {
                 print("error getting access token")
-                accessToken = ""
+                completion("")
             }
         }
-        return accessToken
     }
     
-    open func getIdToken() -> String {
-        var idToken = String()
+    open func getIdToken(completion: @escaping (String) -> Void){
         silentTokenRenewal(){(success,response) in
             if(success){
-                idToken = response["idToken"]!
+                completion(response["idToken"]!)
             } else {
-                idToken = ""
+                print("error getting id token")
+                completion("")
             }
         }
-        return idToken
     }
 
     open func logout() { // old iOS library had clear Id token
