@@ -12,12 +12,7 @@ open class MSALAuthLibrary {
     
  /*todos:
      1.) get right sign in/edit policies
-     2.) introduce logging like the Android application or pass string back? more exceptions?
-     Ask about these ^
-     
-     work on v
-     4.) test
-    */
+     2.) introduce logging like the Android application or pass string back? more exceptions? */
   
     let clientId: String
     let tenantName: String
@@ -29,12 +24,11 @@ open class MSALAuthLibrary {
     // Format of OIDC Token and Authorization endpoints for Azure AD B2C.
     lazy var endpoint: String = "https://login.microsoftonline.com/tfp/%@/%@"
     
+    // MSALAuthLibrary constructor
     required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String,_ EditProfilePolicy: String, _ scopes: [String]) {
         self.clientId = clientId
         //self.SignupOrSigninPolicy = brand.equalsIgnoreCase("Lexus") ? "B2C_1_SignupOrSigninLexus": "B2C_1_SignupOrSigninToyota"
         //self.EditProfilePolicy = brand.equalsIgnoreCase("Lexus") ? "B2C_1_EditProfileLexus": "B2C_1_EditProfileToyota"
-        // todo: pass in brand and correct policies based on this
-        
         self.SignupOrSigninPolicy = SignupOrSigninPolicy
         self.EditProfilePolicy = EditProfilePolicy
         self.tenantName = tenantName
@@ -42,42 +36,46 @@ open class MSALAuthLibrary {
         self.authority = ""
     }
     
-    open func login(completion: @escaping (Bool) -> Void){
+    // login: launches broswer, redirects to login page on Azure, allows user to login
+    // Leverages MSAL's acquireToken function to force login
+    open func login(completion: @escaping (Bool,String) -> Void){
         self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
+        
+        // Initialize the MSAL App
         if let application = try? MSALPublicClientApplication.init(clientId: self.clientId,authority: self.authority) {
             application.acquireToken(forScopes: self.scopes) { (result, error) in
+                // User logged in
                 if  error == nil {
-                    completion(true)
-                } else if (error! as NSError).code == MSALErrorCode.noAccessTokenInResponse.rawValue{
-                    print("error occurred getting access token, check scopes you're passing in")
-                    print("Error info: \(String(describing: error))")
-                    completion(false)
-                } else if (error! as NSError).code == MSALErrorCode.invalidClient.rawValue{
-                    print("invalid client")
-                    print("Error info: \(String(describing: error))")
-                    completion(false)
-                } else if (error! as NSError).code == MSALErrorCode.userNotFound.rawValue{
-                    print("invalid user")
-                    print("Error info: \(String(describing: error))")
-                    completion(false)
-                } else if (error! as NSError).code == MSALErrorCode.userCanceled.rawValue{
-                    print("user cancelled login")
-                    print("Error info: \(String(describing: error))")
-                    completion(false)
-                } else if (error! as NSError).code == MSALErrorCode.authorizationFailed.rawValue{
-                    print("error occurred authorizing")
-                    print("Error info: \(String(describing: error))")
-                    completion(false)
+                    completion(true,"Successfully Authenticated")
+                } else if (error! as NSError).code == MSALErrorCode.noAccessTokenInResponse.rawValue {
+                    completion(false, "Error info: \(String(describing: error))" + " No access token in response")
+                } else if (error! as NSError).code == MSALErrorCode.invalidClient.rawValue {
+                    completion(false, "Error info: \(String(describing: error))" + " Invalid client.")
+                } else if (error! as NSError).code == MSALErrorCode.userCanceled.rawValue {
+                    completion(false, "Error info: \(String(describing: error))" + " User cancelled login.")
+                } else if (error! as NSError).code == MSALErrorCode.authorizationFailed.rawValue {
+                    completion(false, "Error info: \(String(describing: error))" + " Authorization failed.")
                 }
             }
         } else {
-            print("error instantiating MSAL application")
-            completion(false)
+            completion(false,"Error instantiating MSAL application")
         }
     }
     
+    // isAuthenticated: Validates stored token, refreshes tokens if needed
+    open func isAuthenticated(completion: @escaping (Bool) -> Void) {
+        silentTokenRenewal(){(isAuthenticated, response, details) in
+            if(isAuthenticated){
+                completion(true,details)
+            } else {
+                completion(false,details)
+            }
+        }
+    }
+    
+    // renewTokens: Allows the user to force refresh their tokens
     open func renewTokens(completion: @escaping (Bool) -> Void) {
-        silentTokenRenewal(force: true){(success,response) in
+        silentTokenRenewal(force: true){(success,response,details) in
             if(success){
                 completion(true)
             } else {
@@ -86,117 +84,23 @@ open class MSALAuthLibrary {
         }
     }
     
-    func silentTokenRenewal(force: Bool = false, completion: @escaping (_ success: Bool,_ tokens: [String:String]) -> Void){
-        do {
-            self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
-            let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
-            let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
-            if (thisUser != nil) {
-                let uuid : UUID = getUUIDTimeBased()
-                application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
-                if error == nil {
-                    var response: [String:String] = [:]
-                    response["accessToken"] = result?.accessToken!
-                    response["idToken"] = result?.idToken!
-                    completion(true,response)
-                } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
-                    application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
-                        if error == nil {
-                            var response: [String:String] = [:]
-                            response["accessToken"] = result?.accessToken!
-                            response["idToken"] = result?.idToken!
-                            completion(false,[:])
-                        } else if (error! as NSError).code == MSALErrorCode.noAccessTokenInResponse.rawValue{
-                            print("error occurred getting access token, check scopes you're passing in")
-                            print("Error info: \(String(describing: error))")
-                            completion(false,[:])
-                        } else if (error! as NSError).code == MSALErrorCode.userCanceled.rawValue{
-                            print("user cancelled login")
-                            print("Error info: \(String(describing: error))")
-                            completion(false,[:])
-                        } else if (error! as NSError).code == MSALErrorCode.authorizationFailed.rawValue{
-                            print("error occurred authorizing")
-                            print("Error info: \(String(describing: error))")
-                            completion(false,[:])
-                        } else {
-                            print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
-                            completion(false,[:])                        }
-                        }
-                    } else if (error! as NSError).code == MSALErrorCode.invalidClient.rawValue{
-                        print("invalid client")
-                        print("Error info: \(String(describing: error))")
-                        completion(false,[:])
-                    } else if (error! as NSError).code == MSALErrorCode.userNotFound.rawValue{
-                        print("invalid user")
-                        print("Error info: \(String(describing: error))")
-                        completion(false,[:])
-                    } else {
-                        print("Could not acquire new token: \(error ?? "No error informarion" as! Error)")
-                        completion(false,[:])
-                    }
-
-                }
-            } else {
-                print("user is not in system, no tokens available")
-                completion(false,[:])
-            }
-        } catch {
-            print("error occurred") // this could be if user doesn't exist -> then will go to in login TODO handle errors better
-            completion(false,[:])
+    open func getIdTokenClaims(completion: @escaping ([String:Any]) -> Void){
+        getIdToken(){(result) in
+            completion(self.getClaimsFromToken(result))
         }
     }
     
-    func getUUIDTimeBased() -> UUID {
-        // time based uuid, swift supported uuid is randomly generated
-        var uuid: uuid_t = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-        withUnsafeMutablePointer(to: &uuid) {
-            $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
-                uuid_generate_time($0)
-            }
+    open func getAccessTokenClaims(completion: @escaping ([String:Any]) -> Void) {
+        getAccessToken(){(result) in
+            completion(self.getClaimsFromToken(result))
         }
-        return UUID(uuid: uuid)
-        
-    }
-    
-    open func isAuthenticated(completion: @escaping (Bool) -> Void) {
-        silentTokenRenewal(){(isAuthenticated, response) in
-            if(isAuthenticated){
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    func getUserByPolicy (withUsers: [MSALUser], forPolicy: String) throws -> MSALUser? {
-        for user in withUsers {
-            if (user.userIdentifier().components(separatedBy: ".")[0].hasSuffix(forPolicy.lowercased())) {
-                return user
-            }
-        }
-        return nil
     }
     
     open func getClaimsFromToken(_ token: String) -> [String: Any] {
-        // change to return an object
         if (!token.isEmpty) {
             return convertTokenToClaims(token)
         } else {
             return [String: Any]()
-        }
-    }
-    
-    open func getIdTokenClaims(completion: @escaping ([String:Any]) -> Void){
-        // change to return an object TODO fix
-        //getIdToken(){(result) in
-            completion(self.getClaimsFromToken(""))
-        //}
-    }
-
-    open func getAccessTokenClaims(completion: @escaping ([String:Any]) -> Void) {
-        //change to return an object
-        getAccessToken(){(result) in
-            completion(self.getClaimsFromToken(result))
         }
     }
     
@@ -228,88 +132,128 @@ open class MSALAuthLibrary {
             completion(obj)
             
         }
-        /* return type:  -> [String:Any]
-        let userInfo = getIdTokenClaims()
-        var obj : [String: Any] = [:]
-        
-        if (userInfo["extension_IsShopper"] != nil) {
-            obj["isShopper"] = true
-        } else {
-            obj["isShopper"] = false
-        }
-        if (userInfo["extension_IsBuyer"] != nil) {
-            obj["isBuyer"] = true
-        } else {
-            obj["isBuyer"] = false
-        }
-        if (userInfo["extension_IsOwner"] != nil) {
-            obj["isOwner"] = true
-        } else {
-            obj["isOwner"] = false
-        }
-        if (userInfo["extension_IsDriver"] != nil) {
-            obj["isDriver"] = true
-        } else {
-            obj["isDriver"] = false
-        }
-        
-        return obj
-        */
     }
     
     open func getAccessToken(completion: @escaping (String) -> Void){
-        // change to return a string
-        silentTokenRenewal(){(success,response) in
+        silentTokenRenewal(){(success,response,details) in
             if(success){
                 completion(response["accessToken"]!)
             } else {
-                print("error getting access token")
                 completion("")
             }
         }
     }
     
     open func getIdToken(completion: @escaping (String) -> Void) {
-        // change to return a string
-        silentTokenRenewal(){(success,response) in
+        silentTokenRenewal(){(success,response,details) in
             if(success){
                 completion(response["idToken"]!)
             } else {
-                print("error getting id token")
                 completion("")
             }
         }
     }
-
-    open func logout() { // old iOS library had clear Id token
+    
+    // logout: Removes user tokens from the MSAL app context
+    open func logout(completion: @escaping (Bool,String) -> Void) {
         do {
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if(thisUser != nil){
                 try application.remove(thisUser)
+                completion(true, "Successfully logged out")
             }
         } catch {
-            // could be no token in cache or that that user does not exist at this position
-            print("error occurred signing out/removing tokens")
+            completion(false,"Error info: \(String(describing: error))")
         }
     }
     
-    open func editProfile(completion: @escaping (Bool) -> Void) {
+    // editProfile: Allows the user to edit their profile on Azure page for editing
+    open func editProfile(completion: @escaping (Bool, String) -> Void) {
         do {
             self.authority = String(format: self.endpoint, self.tenantName, self.EditProfilePolicy)
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.EditProfilePolicy)
             application.acquireToken(forScopes: self.scopes, user: thisUser ) { (result, error) in
                 if error == nil {
-                    completion(true)
+                    completion(true,"Successfully edited profile")
                 } else {
-                    // print("Could not edit profile: \(error ?? "No error informarion" as! Error)")
-                    completion(false)
+                    completion(false, "Could not edit profile: \(error ?? "No error informarion" as! Error)")
                 }
             }
         } catch {
-            completion(false)
+            completion(false, "Error instantiating application")
         }
+    }
+    
+    // Internal functions for library
+    
+    // silentTokenRenewal: Returns valid tokens, leverages MSAL acquireTokenSilent to refresh tokens or redirect to login
+    func silentTokenRenewal(force: Bool = false, completion: @escaping (_ success: Bool,_ tokens: [String:String],_ details: String) -> Void){
+        do {
+            self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy)
+            let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
+            let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
+            if (thisUser != nil) {
+                let uuid : UUID = getUUIDTimeBased()
+                application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
+                if error == nil {
+                    var response: [String:String] = [:]
+                    response["accessToken"] = result?.accessToken!
+                    response["idToken"] = result?.idToken!
+                    completion(true,response,"Successfully authenticated")
+                } else if (error! as NSError).code == MSALErrorCode.interactionRequired.rawValue {
+                    application.acquireToken(forScopes: self.scopes, user: thisUser){(result, error) in
+                        if error == nil {
+                            var response: [String:String] = [:]
+                            response["accessToken"] = result?.accessToken!
+                            response["idToken"] = result?.idToken!
+                            completion(true,response,"Successfully authenticated")
+                        } else if (error! as NSError).code == MSALErrorCode.noAccessTokenInResponse.rawValue{
+                            completion(false,[:],"Error info: \(String(describing: error)) No access token in response" )
+                        } else if (error! as NSError).code == MSALErrorCode.userCanceled.rawValue{
+                            completion(false,[:],"Error info: \(String(describing: error)) User cancelled login")
+                        } else if (error! as NSError).code == MSALErrorCode.authorizationFailed.rawValue{
+                            completion(false,[:], "Error info: \(String(describing: error)) Authroization failed")
+                        } else {
+                            completion(false,[:],"Could not acquire new token: \(error ?? "No error informarion" as! Error)")                        }
+                        }
+                    // check flow here
+                    } else if (error! as NSError).code == MSALErrorCode.invalidClient.rawValue{
+                        completion(false,[:],"Error info: \(String(describing: error)) Invalid Client")
+                    } else {
+                        completion(false,[:], "Could not acquire new token: \(error ?? "No error informarion" as! Error)")
+                    }
+                }
+            } else {
+                completion(false,[:],"Not authenticated")
+            }
+        } catch {
+            completion(false,[:],"Error occurred instantiating application")
+        }
+    }
+    
+    // getUUIDTimeBased: returns a UUID based on time to minimize possible collisions
+    func getUUIDTimeBased() -> UUID {
+        // time based uuid, swift supported uuid is randomly generated
+        var uuid: uuid_t = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+        withUnsafeMutablePointer(to: &uuid) {
+            $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
+                uuid_generate_time($0)
+            }
+        }
+        return UUID(uuid: uuid)
+    }
+    
+    // getUserByPolicy: gets a MSAL user that has a policy 
+    // Leveraged in logout, editProfile, silentTokenRenewal
+    func getUserByPolicy (withUsers: [MSALUser], forPolicy: String) throws -> MSALUser? {
+        for user in withUsers {
+            if (user.userIdentifier().components(separatedBy: ".")[0].hasSuffix(forPolicy.lowercased())) {
+                return user
+            }
+        }
+        return nil
     }
     
     func convertTokenToClaims(_ token: String) -> [String: Any] {
