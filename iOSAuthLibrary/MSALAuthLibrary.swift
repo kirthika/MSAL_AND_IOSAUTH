@@ -63,7 +63,7 @@ open class MSALAuthLibrary {
     }
     
     // isAuthenticated: Validates stored token, refreshes tokens if needed
-    open func isAuthenticated(completion: @escaping (Bool) -> Void) {
+    open func isAuthenticated(completion: @escaping (Bool,String) -> Void) {
         silentTokenRenewal(){(isAuthenticated, response, details) in
             if(isAuthenticated){
                 completion(true,details)
