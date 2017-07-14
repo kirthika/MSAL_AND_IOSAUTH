@@ -9,10 +9,6 @@ import Foundation
 import MSAL
 
 open class MSALAuthLibrary {
-    
- /*todos:
-     1.) get right sign in/edit policies
-     2.) introduce logging like the Android application or pass string back? more exceptions? */
   
     let clientId: String
     let tenantName: String
@@ -25,12 +21,15 @@ open class MSALAuthLibrary {
     lazy var endpoint: String = "https://login.microsoftonline.com/tfp/%@/%@"
     
     // MSALAuthLibrary constructor
-    required public init(_ clientId: String, _ tenantName: String, _ SignupOrSigninPolicy: String,_ EditProfilePolicy: String, _ scopes: [String]) {
+    required public init(_ clientId: String, _ tenantName: String, _ brand: String, _ scopes: [String]) {
         self.clientId = clientId
-        //self.SignupOrSigninPolicy = brand.equalsIgnoreCase("Lexus") ? "B2C_1_SignupOrSigninLexus": "B2C_1_SignupOrSigninToyota"
-        //self.EditProfilePolicy = brand.equalsIgnoreCase("Lexus") ? "B2C_1_EditProfileLexus": "B2C_1_EditProfileToyota"
-        self.SignupOrSigninPolicy = SignupOrSigninPolicy
-        self.EditProfilePolicy = EditProfilePolicy
+        if(brand.caseInsensitiveCompare("Lexus") == .orderedSame){
+            self.SignupOrSigninPolicy = "B2C_1_SignupOrSigninLexus"
+            self.EditProfilePolicy = "B2C_1_EditProfileLexus"
+        } else {
+            self.SignupOrSigninPolicy = "B2C_1_SignupOrSigninToyota"
+            self.EditProfilePolicy = "B2C_1_EditProfileToyota"
+        }
         self.tenantName = tenantName
         self.scopes = scopes
         self.authority = ""
