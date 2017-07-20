@@ -46,7 +46,7 @@ open class MSALAuthLibrary {
                 // User logged in
                 if  error == nil {
                    completion(true,"Successfully Authenticated")
-                } else if((error as NSError).code == MSALErrorCode.authorizationFailed.rawValue){
+                } else if (error as! NSError).code == MSALErrorCode.authorizationFailed.rawValue {
                     var errorMsg: String = ""
                     errorMsg = self.handleError(error: error!)
                     // completion(false,errorMsg)
