@@ -50,6 +50,7 @@ open class MSALAuthLibrary {
                     var errorMsg: String = ""
                     errorMsg = self.handleError(error: error!)
                     // completion(false,errorMsg)
+                    application.cancelCurrentWebAuthSession()
                     let forgotPassAuthority: String = String(format: self.endpoint, self.tenantName, "B2C_1_DefaultPolicy")
                     if let application2 = try? MSALPublicClientApplication.init(clientId: self.clientId, authority: forgotPassAuthority){
                         application2.acquireToken(forScopes: self.scopes){ (result, error) in
