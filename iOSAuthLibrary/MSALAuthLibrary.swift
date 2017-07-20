@@ -49,7 +49,6 @@ open class MSALAuthLibrary {
                 } else if (error as! NSError).code == MSALErrorCode.authorizationFailed.rawValue {
                     var errorMsg: String = ""
                     errorMsg = self.handleError(error: error!)
-                    // completion(false,errorMsg)
                     let forgotPassAuthority: String = String(format: self.endpoint, self.tenantName, "B2C_1_DefaultPolicy")
                     if let application2 = try? MSALPublicClientApplication.init(clientId: self.clientId, authority: forgotPassAuthority){
                         application2.acquireToken(forScopes: self.scopes){ (result, error) in
@@ -60,8 +59,7 @@ open class MSALAuthLibrary {
                             }
                         }
                     } else {
-                        print("error resetting forgotten password")
-                        completion(false, errorMsg)
+                        completion(false, "Error resetting forgotten password")
                     }
                 } else {
                     var errorMsg: String = ""
