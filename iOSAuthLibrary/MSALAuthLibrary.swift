@@ -45,7 +45,7 @@ open class MSALAuthLibrary {
             application.acquireToken(forScopes: self.scopes) { (result, error) in
                 // User logged in
                 if  error == nil {
-                   // completion(true,"Successfully Authenticated")
+                   completion(true,"Successfully Authenticated")
                 } else {
                     var errorMsg: String = ""
                     errorMsg = self.handleError(error: error!)
@@ -54,17 +54,21 @@ open class MSALAuthLibrary {
                     if let application2 = try? MSALPublicClientApplication.init(clientId: self.clientId, authority: forgotPassAuthority){
                         application2.acquireToken(forScopes: self.scopes){ (result, error) in
                             //do something
-                            
+                            if error == nil {
+                                completion(true,"Successfully changed password")
+                            } else {
+                                completion(false,"Error info: \(String(describing: error)) Authorization failed")
+                            }
                         }
                     } else {
                         print("error resetting forgotten password")
+                        completion(false, errorMsg)
                     }
                 }
             }
-            print("more testing")
             
         } else {
-            // completion(false,"Error instantiating MSAL application")
+            completion(false,"Error instantiating MSAL application")
         }
         
     }
