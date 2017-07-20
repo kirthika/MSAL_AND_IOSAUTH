@@ -45,17 +45,27 @@ open class MSALAuthLibrary {
             application.acquireToken(forScopes: self.scopes) { (result, error) in
                 // User logged in
                 if  error == nil {
-                    completion(true,"Successfully Authenticated")
+                   // completion(true,"Successfully Authenticated")
                 } else {
                     var errorMsg: String = ""
                     errorMsg = self.handleError(error: error!)
-                    completion(false,errorMsg)
+                    // completion(false,errorMsg)
                 }
             }
             print("more testing")
             
         } else {
-            completion(false,"Error instantiating MSAL application")
+            // completion(false,"Error instantiating MSAL application")
+        }
+        
+        let tempAuthority: String = String(format: endpoint, tenantName, "B2C_1_DefaultPolicy")
+        if let application = try? MSALPublicClientApplication.init(clientId: self.clientId, authority: tempAuthority){
+            application.acquireToken(forScopes: self.scopes){ (result, error) in
+                //do something
+                
+            }
+        } else {
+            print("error resetting forgotten password")
         }
         
     }
