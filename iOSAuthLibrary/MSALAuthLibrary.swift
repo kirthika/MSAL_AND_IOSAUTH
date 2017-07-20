@@ -50,7 +50,7 @@ open class MSALAuthLibrary {
                     var errorMsg: String = ""
                     errorMsg = self.handleError(error: error!)
                     // completion(false,errorMsg)
-                    let tempAuthority: String = String(format: endpoint, tenantName, "B2C_1_DefaultPolicy")
+                    let tempAuthority: String = String(format: self.endpoint, self.tenantName, "B2C_1_DefaultPolicy")
                     if let application = try? MSALPublicClientApplication.init(clientId: self.clientId, authority: tempAuthority){
                         application.acquireToken(forScopes: self.scopes){ (result, error) in
                             //do something
