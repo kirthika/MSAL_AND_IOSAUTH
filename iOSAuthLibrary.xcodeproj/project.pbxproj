@@ -19,6 +19,9 @@
 		466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466910371DAEBB4900E0DB35 /* Login.storyboard */; };
 		CBB227911F0AAA90009C03E7 /* MSAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFD52521F03F3420093C7FC /* MSAL.framework */; };
 		CBE0C2371F09FAF5009E5344 /* MSALAuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE0C2361F09FAF5009E5344 /* MSALAuthLibrary.swift */; };
+		CBF9F15A1F20FD4B0078FE40 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */; };
+		CBF9F15B1F20FD580078FE40 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460099A81DC245AA0015BA8E /* KeychainAccess.framework */; };
+		CBF9F15C1F20FD6E0078FE40 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */; };
 		E176DAC71ED36F9A00C9E6D3 /* dev-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DAC61ED36F9A00C9E6D3 /* dev-tenant.plist */; };
 		E176DAC91ED38A5900C9E6D3 /* test-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DAC81ED38A5900C9E6D3 /* test-tenant.plist */; };
 		E176DACB1ED38A6500C9E6D3 /* stage-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DACA1ED38A6500C9E6D3 /* stage-tenant.plist */; };
@@ -78,6 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBF9F15C1F20FD6E0078FE40 /* JWT.framework in Frameworks */,
+				CBF9F15B1F20FD580078FE40 /* KeychainAccess.framework in Frameworks */,
+				CBF9F15A1F20FD4B0078FE40 /* Alamofire.framework in Frameworks */,
 				CBB227911F0AAA90009C03E7 /* MSAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
