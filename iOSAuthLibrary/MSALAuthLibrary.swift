@@ -205,7 +205,7 @@ open class MSALAuthLibrary {
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if (thisUser != nil) {
-                let uuid : UUID = getUUIDTimeBased()
+                let uuid : UUID = UUID()
                 application.acquireTokenSilent(forScopes: self.scopes, user: thisUser, authority: self.authority, forceRefresh: force, correlationId: uuid){(result,error) in
                     if error == nil {
                         var response: [String:String] = [:]
@@ -239,18 +239,6 @@ open class MSALAuthLibrary {
         } catch {
             completion(false,[:],"Error occurred instantiating application")
         }
-    }
-    
-    // getUUIDTimeBased: returns a UUID based on time to minimize possible collisions
-    func getUUIDTimeBased() -> UUID {
-        // time based uuid, swift supported uuid is randomly generated
-        var uuid: uuid_t = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-        withUnsafeMutablePointer(to: &uuid) {
-            $0.withMemoryRebound(to: UInt8.self, capacity: 16) {
-                uuid_generate_time($0)
-            }
-        }
-        return UUID(uuid: uuid)
     }
     
     // getUserByPolicy: gets a MSAL user that has a policy
