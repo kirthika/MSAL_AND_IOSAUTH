@@ -67,7 +67,6 @@ open class MSALAuthLibrary {
                     completion(false,errorMsg)
                 }
             }
-            
         } else {
             completion(false,"Error instantiating MSAL application")
         }
