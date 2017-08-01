@@ -24,11 +24,12 @@ open class MSALAuthLibrary {
     required public init(_ clientId: String, _ tenantName: String, _ brand: String, _ scopes: [String]) {
         self.clientId = clientId
         if(brand.caseInsensitiveCompare("Lexus") == .orderedSame){
-            self.SignupOrSigninPolicy = "B2C_1_SignupOrSigninLexus"
-            self.EditProfilePolicy = "B2C_1_EditProfileLexus"
+            let azureProps = PList("azure")
+            self.SignupOrSigninPolicy = azureProps.getProperty("policy")//"B2C_1_SignupOrSigninLexus" // todo: use p list here
+            self.EditProfilePolicy = azureProps.getProperty("policyEdit")
         } else {
-            self.SignupOrSigninPolicy = "B2C_1_SignupOrSigninToyota"
-            self.EditProfilePolicy = "B2C_1_EditProfileToyota"
+            self.SignupOrSigninPolicy = azureProps.getProperty("policyLexus")
+            self.EditProfilePolicy = azureProps.getProperty("policyEditLexus")
         }
         self.tenantName = tenantName
         self.scopes = scopes

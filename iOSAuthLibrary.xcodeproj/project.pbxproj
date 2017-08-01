@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2ACFAFE61DDAB530002EC763 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACFAFE51DDAB530002EC763 /* TokenService.swift */; };
-		460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AB1DC29B9D0015BA8E /* KeychainService.swift */; };
-		460099AE1DC3E33A0015BA8E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460099AD1DC3E33A0015BA8E /* Token.swift */; };
 		4600DC2E1DAEBDC500DB6090 /* iOSAuthLibrary.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */; };
 		46408CDC1DCA6FAF000715CD /* azure.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46408CDB1DCA6FAF000715CD /* azure.plist */; };
 		46408CDE1DCA7B21000715CD /* PList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46408CDD1DCA7B21000715CD /* PList.swift */; };
@@ -19,15 +16,10 @@
 		466910381DAEBB4900E0DB35 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466910371DAEBB4900E0DB35 /* Login.storyboard */; };
 		CBB227911F0AAA90009C03E7 /* MSAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFD52521F03F3420093C7FC /* MSAL.framework */; };
 		CBE0C2371F09FAF5009E5344 /* MSALAuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE0C2361F09FAF5009E5344 /* MSALAuthLibrary.swift */; };
-		CBF9F15A1F20FD4B0078FE40 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */; };
-		CBF9F15B1F20FD580078FE40 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460099A81DC245AA0015BA8E /* KeychainAccess.framework */; };
-		CBF9F15C1F20FD6E0078FE40 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */; };
 		E176DAC71ED36F9A00C9E6D3 /* dev-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DAC61ED36F9A00C9E6D3 /* dev-tenant.plist */; };
 		E176DAC91ED38A5900C9E6D3 /* test-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DAC81ED38A5900C9E6D3 /* test-tenant.plist */; };
 		E176DACB1ED38A6500C9E6D3 /* stage-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DACA1ED38A6500C9E6D3 /* stage-tenant.plist */; };
 		E176DACD1ED38A7500C9E6D3 /* prod-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DACC1ED38A7500C9E6D3 /* prod-tenant.plist */; };
-		EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */; };
-		EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */; };
 		EB6404761DC7F58F008AFAC9 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = EB6404741DC7F58F008AFAC9 /* Cartfile */; };
 		EB6404771DC7F58F008AFAC9 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */; };
 		EBFF96521DCA90F0004F7EE9 /* MockKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */; };
@@ -45,10 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2ACFAFE51DDAB530002EC763 /* TokenService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
-		460099A81DC245AA0015BA8E /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
-		460099AB1DC29B9D0015BA8E /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
-		460099AD1DC3E33A0015BA8E /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOSAuthLibrary.podspec; sourceTree = "<group>"; };
 		46408CDB1DCA6FAF000715CD /* azure.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = azure.plist; sourceTree = "<group>"; };
 		46408CDD1DCA7B21000715CD /* PList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PList.swift; sourceTree = "<group>"; };
@@ -59,7 +47,6 @@
 		466910281DAEBAFD00E0DB35 /* iOSAuthLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSAuthLibraryTests.swift; sourceTree = "<group>"; };
 		4669102A1DAEBAFD00E0DB35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		466910371DAEBB4900E0DB35 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		CBE0C2361F09FAF5009E5344 /* MSALAuthLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSALAuthLibrary.swift; sourceTree = "<group>"; };
 		CBFD52501F03F3320093C7FC /* 0B643A1F-6E89-3EFD-9A0F-607FB7C8BA4E.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; name = "0B643A1F-6E89-3EFD-9A0F-607FB7C8BA4E.bcsymbolmap"; path = "Carthage/Build/iOS/0B643A1F-6E89-3EFD-9A0F-607FB7C8BA4E.bcsymbolmap"; sourceTree = "<group>"; };
 		CBFD52521F03F3420093C7FC /* MSAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MSAL.framework; path = Carthage/Build/iOS/MSAL.framework; sourceTree = "<group>"; };
@@ -67,9 +54,6 @@
 		E176DAC81ED38A5900C9E6D3 /* test-tenant.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "test-tenant.plist"; sourceTree = "<group>"; };
 		E176DACA1ED38A6500C9E6D3 /* stage-tenant.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "stage-tenant.plist"; sourceTree = "<group>"; };
 		E176DACC1ED38A7500C9E6D3 /* prod-tenant.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "prod-tenant.plist"; sourceTree = "<group>"; };
-		EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthLibrary.swift; sourceTree = "<group>"; };
-		EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWT.framework; path = Carthage/Build/iOS/JWT.framework; sourceTree = "<group>"; };
 		EB6404741DC7F58F008AFAC9 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockKeychainService.swift; sourceTree = "<group>"; };
@@ -81,9 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBF9F15C1F20FD6E0078FE40 /* JWT.framework in Frameworks */,
-				CBF9F15B1F20FD580078FE40 /* KeychainAccess.framework in Frameworks */,
-				CBF9F15A1F20FD4B0078FE40 /* Alamofire.framework in Frameworks */,
 				CBB227911F0AAA90009C03E7 /* MSAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,9 +94,6 @@
 			children = (
 				EB6404741DC7F58F008AFAC9 /* Cartfile */,
 				EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */,
-				46FE9E451DCB9FBD006EEC75 /* Alamofire.framework */,
-				EB47F9EE1DBEE96A00A2ED70 /* JWT.framework */,
-				460099A81DC245AA0015BA8E /* KeychainAccess.framework */,
 				4600DC2D1DAEBDC500DB6090 /* iOSAuthLibrary.podspec */,
 				4669101B1DAEBAFD00E0DB35 /* iOSAuthLibrary */,
 				466910271DAEBAFD00E0DB35 /* iOSAuthLibraryTests */,
@@ -142,16 +120,11 @@
 				E176DAC81ED38A5900C9E6D3 /* test-tenant.plist */,
 				E176DACA1ED38A6500C9E6D3 /* stage-tenant.plist */,
 				E176DACC1ED38A7500C9E6D3 /* prod-tenant.plist */,
-				EB47F9EA1DBEE94500A2ED70 /* AuthLibrary.swift */,
 				CBE0C2361F09FAF5009E5344 /* MSALAuthLibrary.swift */,
 				4669101E1DAEBAFD00E0DB35 /* Info.plist */,
 				4669101C1DAEBAFD00E0DB35 /* iOSAuthLibrary.h */,
-				460099AB1DC29B9D0015BA8E /* KeychainService.swift */,
 				466910371DAEBB4900E0DB35 /* Login.storyboard */,
-				EB47F9EB1DBEE94500A2ED70 /* LoginViewController.swift */,
 				46408CDD1DCA7B21000715CD /* PList.swift */,
-				460099AD1DC3E33A0015BA8E /* Token.swift */,
-				2ACFAFE51DDAB530002EC763 /* TokenService.swift */,
 			);
 			path = iOSAuthLibrary;
 			sourceTree = "<group>";
@@ -327,15 +300,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB47F9ED1DBEE94500A2ED70 /* LoginViewController.swift in Sources */,
 				CBE0C2371F09FAF5009E5344 /* MSALAuthLibrary.swift in Sources */,
-				EB47F9EC1DBEE94500A2ED70 /* AuthLibrary.swift in Sources */,
-				460099AC1DC29B9D0015BA8E /* KeychainService.swift in Sources */,
-				2ACFAFE61DDAB530002EC763 /* TokenService.swift in Sources */,
 				46408CDE1DCA7B21000715CD /* PList.swift in Sources */,
 				EBFF96551DCA9A38004F7EE9 /* MockToken.swift in Sources */,
 				EBFF96521DCA90F0004F7EE9 /* MockKeychainService.swift in Sources */,
-				460099AE1DC3E33A0015BA8E /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,10 @@
 	<string>B2C_1_SignupOrSigninLexus</string>
 	<key>policyReset</key>
 	<string>B2C_1_PasswordResetToyota</string>
+	<key>policyEditLexus</key>
+	<string>B2C_1_EditProfileLexus</string>
+	<key>policyEdit</key>
+	<string>B2C_1_EditProfileToyota</string>
 	<key>policyResetLexus</key>
 	<string>B2C_1_PasswordResetLexus</string>
 	<key>redirectUri</key>
