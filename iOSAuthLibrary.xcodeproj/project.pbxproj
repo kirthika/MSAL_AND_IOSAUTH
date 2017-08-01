@@ -22,8 +22,6 @@
 		E176DACD1ED38A7500C9E6D3 /* prod-tenant.plist in Resources */ = {isa = PBXBuildFile; fileRef = E176DACC1ED38A7500C9E6D3 /* prod-tenant.plist */; };
 		EB6404761DC7F58F008AFAC9 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = EB6404741DC7F58F008AFAC9 /* Cartfile */; };
 		EB6404771DC7F58F008AFAC9 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */; };
-		EBFF96521DCA90F0004F7EE9 /* MockKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */; };
-		EBFF96551DCA9A38004F7EE9 /* MockToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFF96541DCA9A38004F7EE9 /* MockToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +54,6 @@
 		E176DACC1ED38A7500C9E6D3 /* prod-tenant.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "prod-tenant.plist"; sourceTree = "<group>"; };
 		EB6404741DC7F58F008AFAC9 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		EB6404751DC7F58F008AFAC9 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
-		EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockKeychainService.swift; sourceTree = "<group>"; };
-		EBFF96541DCA9A38004F7EE9 /* MockToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +110,6 @@
 		4669101B1DAEBAFD00E0DB35 /* iOSAuthLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				EBFF96531DCA90FE004F7EE9 /* Mocks */,
 				46408CDB1DCA6FAF000715CD /* azure.plist */,
 				E176DAC61ED36F9A00C9E6D3 /* dev-tenant.plist */,
 				E176DAC81ED38A5900C9E6D3 /* test-tenant.plist */,
@@ -136,15 +131,6 @@
 				4669102A1DAEBAFD00E0DB35 /* Info.plist */,
 			);
 			path = iOSAuthLibraryTests;
-			sourceTree = "<group>";
-		};
-		EBFF96531DCA90FE004F7EE9 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				EBFF96511DCA90F0004F7EE9 /* MockKeychainService.swift */,
-				EBFF96541DCA9A38004F7EE9 /* MockToken.swift */,
-			);
-			name = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,8 +288,6 @@
 			files = (
 				CBE0C2371F09FAF5009E5344 /* MSALAuthLibrary.swift in Sources */,
 				46408CDE1DCA7B21000715CD /* PList.swift in Sources */,
-				EBFF96551DCA9A38004F7EE9 /* MockToken.swift in Sources */,
-				EBFF96521DCA90F0004F7EE9 /* MockKeychainService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

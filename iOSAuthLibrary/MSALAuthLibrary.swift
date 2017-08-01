@@ -8,7 +8,7 @@
 import Foundation
 import MSAL
 
-open class MSALAuthLibrary {
+open class MSALAuthLibrary { // todo: rename
     
     let clientId: String
     let tenantName: String
@@ -22,10 +22,10 @@ open class MSALAuthLibrary {
     
     // MSALAuthLibrary constructor
     required public init(_ clientId: String, _ tenantName: String, _ brand: String, _ scopes: [String]) {
+        let azureProps = PList("azure")
         self.clientId = clientId
         if(brand.caseInsensitiveCompare("Lexus") == .orderedSame){
-            let azureProps = PList("azure")
-            self.SignupOrSigninPolicy = azureProps.getProperty("policy")//"B2C_1_SignupOrSigninLexus" // todo: use p list here
+            self.SignupOrSigninPolicy = azureProps.getProperty("policy")
             self.EditProfilePolicy = azureProps.getProperty("policyEdit")
         } else {
             self.SignupOrSigninPolicy = azureProps.getProperty("policyLexus")
