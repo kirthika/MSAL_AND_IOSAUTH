@@ -25,11 +25,11 @@ open class MSALAuthLibrary { // todo: rename
         let azureProps = PList("azure")
         self.clientId = clientId
         if(brand.caseInsensitiveCompare("Lexus") == .orderedSame){
-            self.SignupOrSigninPolicy = azureProps.getProperty("policy")
-            self.EditProfilePolicy = azureProps.getProperty("policyEdit")
-        } else {
             self.SignupOrSigninPolicy = azureProps.getProperty("policyLexus")
             self.EditProfilePolicy = azureProps.getProperty("policyEditLexus")
+        } else {
+            self.SignupOrSigninPolicy = azureProps.getProperty("policy")
+            self.EditProfilePolicy = azureProps.getProperty("policyEdit")
         }
         self.tenantName = tenantName
         self.scopes = scopes
