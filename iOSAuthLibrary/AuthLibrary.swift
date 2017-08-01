@@ -1,11 +1,11 @@
 //
-//  isJWTValid.swift
+//  AuthLibrary.swift
 //
 //  Created by Pariveda Solutions.
 //
 
 
-open class AuthLibrary {
+@objc open class AuthLibrary: NSObject {
     
     var keychainService: KeychainService
     let brand: String
