@@ -5,7 +5,7 @@
 //
 
 
-public class AuthLibrary {
+@objc open class AuthLibrary: NSObject {
     
     var keychainService: KeychainService
     let brand: String
