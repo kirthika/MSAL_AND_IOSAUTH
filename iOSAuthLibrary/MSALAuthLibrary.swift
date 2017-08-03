@@ -8,7 +8,7 @@
 import Foundation
 import MSAL
 
-open class MSALAuthLibrary { // todo: rename
+@objc open class AuthLibrary: NSObject {
     
     let clientId: String
     let tenantName: String
