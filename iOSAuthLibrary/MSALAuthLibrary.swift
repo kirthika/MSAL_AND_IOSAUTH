@@ -160,7 +160,7 @@ import MSAL
                 completion(true, "Successfully logged out")
             }
         } catch {
-            completion(false,"Error info: \(String(describing: error))")
+            completion(false, self.authority)//"Error info: \(String(describing: error))")
         }
     }
     
