@@ -153,6 +153,7 @@ import MSAL
     // logout: Removes user tokens from the MSAL app context
     open func logout(completion: @escaping (Bool,String) -> Void) {
         do {
+            self.authority = String(format: endpoint, tenantName, SignupOrSigninPolicy) // for obj c issue
             let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
             let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.SignupOrSigninPolicy)
             if(thisUser != nil){
