@@ -13,7 +13,6 @@ import MSAL
     let clientId: String
     let tenantName: String
     let SignupOrSigninPolicy: String
-    let EditProfilePolicy: String
     var authority: String
     let scopes: [String]
     
@@ -26,10 +25,8 @@ import MSAL
         self.clientId = clientId
         if(brand.caseInsensitiveCompare("Lexus") == .orderedSame){
             self.SignupOrSigninPolicy = azureProps.getProperty("policyLexus")
-            self.EditProfilePolicy = azureProps.getProperty("policyEditLexus")
         } else {
             self.SignupOrSigninPolicy = azureProps.getProperty("policy")
-            self.EditProfilePolicy = azureProps.getProperty("policyEdit")
         }
         self.tenantName = tenantName
         self.scopes = scopes
@@ -162,24 +159,6 @@ import MSAL
             }
         } catch {
             completion(false, "Error info: \(String(describing: error))")
-        }
-    }
-    
-    // editProfile: Allows the user to edit their profile on Azure page for editing
-    open func editProfile(completion: @escaping (Bool, String) -> Void) {
-        do {
-            self.authority = String(format: self.endpoint, self.tenantName, self.EditProfilePolicy)
-            let application = try MSALPublicClientApplication.init(clientId: self.clientId, authority: self.authority)
-            let thisUser = try self.getUserByPolicy(withUsers: application.users(), forPolicy: self.EditProfilePolicy)
-            application.acquireToken(forScopes: self.scopes, user: thisUser ) { (result, error) in
-                if error == nil {
-                    completion(true,"Successfully edited profile")
-                } else {
-                    completion(false, "Could not edit profile: \(error ?? "No error informarion" as! Error)")
-                }
-            }
-        } catch {
-            completion(false, "Error instantiating application")
         }
     }
     
