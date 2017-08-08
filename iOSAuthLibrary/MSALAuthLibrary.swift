@@ -192,7 +192,6 @@ import MSAL
                                 completion(false,[:],errorMsg)
                             }
                         }
-                        //check flow here
                     } else if (error! as NSError).code == MSALErrorCode.invalidClient.rawValue{
                         completion(false,[:],"Error info: \(String(describing: error)) Invalid Client")
                     } else {
